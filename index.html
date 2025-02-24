@@ -33,8 +33,8 @@
     }
     /* Button styles for navigation */
     .nav-container a {
-      display: inline-block;
-      margin: 10px;
+      display: block; /* Кнопки теперь располагаются вертикально */
+      margin: 10px 0; /* Отступ сверху и снизу для каждой кнопки */
       padding: 10px 20px;
       background-color: #10a37f;
       color: #ffffff;
@@ -53,6 +53,7 @@
     <h1>Hello parsers</h1>
     <div class="nav-container">
       <a href="telegram-json-parser.html">Telegram JSON Parser</a>
+      <a href="docker-inspect-to-compose.html">Convert docker inspect to docker compose yaml</a>
       <!-- Additional navigation buttons for other utilities can be added here -->
     </div>
   </div>
