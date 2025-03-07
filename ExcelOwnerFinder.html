@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Excel Owner Finder IP/domain/string</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <style>
@@ -12,34 +12,43 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
+      position: relative;
     }
+
     .layout {
       display: flex;
       flex-direction: row;
       gap: 1rem;
       margin: 2rem;
     }
+
     .leftPanel {
       width: 400px;
       background-color: #fff;
       padding: 1.5rem;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      z-index: 1;
     }
+
     .rightPanel {
       flex: 1;
       background-color: #fff;
       padding: 1.5rem;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      z-index: 1;
     }
+
     h2 {
       margin-top: 0;
     }
+
     label {
       display: inline-block;
       margin-top: 1rem;
     }
+
     input[type="text"],
     input[type="number"],
     textarea {
@@ -50,13 +59,16 @@
       border-radius: 4px;
       box-sizing: border-box;
     }
+
     textarea {
       resize: vertical;
     }
+
     .checkbox-area,
     .button-area {
       margin-top: 1rem;
     }
+
     button {
       padding: 0.75rem 1rem;
       border: none;
@@ -67,9 +79,11 @@
       color: #fff;
       transition: background-color 0.3s ease;
     }
+
     button:hover {
       background-color: #45a049;
     }
+
     #dropZone {
       margin-top: 1rem;
       padding: 1rem;
@@ -78,10 +92,12 @@
       text-align: center;
       cursor: pointer;
     }
+
     #dropZone.dragover {
       background-color: #e0ffe0;
       border-color: #4CAF50;
     }
+
     #output {
       margin-top: 1rem;
       background-color: #fafafa;
@@ -90,296 +106,575 @@
       border: 1px solid #ddd;
       min-height: 50px;
     }
+
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0,0,0,0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    #overlayContent {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      min-width: 300px;
+    }
+
+    #progressBar {
+      width: 100%;
+      height: 20px;
+      background-color: #eee;
+      border-radius: 10px;
+      margin: 1rem 0;
+      overflow: hidden;
+    }
+
+    #progressBarFill {
+      width: 0;
+      height: 100%;
+      background-color: #4CAF50;
+      transition: width 0.2s;
+    }
   </style>
 </head>
+
 <body>
-<div class="layout">
-  <div class="leftPanel">
-    <h2>Excel Owner Finder IP/domain/string</h2>
-    <p>Drag & drop an Excel file below or click to select.</p>
-    <div id="dropZone">Drop Excel file here or click to select</div>
-    <input type="file" id="fileInput" accept=".xls,.xlsx" style="display:none;" />
+  <div class="layout">
+    <div class="leftPanel">
+      <h2>Excel Owner Finder IP/domain/string</h2>
+      <p>Drag & drop an Excel file below or click to select.</p>
+      <div id="dropZone">Drop Excel file here or click to select</div>
+      <input type="file" id="fileInput" accept=".xls,.xlsx" style="display:none;"/>
 
-    <div>
-      <label for="sheetNameInput">Sheet name (optional):</label>
-      <input type="text" id="sheetNameInput" placeholder="Enter sheet name (optional)" />
-    </div>
+      <div>
+        <label for="sheetNameInput">Sheet name (optional):</label>
+        <input type="text" id="sheetNameInput" placeholder="Enter sheet name (optional)"/>
+      </div>
 
-    <div>
-      <label for="teamColumnInput">Owner/Team column number (1-based):</label>
-      <input type="number" id="teamColumnInput" value="1" placeholder="e.g., 1" />
-    </div>
+      <div>
+        <label for="teamColumnInput">Owner/Team column number (1-based):</label>
+        <input type="number" id="teamColumnInput" value="1" placeholder="e.g., 1"/>
+      </div>
 
-    <div class="checkbox-area">
-      <input type="checkbox" id="rangeCheckbox" />
-      <label for="rangeCheckbox">Search only in a specific column range (1-based)</label>
-      <div style="margin-left: 20px;">
-        <label for="rangeStart">From column:</label>
-        <input type="number" id="rangeStart" value="2" min="1" />
+      <div class="checkbox-area">
+        <input type="checkbox" id="rangeCheckbox"/>
+        <label for="rangeCheckbox">Search only in a specific column range (1-based)</label>
+        <div style="margin-left: 20px;">
+          <label for="rangeStart">From column:</label>
+          <input type="number" id="rangeStart" value="2" min="1"/>
+          <label for="rangeEnd">To column:</label>
+          <input type="number" id="rangeEnd" value="5" min="1"/>
+        </div>
+      </div>
 
-        <label for="rangeEnd">To column:</label>
-        <input type="number" id="rangeEnd" value="5" min="1" />
+      <div class="checkbox-area">
+        <input type="checkbox" id="removePortCheckbox" checked/>
+        <label for="removePortCheckbox">Ignore port (remove ":port")</label>
+      </div>
+
+      <div>
+        <label for="separatorInput">Item separator:</label>
+        <input type="text" id="separatorInput" value="," placeholder="Enter a separator character"/>
+      </div>
+
+      <div>
+        <label for="ipList">List of IPs/domains/words:</label>
+        <textarea id="ipList" rows="6" placeholder="e.g.\n192.168.0.1:8080, test.com:123\nmyword..."></textarea>
+      </div>
+
+      <div class="checkbox-area">
+        <input type="checkbox" id="searchInsideCheckbox"/>
+        <label for="searchInsideCheckbox">Substring search</label>
+      </div>
+
+      <div class="button-area">
+        <button id="startBtn">Process</button>
       </div>
     </div>
 
-    <div class="checkbox-area">
-      <input type="checkbox" id="removePortCheckbox" checked />
-      <label for="removePortCheckbox">Ignore port (remove ":port")</label>
-    </div>
-
-    <div>
-      <label for="separatorInput">Item separator:</label>
-      <input type="text" id="separatorInput" value="," placeholder="Enter a separator character" />
-    </div>
-
-    <div>
-      <label for="ipList">List of IPs/domains/words:</label>
-      <textarea id="ipList" rows="6" placeholder="e.g.\n192.168.0.1:8080, test.com:123\nmyword..."></textarea>
-    </div>
-
-    <div class="checkbox-area">
-      <input type="checkbox" id="searchInsideCheckbox" />
-      <label for="searchInsideCheckbox">Substring search</label>
-    </div>
-
-    <div class="button-area">
-      <button onclick="processExcel()">Process</button>
+    <div class="rightPanel">
+      <h2>Results</h2>
+      <!-- Добавляем кнопки Download и Copy -->
+      <div class="button-area" style="margin-bottom:1rem;">
+        <button id="downloadBtn">Download</button>
+        <button id="copyBtn">Copy</button>
+      </div>
+      <div id="output"></div>
     </div>
   </div>
 
-  <div class="rightPanel">
-    <h2>Results</h2>
-    <div id="output"></div>
+  <div id="overlay">
+    <div id="overlayContent">
+      <p id="progressStatus">Processing... 0%</p>
+      <div id="progressBar"><div id="progressBarFill"></div></div>
+      <button id="cancelBtn">Cancel</button>
+    </div>
   </div>
-</div>
 
-<script>
-  let droppedFile = null;
+  <script>
+    let droppedFile = null;
+    let isCanceled = false;
+    let isProcessing = false;
 
-  // Utility: escape special regex characters
-  function escapeRegex(str) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  }
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+    const startBtn = document.getElementById('startBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
 
-  // Utility: strip ":port"
-  function stripPort(value) {
-    const colonIndex = value.indexOf(":");
-    return (colonIndex !== -1) ? value.substring(0, colonIndex) : value;
-  }
+    const downloadBtn = document.getElementById('downloadBtn');
+    const copyBtn = document.getElementById('copyBtn');
 
-  // Drag & Drop logic
-  const dropZone = document.getElementById('dropZone');
-  const fileInput = document.getElementById('fileInput');
-
-  dropZone.addEventListener('click', () => {
-    fileInput.click();
-  });
-
-  dropZone.addEventListener('dragover', (e) => {
-    e.preventDefault();
-    dropZone.classList.add('dragover');
-  });
-
-  dropZone.addEventListener('dragleave', () => {
-    dropZone.classList.remove('dragover');
-  });
-
-  dropZone.addEventListener('drop', (e) => {
-    e.preventDefault();
-    dropZone.classList.remove('dragover');
-    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      droppedFile = e.dataTransfer.files[0];
-      dropZone.textContent = `File selected: ${droppedFile.name}`;
-    }
-  });
-
-  // Also handle changes via file input
-  fileInput.addEventListener('change', () => {
-    if (fileInput.files.length > 0) {
-      droppedFile = fileInput.files[0];
-      dropZone.textContent = `File selected: ${droppedFile.name}`;
-    }
-  });
-
-  function processExcel() {
-    const sheetNameInput = document.getElementById('sheetNameInput').value.trim();
-    const teamColumnInput = parseInt(document.getElementById('teamColumnInput').value, 10);
-    const rangeCheckbox = document.getElementById('rangeCheckbox').checked;
-    const rangeStart = parseInt(document.getElementById('rangeStart').value, 10);
-    const rangeEnd = parseInt(document.getElementById('rangeEnd').value, 10);
-    const removePortCheckbox = document.getElementById('removePortCheckbox').checked;
-    const separatorInput = document.getElementById('separatorInput').value;
-    const ipListRaw = document.getElementById('ipList').value;
-    const searchInsideCheckbox = document.getElementById('searchInsideCheckbox').checked;
-    const output = document.getElementById('output');
-    output.innerHTML = "";
-
-    if (!droppedFile) {
-      alert("Please select an Excel file.");
-      return;
+    function escapeRegex(str) {
+      return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     }
 
-    if (isNaN(teamColumnInput) || teamColumnInput < 1) {
-      alert("Invalid Owner/Team column number.");
-      return;
+    function stripPort(value) {
+      const i = value.indexOf(":");
+      return (i !== -1) ? value.substring(0, i) : value;
     }
 
-    // For range
-    let rs = rangeStart;
-    let re = rangeEnd;
-    if (!rangeCheckbox) {
-      // If the checkbox isn't checked, we won't limit columns, so set them to some large range:
-      rs = 1;
-      re = 1000; // Arbitrary big number
-    }
-    if (rs > re) {
-      // swap if user typed 5..2
-      [rs, re] = [re, rs];
+    dropZone.addEventListener('click', () => {
+      fileInput.click();
+    });
+
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('dragover');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('dragover');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('dragover');
+      if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+        droppedFile = e.dataTransfer.files[0];
+        dropZone.textContent = "File selected: " + droppedFile.name;
+      }
+    });
+
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files.length > 0) {
+        droppedFile = fileInput.files[0];
+        dropZone.textContent = "File selected: " + droppedFile.name;
+      }
+    });
+
+    startBtn.addEventListener('click', () => {
+      processExcel();
+    });
+
+    cancelBtn.addEventListener('click', () => {
+      if (isProcessing) {
+        isCanceled = true;
+      } else {
+        hideOverlay();
+      }
+    });
+
+    function showOverlay() {
+      document.getElementById('overlay').style.display = 'flex';
+      document.body.style.pointerEvents = 'none';
+      document.getElementById('overlay').style.pointerEvents = 'auto';
     }
 
-    // Prepare user item list
-    const escapedSep = escapeRegex(separatorInput);
-    const userSplitRegex = new RegExp(`[;\\n,${escapedSep}]+`, 'g');
-    let userItems = ipListRaw.split(userSplitRegex).map(s => s.trim()).filter(Boolean);
-    if (removePortCheckbox) {
-      userItems = userItems.map(stripPort);
+    function hideOverlay() {
+      document.getElementById('overlay').style.display = 'none';
+      document.body.style.pointerEvents = 'auto';
     }
-    userItems = userItems.map(u => u.toLowerCase());
 
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      try {
-        const data = new Uint8Array(e.target.result);
-        const workbook = XLSX.read(data, { type: 'array' });
+    function updateProgress(p) {
+      const fill = document.getElementById('progressBarFill');
+      const status = document.getElementById('progressStatus');
+      fill.style.width = p + '%';
+      status.textContent = 'Processing... ' + p + '%';
+    }
 
-        // pick a sheet
-        let targetSheetName = sheetNameInput || workbook.SheetNames[0];
-        if (!workbook.SheetNames.includes(targetSheetName)) {
-          alert(`Sheet "${targetSheetName}" not found in the file.`);
+    function processExcel() {
+      if (isProcessing) return;
+      isCanceled = false;
+
+      const sheetNameInput = document.getElementById('sheetNameInput').value.trim();
+      const teamColumnInput = parseInt(document.getElementById('teamColumnInput').value, 10);
+      const rangeCheckbox = document.getElementById('rangeCheckbox').checked;
+      const rangeStart = parseInt(document.getElementById('rangeStart').value, 10);
+      const rangeEnd = parseInt(document.getElementById('rangeEnd').value, 10);
+      const removePortCheckbox = document.getElementById('removePortCheckbox').checked;
+      const separatorInput = document.getElementById('separatorInput').value;
+      const ipListRaw = document.getElementById('ipList').value;
+      const searchInsideCheckbox = document.getElementById('searchInsideCheckbox').checked;
+      const output = document.getElementById('output');
+
+      output.innerHTML = "";
+
+      if (!droppedFile) {
+        alert("Please select an Excel file.");
+        return;
+      }
+
+      if (isNaN(teamColumnInput) || teamColumnInput < 1) {
+        alert("Invalid Owner/Team column number.");
+        return;
+      }
+
+      let rs = rangeStart;
+      let re = rangeEnd;
+
+      if (!rangeCheckbox) {
+        rs = 1;
+        re = 1000;
+      }
+
+      if (rs > re) {
+        [rs, re] = [re, rs];
+      }
+
+      const escapedSep = escapeRegex(separatorInput);
+      const userSplitRegex = new RegExp(`[;\n,${escapedSep}]+`, 'g');
+      let userItems = ipListRaw.split(userSplitRegex).map(s => s.trim()).filter(Boolean);
+
+      if (removePortCheckbox) {
+        userItems = userItems.map(stripPort);
+      }
+
+      userItems = userItems.map(u => u.toLowerCase());
+
+      isProcessing = true;
+      showOverlay();
+      updateProgress(0);
+
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+        if (isCanceled) {
+          finishCancel(output);
           return;
         }
 
-        const sheet = workbook.Sheets[targetSheetName];
+        try {
+          const data = new Uint8Array(e.target.result);
+          const workbook = XLSX.read(data, { type: 'array' });
 
-        // decode range to find how many rows are in the sheet
-        const range = XLSX.utils.decode_range(sheet["!ref"]);
-        const maxRow = range.e.r + 1; // last row index is e.r, but 1-based is row count
-        // we won't limit columns by the actual used range if user specified them
-
-        // Regex for splitting cell contents
-        const cellSplitRegex = new RegExp(`[;\\n,${escapedSep}]+`, 'g');
-
-        // Where we store found matches
-        const itemToTeams = new Map();
-        let currentTeam = "";
-
-        // We'll loop through all rows from 1..maxRow
-        for (let row = 1; row <= maxRow; row++) {
-          // 1) Read the team cell if it exists
-          const teamColLetter = XLSX.utils.encode_col(teamColumnInput - 1); // e.g. 1 => A, 2 => B...
-          const teamCellRef = teamColLetter + row; // e.g. A1, B2, ...
-          const teamCellObj = sheet[teamCellRef];
-          let teamVal = teamCellObj ? teamCellObj.v : "";
-          if (teamVal && teamVal.toString().trim() !== "") {
-            currentTeam = teamVal.toString().trim();
+          let targetSheetName = sheetNameInput || workbook.SheetNames[0];
+          if (!workbook.SheetNames.includes(targetSheetName)) {
+            alert(`Sheet "${targetSheetName}" not found in the file.`);
+            finishProcessing();
+            return;
           }
 
-          // 2) For each column in [rs..re], skip if it's the team column
-          for (let colNum = rs; colNum <= re; colNum++) {
-            if (colNum === teamColumnInput) {
-              // skip the team column
-              continue;
-            }
-            const colLetter = XLSX.utils.encode_col(colNum - 1);
-            const cellRef = colLetter + row;
-            const cellObj = sheet[cellRef];
-            if (!cellObj) continue;
-            const rawVal = cellObj.v;
-            if (!rawVal || rawVal.toString().trim() === "") continue;
+          const sheet = workbook.Sheets[targetSheetName];
+          const range = XLSX.utils.decode_range(sheet["!ref"]);
+          const maxRow = range.e.r + 1;
 
-            // parse
-            let cellStr = rawVal.toString().replace(/[\r\u2028\u2029]+/g, "\n");
-            let cellItems = cellStr.split(cellSplitRegex).map(x => x.trim()).filter(Boolean);
+          const itemToTeams = new Map();
+          let currentTeam = "";
 
-            if (removePortCheckbox) {
-              cellItems = cellItems.map(stripPort);
-            }
+          const cellSplitRegex = new RegExp(`[;\n,${escapedSep}]+`, 'g');
 
-            for (const cItemRaw of cellItems) {
-              const cItem = cItemRaw.toLowerCase();
+          parseRowsAsync(
+            1,
+            maxRow,
+            rs,
+            re,
+            sheet,
+            teamColumnInput,
+            userItems,
+            itemToTeams,
+            cellSplitRegex,
+            removePortCheckbox,
+            searchInsideCheckbox,
+            output
+          );
+        } catch (err) {
+          console.error(err);
+          output.innerHTML = `<p>Error reading file: ${err.message}</p>`;
+          finishProcessing();
+        }
+      };
 
-              for (const userVal of userItems) {
-                let isMatch = false;
-                if (searchInsideCheckbox) {
-                  if (cItem.includes(userVal)) {
-                    isMatch = true;
-                  }
-                } else {
-                  if (cItem === userVal) {
-                    isMatch = true;
-                  }
+      reader.readAsArrayBuffer(droppedFile);
+    }
+
+    function parseRowsAsync(
+      rowIndex,
+      maxRow,
+      rs,
+      re,
+      sheet,
+      teamColumnInput,
+      userItems,
+      itemToTeams,
+      cellSplitRegex,
+      removePortCheckbox,
+      searchInsideCheckbox,
+      output
+    ) {
+      if (rowIndex > maxRow) {
+        finalizeResults(itemToTeams, output);
+        finishProcessing();
+        return;
+      }
+
+      if (isCanceled) {
+        finishCancel(output);
+        return;
+      }
+
+      const chunkSize = 50;
+      const endRow = Math.min(rowIndex + chunkSize - 1, maxRow);
+
+      for (let row = rowIndex; row <= endRow; row++) {
+        if (isCanceled) {
+          finishCancel(output);
+          return;
+        }
+
+        const teamColLetter = XLSX.utils.encode_col(teamColumnInput - 1);
+        const teamCellRef = teamColLetter + row;
+        const teamCellObj = sheet[teamCellRef];
+
+        let teamVal = teamCellObj ? teamCellObj.v : "";
+        if (teamVal && teamVal.toString().trim() !== "") {
+          teamVal = teamVal.toString().trim();
+        }
+
+        if (teamVal) {
+          currentTeam = teamVal;
+        }
+
+        for (let colNum = rs; colNum <= re; colNum++) {
+          if (colNum === teamColumnInput) {
+            continue;
+          }
+
+          const colLetter = XLSX.utils.encode_col(colNum - 1);
+          const cellRef = colLetter + row;
+          const cellObj = sheet[cellRef];
+
+          if (!cellObj) {
+            continue;
+          }
+
+          const rawVal = cellObj.v;
+
+          if (!rawVal || rawVal.toString().trim() === "") {
+            continue;
+          }
+
+          let cellStr = rawVal.toString().replace(/[\r\u2028\u2029]+/g, "\n");
+          let cellItems = cellStr.split(cellSplitRegex).map(x => x.trim()).filter(Boolean);
+
+          if (removePortCheckbox) {
+            cellItems = cellItems.map(stripPort);
+          }
+
+          for (const cItemRaw of cellItems) {
+            const cItem = cItemRaw.toLowerCase();
+            let matched = false;
+
+            for (const userVal of userItems) {
+              if (searchInsideCheckbox) {
+                if (cItem.includes(userVal)) {
+                  matched = true;
+                }
+              } else {
+                if (cItem === userVal) {
+                  matched = true;
+                }
+              }
+
+              if (matched) {
+                if (!itemToTeams.has(cItem)) {
+                  itemToTeams.set(cItem, new Set());
                 }
 
-                if (isMatch) {
-                  if (!itemToTeams.has(cItem)) {
-                    itemToTeams.set(cItem, new Set());
-                  }
-                  itemToTeams.get(cItem).add(currentTeam);
-                  break; // next item in the cell
-                }
+                itemToTeams.get(cItem).add(currentTeam || "");
+                break;
               }
             }
           }
         }
-
-        // build final output
-        const labelToItems = new Map();
-        for (const [item, teamsSet] of itemToTeams.entries()) {
-          if (teamsSet.size === 0) continue;
-          if (teamsSet.size === 1) {
-            const [onlyTeam] = teamsSet;
-            const label = `Team: ${onlyTeam}`;
-            if (!labelToItems.has(label)) {
-              labelToItems.set(label, new Set());
-            }
-            labelToItems.get(label).add(item);
-          } else {
-            const teamArr = [...teamsSet].sort();
-            const label = `In multiple teams: ${teamArr.join(" & ")}`;
-            if (!labelToItems.has(label)) {
-              labelToItems.set(label, new Set());
-            }
-            labelToItems.get(label).add(item);
-          }
-        }
-
-        if (labelToItems.size === 0) {
-          output.innerHTML = "<p>No matches found.</p>";
-          return;
-        }
-
-        let html = "";
-        for (const [label, itemsSet] of labelToItems.entries()) {
-          const itemsArr = [...itemsSet];
-          if (!label || itemsArr.length === 0) continue;
-
-          html += `<h4>${label}</h4>`;
-          html += "<ul>";
-          for (const i of itemsArr) {
-            html += `<li>${i}</li>`;
-          }
-          html += "</ul>";
-        }
-
-        output.innerHTML = html;
-      } catch (err) {
-        console.error(err);
-        output.innerHTML = `<p>Error reading file: ${err.message}</p>`;
       }
-    };
 
-    reader.readAsArrayBuffer(droppedFile);
-  }
-</script>
+      const progress = Math.floor((endRow / maxRow) * 100);
+      updateProgress(progress);
+
+      setTimeout(() => {
+        parseRowsAsync(
+          endRow + 1,
+          maxRow,
+          rs,
+          re,
+          sheet,
+          teamColumnInput,
+          userItems,
+          itemToTeams,
+          cellSplitRegex,
+          removePortCheckbox,
+          searchInsideCheckbox,
+          output
+        );
+      }, 0);
+    }
+
+    function finalizeResults(itemToTeams, output) {
+      const labelToItems = new Map();
+
+      for (const [item, teamsSet] of itemToTeams.entries()) {
+        if (teamsSet.size === 0) {
+          continue;
+        }
+        if (teamsSet.size === 1) {
+          const [onlyTeam] = teamsSet;
+          const label = onlyTeam;
+          if (!labelToItems.has(label)) {
+            labelToItems.set(label, new Set());
+          }
+          labelToItems.get(label).add(item);
+        } else {
+          const teamArr = [...teamsSet].sort();
+          const label = `In multiple teams: ${teamArr.join(" & ")}`;
+          if (!labelToItems.has(label)) {
+            labelToItems.set(label, new Set());
+          }
+          labelToItems.get(label).add(item);
+        }
+      }
+
+      if (labelToItems.size === 0) {
+        output.innerHTML = "<p>No matches found.</p>";
+        return;
+      }
+
+      let html = "<table style='border-collapse: collapse; width: 100%;'>" +
+        "<thead>" +
+        "<tr style='background-color: #f0f0f0;'>" +
+        "<th style='width:30%; border:1px solid #000; padding:8px;'>Team</th>" +
+        "<th style='width:70%; border:1px solid #000; padding:8px;'>Results</th>" +
+        "</tr>" +
+        "</thead>" +
+        "<tbody>";
+
+      for (const [label, itemsSet] of labelToItems.entries()) {
+        const itemsArr = [...itemsSet];
+        if (!label || itemsArr.length === 0) {
+          continue;
+        }
+        const resultsJoined = itemsArr.join(", ");
+        html += "<tr style='border:1px solid #000;'>" +
+          `<td style='border:1px solid #000; padding:8px;'>${label}</td>` +
+          `<td style='border:1px solid #000; padding:8px;'>${resultsJoined}</td>` +
+          "</tr>";
+      }
+
+      html += "</tbody></table>";
+      output.innerHTML = html;
+      updateProgress(100);
+    }
+
+    function finishProcessing() {
+      isProcessing = false;
+      hideOverlay();
+    }
+
+    function finishCancel(output) {
+      isProcessing = false;
+      output.innerHTML = "<p>Processing canceled.</p>";
+      hideOverlay();
+    }
+
+    downloadBtn.addEventListener('click', () => {
+      const table = document.querySelector('#output table');
+      if (!table) {
+        alert('No table to download!');
+        return;
+      }
+      const rows = table.querySelectorAll('tr');
+      const data = [];
+      rows.forEach((row, rowIndex) => {
+        const cells = row.querySelectorAll('th, td');
+        const rowData = [];
+        cells.forEach(cell => {
+          rowData.push(cell.innerText.trim());
+        });
+        data.push(rowData);
+      });
+
+      const wb = XLSX.utils.book_new();
+      const ws = XLSX.utils.aoa_to_sheet(data);
+
+      const range = XLSX.utils.decode_range(ws['!ref']);
+      for (let R = range.s.r; R <= range.e.r; R++) {
+        for (let C = range.s.c; C <= range.e.c; C++) {
+          const cellAddress = XLSX.utils.encode_cell({ r: R, c: C });
+          const cell = ws[cellAddress];
+          if (!cell) continue;
+
+          cell.s = {
+            border: {
+              top: { style: 'thin', color: { rgb: '000000' } },
+              left: { style: 'thin', color: { rgb: '000000' } },
+              right: { style: 'thin', color: { rgb: '000000' } },
+              bottom: { style: 'thin', color: { rgb: '000000' } }
+            }
+          };
+
+          if (R === 0) {
+            cell.s.fill = {
+              patternType: 'solid',
+              fgColor: { rgb: 'FFF0F0F0' }
+            };
+            cell.s.font = { bold: true };
+          }
+        }
+      }
+
+      XLSX.utils.book_append_sheet(wb, ws, 'Results');
+
+      const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array', cellStyles: true });
+      const blob = new Blob([wbout], { type: 'application/octet-stream' });
+      const url = URL.createObjectURL(blob);
+
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'results.xlsx';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    });
+
+    copyBtn.addEventListener('click', () => {
+      const table = document.querySelector('#output table');
+      if (!table) {
+        alert('No table to copy!');
+        return;
+      }
+      const range = document.createRange();
+      range.selectNode(table);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+
+      try {
+        const successful = document.execCommand('copy');
+        alert(successful ? 'Table copied to clipboard!' : 'Unable to copy.');
+      } catch (err) {
+        console.error('Unable to copy', err);
+      }
+      selection.removeAllRanges();
+    });
+  </script>
 </body>
 </html>
