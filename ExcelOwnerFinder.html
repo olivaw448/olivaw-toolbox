@@ -203,7 +203,6 @@
 
     <div class="rightPanel">
       <h2>Results</h2>
-      <!-- Добавляем кнопки Download и Copy -->
       <div class="button-area" style="margin-bottom:1rem;">
         <button id="downloadBtn">Download</button>
         <button id="copyBtn">Copy</button>
@@ -233,12 +232,15 @@
     const downloadBtn = document.getElementById('downloadBtn');
     const copyBtn = document.getElementById('copyBtn');
 
+    let userItemsOriginal = [];
+    const userWorkMap = new Map();
+
     function escapeRegex(str) {
       return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     }
 
     function stripPort(value) {
-      const i = value.indexOf(":");
+      const i = value.indexOf(':');
       return (i !== -1) ? value.substring(0, i) : value;
     }
 
@@ -271,10 +273,6 @@
       }
     });
 
-    startBtn.addEventListener('click', () => {
-      processExcel();
-    });
-
     cancelBtn.addEventListener('click', () => {
       if (isProcessing) {
         isCanceled = true;
@@ -301,8 +299,13 @@
       status.textContent = 'Processing... ' + p + '%';
     }
 
+    startBtn.addEventListener('click', () => {
+      if (!isProcessing) {
+        processExcel();
+      }
+    });
+
     function processExcel() {
-      if (isProcessing) return;
       isCanceled = false;
 
       const sheetNameInput = document.getElementById('sheetNameInput').value.trim();
@@ -314,8 +317,8 @@
       const separatorInput = document.getElementById('separatorInput').value;
       const ipListRaw = document.getElementById('ipList').value;
       const searchInsideCheckbox = document.getElementById('searchInsideCheckbox').checked;
-      const output = document.getElementById('output');
 
+      const output = document.getElementById('output');
       output.innerHTML = "";
 
       if (!droppedFile) {
@@ -335,27 +338,32 @@
         rs = 1;
         re = 1000;
       }
-
       if (rs > re) {
         [rs, re] = [re, rs];
       }
 
       const escapedSep = escapeRegex(separatorInput);
       const userSplitRegex = new RegExp(`[;\n,${escapedSep}]+`, 'g');
-      let userItems = ipListRaw.split(userSplitRegex).map(s => s.trim()).filter(Boolean);
 
-      if (removePortCheckbox) {
-        userItems = userItems.map(stripPort);
+      userItemsOriginal = ipListRaw.split(userSplitRegex).map(s => s.trim()).filter(Boolean);
+      userWorkMap.clear();
+
+      for (const origVal of userItemsOriginal) {
+        let work = origVal.toLowerCase();
+        if (removePortCheckbox) {
+          work = stripPort(work);
+        }
+        if (!userWorkMap.has(work)) {
+          userWorkMap.set(work, new Set());
+        }
+        userWorkMap.get(work).add(origVal);
       }
-
-      userItems = userItems.map(u => u.toLowerCase());
 
       isProcessing = true;
       showOverlay();
       updateProgress(0);
 
       const reader = new FileReader();
-
       reader.onload = function(e) {
         if (isCanceled) {
           finishCancel(output);
@@ -374,26 +382,40 @@
           }
 
           const sheet = workbook.Sheets[targetSheetName];
-          const range = XLSX.utils.decode_range(sheet["!ref"]);
-          const maxRow = range.e.r + 1;
+
+          if (sheet["!merges"] && sheet["!merges"].length) {
+            sheet["!merges"].forEach(mergeRange => {
+              const startRow = mergeRange.s.r;
+              const startCol = mergeRange.s.c;
+              const endRow = mergeRange.e.r;
+              const endCol = mergeRange.e.c;
+              const firstCellRef = XLSX.utils.encode_cell({ r: startRow, c: startCol });
+              const firstCellVal = sheet[firstCellRef] ? sheet[firstCellRef].v : "";
+              for (let R = startRow; R <= endRow; R++) {
+                for (let C = startCol; C <= endCol; C++) {
+                  const ref = XLSX.utils.encode_cell({ r: R, c: C });
+                  if (!sheet[ref]) {
+                    sheet[ref] = { t: 's', v: firstCellVal };
+                  }
+                }
+              }
+            });
+          }
+
+          const fullRange = XLSX.utils.decode_range(sheet["!ref"]);
+          const maxRow = fullRange.e.r + 1;
 
           const itemToTeams = new Map();
-          let currentTeam = "";
-
-          const cellSplitRegex = new RegExp(`[;\n,${escapedSep}]+`, 'g');
 
           parseRowsAsync(
-            1,
-            maxRow,
-            rs,
-            re,
+            1, maxRow,
+            rs, re,
             sheet,
             teamColumnInput,
-            userItems,
+            userWorkMap,
             itemToTeams,
-            cellSplitRegex,
-            removePortCheckbox,
             searchInsideCheckbox,
+            removePortCheckbox,
             output
           );
         } catch (err) {
@@ -402,7 +424,6 @@
           finishProcessing();
         }
       };
-
       reader.readAsArrayBuffer(droppedFile);
     }
 
@@ -413,19 +434,17 @@
       re,
       sheet,
       teamColumnInput,
-      userItems,
+      userWorkMap,
       itemToTeams,
-      cellSplitRegex,
-      removePortCheckbox,
       searchInsideCheckbox,
+      removePortCheckbox,
       output
     ) {
       if (rowIndex > maxRow) {
-        finalizeResults(itemToTeams, output);
+        finalizeResults(userWorkMap, itemToTeams, output);
         finishProcessing();
         return;
       }
-
       if (isCanceled) {
         finishCancel(output);
         return;
@@ -433,6 +452,8 @@
 
       const chunkSize = 50;
       const endRow = Math.min(rowIndex + chunkSize - 1, maxRow);
+
+      const cellSplitRegex = /[;,\n]+/;
 
       for (let row = rowIndex; row <= endRow; row++) {
         if (isCanceled) {
@@ -443,64 +464,39 @@
         const teamColLetter = XLSX.utils.encode_col(teamColumnInput - 1);
         const teamCellRef = teamColLetter + row;
         const teamCellObj = sheet[teamCellRef];
-
-        let teamVal = teamCellObj ? teamCellObj.v : "";
-        if (teamVal && teamVal.toString().trim() !== "") {
-          teamVal = teamVal.toString().trim();
-        }
-
-        if (teamVal) {
-          currentTeam = teamVal;
-        }
+        let currentTeam = teamCellObj && teamCellObj.v ? teamCellObj.v.toString().trim() : "";
 
         for (let colNum = rs; colNum <= re; colNum++) {
-          if (colNum === teamColumnInput) {
-            continue;
-          }
+          if (colNum === teamColumnInput) continue;
 
           const colLetter = XLSX.utils.encode_col(colNum - 1);
           const cellRef = colLetter + row;
           const cellObj = sheet[cellRef];
+          if (!cellObj || !cellObj.v) continue;
 
-          if (!cellObj) {
-            continue;
-          }
+          const rawStr = cellObj.v.toString();
+          const segments = rawStr.split(cellSplitRegex).map(s => s.trim()).filter(Boolean);
 
-          const rawVal = cellObj.v;
+          for (const seg of segments) {
+            const segLower = seg.toLowerCase();
 
-          if (!rawVal || rawVal.toString().trim() === "") {
-            continue;
-          }
+            const needSubstring = searchInsideCheckbox || removePortCheckbox;
 
-          let cellStr = rawVal.toString().replace(/[\r\u2028\u2029]+/g, "\n");
-          let cellItems = cellStr.split(cellSplitRegex).map(x => x.trim()).filter(Boolean);
-
-          if (removePortCheckbox) {
-            cellItems = cellItems.map(stripPort);
-          }
-
-          for (const cItemRaw of cellItems) {
-            const cItem = cItemRaw.toLowerCase();
-            let matched = false;
-
-            for (const userVal of userItems) {
-              if (searchInsideCheckbox) {
-                if (cItem.includes(userVal)) {
-                  matched = true;
+            for (const [uWork, origSet] of userWorkMap.entries()) {
+              if (needSubstring) {
+                if (segLower.includes(uWork)) {
+                  if (!itemToTeams.has(uWork)) {
+                    itemToTeams.set(uWork, new Set());
+                  }
+                  itemToTeams.get(uWork).add(currentTeam);
                 }
               } else {
-                if (cItem === userVal) {
-                  matched = true;
+                if (segLower === uWork) {
+                  if (!itemToTeams.has(uWork)) {
+                    itemToTeams.set(uWork, new Set());
+                  }
+                  itemToTeams.get(uWork).add(currentTeam);
                 }
-              }
-
-              if (matched) {
-                if (!itemToTeams.has(cItem)) {
-                  itemToTeams.set(cItem, new Set());
-                }
-
-                itemToTeams.get(cItem).add(currentTeam || "");
-                break;
               }
             }
           }
@@ -518,42 +514,79 @@
           re,
           sheet,
           teamColumnInput,
-          userItems,
+          userWorkMap,
           itemToTeams,
-          cellSplitRegex,
-          removePortCheckbox,
           searchInsideCheckbox,
+          removePortCheckbox,
           output
         );
       }, 0);
     }
 
-    function finalizeResults(itemToTeams, output) {
+    function finalizeResults(userWorkMap, itemToTeams, output) {
       const labelToItems = new Map();
 
-      for (const [item, teamsSet] of itemToTeams.entries()) {
-        if (teamsSet.size === 0) {
-          continue;
-        }
-        if (teamsSet.size === 1) {
-          const [onlyTeam] = teamsSet;
-          const label = onlyTeam;
+      for (const [uWork, origSet] of userWorkMap.entries()) {
+        if (!itemToTeams.has(uWork)) {
+          const label = "Not found in the file:";
           if (!labelToItems.has(label)) {
             labelToItems.set(label, new Set());
           }
-          labelToItems.get(label).add(item);
+          for (const origVal of origSet) {
+            labelToItems.get(label).add(origVal);
+          }
         } else {
-          const teamArr = [...teamsSet].sort();
-          const label = `In multiple teams: ${teamArr.join(" & ")}`;
-          if (!labelToItems.has(label)) {
-            labelToItems.set(label, new Set());
+          const teams = itemToTeams.get(uWork);
+          const normTeams = [...teams].map(t => (t === "" ? "No team name" : t));
+          const uniqueTeams = [...new Set(normTeams)];
+
+          if (uniqueTeams.length === 1) {
+            const singleTeam = uniqueTeams[0];
+            if (singleTeam === "No team name") {
+              
+              const label = "No team name:";
+              if (!labelToItems.has(label)) {
+                labelToItems.set(label, new Set());
+              }
+              for (const origVal of origSet) {
+                labelToItems.get(label).add(origVal);
+              }
+            } else {
+              
+              const label = singleTeam;
+              if (!labelToItems.has(label)) {
+                labelToItems.set(label, new Set());
+              }
+              for (const origVal of origSet) {
+                labelToItems.get(label).add(origVal);
+              }
+            }
+          } else {
+            if (uniqueTeams.length === 1 && uniqueTeams[0] === "No team name") {
+              const label = "No team name:";
+              if (!labelToItems.has(label)) {
+                labelToItems.set(label, new Set());
+              }
+              for (const origVal of origSet) {
+                labelToItems.get(label).add(origVal);
+              }
+            } else {
+              const sortedTeams = uniqueTeams.sort();
+              const label = "In multiple teams: " + sortedTeams.join(" & ");
+              if (!labelToItems.has(label)) {
+                labelToItems.set(label, new Set());
+              }
+              for (const origVal of origSet) {
+                labelToItems.get(label).add(origVal);
+              }
+            }
           }
-          labelToItems.get(label).add(item);
         }
       }
 
       if (labelToItems.size === 0) {
         output.innerHTML = "<p>No matches found.</p>";
+        updateProgress(100);
         return;
       }
 
@@ -563,19 +596,18 @@
         "<th style='width:30%; border:1px solid #000; padding:8px;'>Team</th>" +
         "<th style='width:70%; border:1px solid #000; padding:8px;'>Results</th>" +
         "</tr>" +
-        "</thead>" +
-        "<tbody>";
+        "</thead><tbody>";
 
       for (const [label, itemsSet] of labelToItems.entries()) {
+        if (!label || itemsSet.size === 0) continue;
+
         const itemsArr = [...itemsSet];
-        if (!label || itemsArr.length === 0) {
-          continue;
-        }
-        const resultsJoined = itemsArr.join(", ");
-        html += "<tr style='border:1px solid #000;'>" +
+        const joined = itemsArr.join(", ");
+
+        html += `<tr style='border:1px solid #000;'>` +
           `<td style='border:1px solid #000; padding:8px;'>${label}</td>` +
-          `<td style='border:1px solid #000; padding:8px;'>${resultsJoined}</td>` +
-          "</tr>";
+          `<td style='border:1px solid #000; padding:8px;'>${joined}</td>` +
+          `</tr>`;
       }
 
       html += "</tbody></table>";
@@ -602,7 +634,7 @@
       }
       const rows = table.querySelectorAll('tr');
       const data = [];
-      rows.forEach((row, rowIndex) => {
+      rows.forEach((row) => {
         const cells = row.querySelectorAll('th, td');
         const rowData = [];
         cells.forEach(cell => {
@@ -629,7 +661,6 @@
               bottom: { style: 'thin', color: { rgb: '000000' } }
             }
           };
-
           if (R === 0) {
             cell.s.fill = {
               patternType: 'solid',
@@ -641,7 +672,6 @@
       }
 
       XLSX.utils.book_append_sheet(wb, ws, 'Results');
-
       const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array', cellStyles: true });
       const blob = new Blob([wbout], { type: 'application/octet-stream' });
       const url = URL.createObjectURL(blob);
