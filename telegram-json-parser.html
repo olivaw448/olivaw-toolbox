@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Парсер Telegram JSON</title>
+  <title>Telegram Chat Parser</title>
   <style>
     :root {
       --bg-dark: #343541;
@@ -12,24 +12,42 @@
       --bg-light: #ffffff;
       --text-light: #000000;
       --border-light: #ccc;
+      --dark-drop-bg: #444654;
+      --dark-output-bg: #444654;
+      --light-drop-bg: #f0f0f0;
+      --light-drop-selected: #e5e5e5;
+      --light-output-bg: #f0f0f0;
+      --btn-bg: #888;
+      --btn-bg-hover: #666;
+      --btn-dark-pressed: #333;
+      --btn-light-pressed: #bbb;
     }
     body {
-      font-family: Arial, sans-serif;
-      max-width: 600px;
-      margin: 20px auto;
-      text-align: center;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       background-color: var(--bg-dark);
       color: var(--text-dark);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      position: relative;
     }
     .container {
+      text-align: center;
+      max-width: 90%;
       padding: 20px;
-      border-radius: 10px;
+      box-sizing: border-box;
     }
-    .description {
-      font-size: 12px;
-      color: #aaa;
+    h2 {
+      font-size: 2.5rem;
       margin-bottom: 10px;
-      line-height: 1.4;
+    }
+    p.description {
+      font-size: 1rem;
+      margin-bottom: 20px;
+      color: #aaa;
     }
     .radio-group {
       display: flex;
@@ -39,356 +57,537 @@
     }
     .radio-group label {
       cursor: pointer;
+      font-size: 1rem;
+    }
+    hr.separator {
+      border: none;
+      border-top: 1px solid #888;
+      margin: 20px 0;
     }
     #search-container {
       margin-bottom: 10px;
+    }
+    #search-label {
+      font-size: 1rem;
+      margin-right: 10px;
+    }
+    #search-word {
+      padding: 8px;
+      font-size: 1rem;
+      border: 1px solid #888;
+      border-radius: 4px;
+      width: 60%;
+      max-width: 300px;
+    }
+    #search-options {
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+    #search-inside-label {
+      font-size: 1rem;
+      margin-left: 5px;
     }
     #drop-area {
       border: 2px dashed var(--border-dark);
       padding: 20px;
       margin: 20px 0;
       cursor: pointer;
-      background-color: #444654;
+      background-color: var(--dark-drop-bg);
       color: var(--text-dark);
-      border-radius: 10px;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
     }
     input[type="file"] {
       display: none;
     }
+    #drop-text {
+      margin: 0;
+      font-size: 1rem;
+    }
+    #copy-btn, #download-btn {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: var(--btn-bg);
+      color: var(--text-dark);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    #copy-btn:hover, #download-btn:hover {
+      background-color: var(--btn-bg-hover);
+    }
     #output {
       white-space: pre-wrap;
       text-align: left;
-      background: #444654;
+      background-color: var(--dark-output-bg);
       padding: 10px;
       border: 1px solid var(--border-dark);
       margin-top: 10px;
-      max-height: 300px;
-      overflow-y: auto;
-      border-radius: 5px;
-      display: none; /* скрыто, пока нет данных */
+      border-radius: 4px;
+      overflow: auto;
+      display: none;
     }
-    button {
-      margin-top: 10px;
-      padding: 10px;
-      font-size: 16px;
-      background-color: #4A4B5A;
-      color: var(--text-dark);
+    #top-right-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
       border: none;
-      border-radius: 5px;
+      font-size: 1rem;
       cursor: pointer;
+      color: var(--text-dark);
     }
-    button:hover {
-      background-color: #5a5b6a;
+    #top-right-btn:hover {
+      text-decoration: underline;
     }
-    .theme-switch {
-      margin-top: 15px;
+    /* Moved to top-left and made smaller */
+    #theme-toggle-btn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: var(--btn-bg);
+      border: none;
+      padding: 5px 10px;
+      font-size: 0.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      color: var(--text-dark);
+      transition: background-color 0.3s ease;
+    }
+    #theme-toggle-btn:hover {
+      background-color: var(--btn-bg-hover);
     }
     .light-theme {
       background-color: var(--bg-light);
       color: var(--text-light);
     }
-    .light-theme #drop-area, 
-    .light-theme #output {
-      background-color: var(--bg-light);
-      color: var(--text-light);
+    .light-theme #drop-area {
+      background-color: var(--light-drop-bg);
       border: 2px dashed var(--border-light);
-    }
-    .light-theme button {
-      background-color: #f0f0f0;
       color: var(--text-light);
-      border: 1px solid var(--border-light);
     }
-    .light-theme .description {
-      color: #666;
+    .light-theme #output {
+      background-color: var(--light-output-bg);
+      border: 1px solid var(--border-light);
+      color: var(--text-light);
+    }
+    .light-theme #copy-btn, .light-theme #download-btn {
+      background-color: #ccc;
+      color: var(--text-light);
+    }
+    .light-theme #top-right-btn {
+      color: var(--text-light);
+    }
+    .light-theme #theme-toggle-btn {
+      background-color: #ccc;
+      color: var(--text-light);
+    }
+    @media (max-width: 600px) {
+      h2 {
+        font-size: 2rem;
+      }
+      #search-word {
+        width: 80%;
+      }
+      #copy-btn, #download-btn, #theme-toggle-btn {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+      }
+    }
+    /* Progress overlay styles */
+    #progress-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+    #progress-container {
+      background: #222;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      color: #fff;
+      width: 80%;
+      max-width: 300px;
+    }
+    #progress-bar {
+      width: 100%;
+      height: 20px;
+      margin-bottom: 10px;
+      background: #444;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    #progress-bar-inner {
+      height: 100%;
+      width: 0%;
+      background: #10a37f;
+      transition: width 0.2s ease;
+    }
+    #cancel-btn {
+      background: var(--btn-bg);
+      color: var(--text-dark);
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    #cancel-btn:hover {
+      background: var(--btn-bg-hover);
+    }
+    .light-theme #cancel-btn {
+      background: #ccc;
+      color: var(--text-light);
     }
   </style>
 </head>
 <body>
-
-<div class="container">
-  <!-- Заголовок -->
-  <h2 id="title">Парсер Telegram JSON</h2>
-
-  <!-- Описание (небольшим шрифтом) -->
-  <p class="description" id="description">
-    Этот инструмент позволяет загружать JSON-файлы с экспортированными сообщениями из Telegram, 
-    фильтровать их по ключевому слову и сохранять результат. Вы можете искать слово в начале или внутри сообщений, 
-    а также переключать язык и тему интерфейса.
-  </p>
-
-  <!-- Переключатели языка -->
-  <div class="radio-group">
-    <label><input type="radio" name="language" value="ru" checked> Русский</label>
-    <label><input type="radio" name="language" value="en"> English</label>
-    <label><input type="radio" name="language" value="ua"> Українська</label>
+  <button id="top-right-btn" onclick="window.location.href='https://olivaw448.github.io/somepages/'">olivaw448-tools</button>
+  <button id="theme-toggle-btn">Light mode</button>
+  <div class="container">
+    <h2 id="title">Telegram Chat Parser</h2>
+    <p class="description" id="description">Sample text</p>
+    <div class="radio-group">
+      <label><input type="radio" name="language" value="en" checked> English</label>
+      <label><input type="radio" name="language" value="ru"> Русский</label>
+      <label><input type="radio" name="language" value="ua"> Українська</label>
+    </div>
+    <hr class="separator">
+    <div id="search-container">
+      <label for="search-word" id="search-label">Enter a search word at the beginning of each message:</label>
+      <input type="text" id="search-word" value="Psycho">
+    </div>
+    <div id="search-options">
+      <label>
+        <input type="checkbox" id="search-inside">
+        <span id="search-inside-label">Search string inside messages</span>
+      </label>
+    </div>
+    <div id="drop-area">
+      <p id="drop-text">Drag and drop a JSON file here or click to select</p>
+      <input type="file" id="file-input" accept=".json">
+    </div>
+    <button id="copy-btn" style="display:none;">Copy</button>
+    <button id="download-btn" style="display:none;">Download result</button>
+    <div id="output"></div>
   </div>
-
-  <!-- Поле для ввода слова и чекбокс "искать внутри" -->
-  <div id="search-container">
-    <label for="search-word" id="search-label">Введите слово для поиска:</label>
-    <input type="text" id="search-word" value="Псих" style="margin-bottom:5px;">
-    <br>
-    <label>
-      <input type="checkbox" id="search-inside">
-      <span id="search-inside-label">Искать внутри сообщения</span>
-    </label>
+  <div id="progress-overlay">
+    <div id="progress-container">
+      <div id="progress-bar">
+        <div id="progress-bar-inner"></div>
+      </div>
+      <button id="cancel-btn">Cancel</button>
+    </div>
   </div>
-
-  <!-- Область для drag & drop -->
-  <div id="drop-area">
-    <p id="drop-text">Перетащите JSON-файл сюда или нажмите для выбора</p>
-    <input type="file" id="file-input" accept=".json">
-  </div>
-
-  <!-- Кнопки "Копировать" и "Скачать" -->
-  <button id="copy-btn" style="display:none;">Копировать</button>
-  <button id="download-btn" style="display:none;">Скачать результат</button>
-
-  <!-- Вывод результата -->
-  <div id="output"></div>
-
-  <!-- Переключатель темы -->
-  <div class="theme-switch">
-    <label><input type="checkbox" id="theme-toggle"> <span id="theme-label">Светлая тема</span></label>
-  </div>
-</div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // --- ЭЛЕМЕНТЫ ---
-    const dropArea          = document.getElementById("drop-area");
-    const fileInput         = document.getElementById("file-input");
-    const outputDiv         = document.getElementById("output");
-    const downloadBtn       = document.getElementById("download-btn");
-    const copyBtn           = document.getElementById("copy-btn");
-    const themeToggle       = document.getElementById("theme-toggle");
-    const languageRadios    = document.querySelectorAll('input[name="language"]');
-    const searchWordInput   = document.getElementById("search-word");
-    const searchInsideCheck = document.getElementById("search-inside");
-
-    // --- Глобальные переменные ---
-    let filteredText      = "";
-    let generatedFileName = "notes.txt";
-    let cachedJsonData    = null; // Кэш для автообновления результата
-
-    // --- ПЕРЕВОД ИНТЕРФЕЙСА ---
-    const translations = {
-      ru: {
-        title: "Парсер Telegram JSON",
-        description: "Этот инструмент позволяет загружать JSON-файлы с экспортированными сообщениями из Telegram, фильтровать их по ключевому слову и сохранять результат. Вы можете искать слово в начале или внутри сообщений, а также переключать язык и тему интерфейса.",
-        searchLabel: "Введите слово для поиска:",
-        searchInsideLabel: "Искать внутри сообщения",
-        dropText: "Перетащите JSON-файл сюда или нажмите для выбора",
-        copyBtn: "Копировать",
-        downloadBtn: "Скачать результат",
-        themeLabel: "Светлая тема"
-      },
-      en: {
-        title: "Telegram JSON Parser",
-        description: "This tool allows you to upload JSON files with exported Telegram messages, filter them by a keyword, and save the result. You can search for a word at the beginning or anywhere in messages, and switch the interface language and theme.",
-        searchLabel: "Enter a search word:",
-        searchInsideLabel: "Search inside messages",
-        dropText: "Drag and drop a JSON file here or click to select",
-        copyBtn: "Copy",
-        downloadBtn: "Download result",
-        themeLabel: "Light Theme"
-      },
-      ua: {
-        title: "Парсер Telegram JSON",
-        description: "Цей інструмент дозволяє завантажувати JSON-файли з експортованими повідомленнями Telegram, фільтрувати їх за ключовим словом і зберігати результат. Ви можете шукати слово на початку або в середині повідомлень, а також перемикати мову та тему інтерфейсу.",
-        searchLabel: "Введіть слово для пошуку:",
-        searchInsideLabel: "Шукати в середині повідомлень",
-        dropText: "Перетягніть JSON-файл сюди або натисніть для вибору",
-        copyBtn: "Скопіювати",
-        downloadBtn: "Завантажити результат",
-        themeLabel: "Світла тема"
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const dropArea = document.getElementById("drop-area");
+      const fileInput = document.getElementById("file-input");
+      const dropText = document.getElementById("drop-text");
+      const copyBtn = document.getElementById("copy-btn");
+      const downloadBtn = document.getElementById("download-btn");
+      const outputDiv = document.getElementById("output");
+      const themeToggleBtn = document.getElementById("theme-toggle-btn");
+      const languageRadios = document.querySelectorAll('input[name="language"]');
+      const searchWordInput = document.getElementById("search-word");
+      const searchInsideCheck = document.getElementById("search-inside");
+      const searchLabel = document.getElementById("search-label");
+      const progressOverlay = document.getElementById("progress-overlay");
+      const progressBarInner = document.getElementById("progress-bar-inner");
+      const cancelBtn = document.getElementById("cancel-btn");
+      
+      let filteredText = "";
+      let generatedFileName = "notes.txt";
+      let cachedJsonData = null;
+      let selectedFileName = "";
+      let currentFileReader = null;
+      let isCanceled = false;
+      
+      const translations = {
+        en: {
+          title: "Telegram Chat Parser",
+          description: "Sample text",
+          searchLabelBegin: "Enter a search word at the beginning of each message:",
+          searchLabelAnywhere: "Enter a search string anywhere in each message:",
+          dropText: "Drag and drop a JSON file here or click to select",
+          fileSelected: "File selected: ",
+          copyBtn: "Copy",
+          downloadBtn: "Download result",
+          noMessages: "No messages found with the given word.",
+          cancel: "Cancel",
+          searchInsideLabel: "Search string inside messages"
+        },
+        ru: {
+          title: "Парсер Telegram Чата",
+          description: "Sample text",
+          searchLabelBegin: "Введите слово для поиска вначале каждого сообщения:",
+          searchLabelAnywhere: "Введите строку для поиска в любом месте каждого сообщения:",
+          dropText: "Перетащите JSON-файл сюда или нажмите для выбора",
+          fileSelected: "Файл выбран: ",
+          copyBtn: "Копировать",
+          downloadBtn: "Скачать результат",
+          noMessages: "Сообщений с заданным словом не найдено.",
+          cancel: "Отмена",
+          searchInsideLabel: "Искать строку внутри сообщений"
+        },
+        ua: {
+          title: "Парсер Telegram Чату",
+          description: "Sample text",
+          searchLabelBegin: "Введіть слово для пошуку на початку кожного повідомлення:",
+          searchLabelAnywhere: "Введіть рядок для пошуку в будь-якому місці кожного повідомлення:",
+          dropText: "Перетягніть JSON-файл сюди або натисніть для вибору",
+          fileSelected: "Файл обрано: ",
+          copyBtn: "Скопіювати",
+          downloadBtn: "Завантажити результат",
+          noMessages: "Повідомлень із заданим словом не знайдено.",
+          cancel: "Скасувати",
+          searchInsideLabel: "Шукати рядок всередині повідомлень"
+        }
+      };
+      
+      function updateSearchLabel() {
+        const currentLang = document.querySelector('input[name="language"]:checked').value;
+        if(searchInsideCheck.checked) {
+          searchLabel.textContent = translations[currentLang].searchLabelAnywhere;
+        } else {
+          searchLabel.textContent = translations[currentLang].searchLabelBegin;
+        }
       }
-    };
-
-    function updateLanguage(lang) {
-      document.getElementById("title").textContent               = translations[lang].title;
-      document.getElementById("description").textContent         = translations[lang].description;
-      document.getElementById("search-label").textContent        = translations[lang].searchLabel;
-      document.getElementById("search-inside-label").textContent   = translations[lang].searchInsideLabel;
-      document.getElementById("drop-text").textContent           = translations[lang].dropText;
-      copyBtn.textContent                                        = translations[lang].copyBtn;
-      downloadBtn.textContent                                    = translations[lang].downloadBtn;
-      document.getElementById("theme-label").textContent         = translations[lang].themeLabel;
-      localStorage.setItem("language", lang);
-    }
-
-    // --- УСТАНОВКА ТЕМЫ ---
-    themeToggle.addEventListener("change", () => {
-      document.body.classList.toggle("light-theme");
-      localStorage.setItem("theme", themeToggle.checked ? "light" : "dark");
-    });
-    if (localStorage.getItem("theme") === "light") {
-      document.body.classList.add("light-theme");
-      themeToggle.checked = true;
-    }
-
-    // --- УСТАНОВКА ЯЗЫКА ---
-    languageRadios.forEach(radio => {
-      radio.addEventListener("change", () => updateLanguage(radio.value));
-    });
-    if (localStorage.getItem("language")) {
-      const savedLang = localStorage.getItem("language");
-      updateLanguage(savedLang);
-      const radioToCheck = document.querySelector(`input[name="language"][value="${savedLang}"]`);
-      if (radioToCheck) radioToCheck.checked = true;
-    }
-
-    // --- DRAG & DROP ---
-    dropArea.addEventListener("dragover", (event) => {
-      event.preventDefault();
-      dropArea.style.backgroundColor = "#555";
-    });
-    dropArea.addEventListener("dragleave", () => {
-      dropArea.style.backgroundColor = "#444654";
-    });
-    dropArea.addEventListener("drop", (event) => {
-      event.preventDefault();
-      dropArea.style.backgroundColor = "#444654";
-      const file = event.dataTransfer.files[0];
-      if (file) {
-        fileInput.files = event.dataTransfer.files; // чтобы сработало событие change
-        handleFile(file);
+      
+      function updateLanguage(lang) {
+        document.getElementById("title").textContent = translations[lang].title;
+        document.getElementById("description").textContent = translations[lang].description;
+        copyBtn.textContent = translations[lang].copyBtn;
+        downloadBtn.textContent = translations[lang].downloadBtn;
+        cancelBtn.textContent = translations[lang].cancel;
+        document.getElementById("search-inside-label").textContent = translations[lang].searchInsideLabel;
+        // Set dropText based on whether a file is selected
+        if(selectedFileName) {
+          dropText.textContent = translations[lang].fileSelected + selectedFileName;
+        } else {
+          dropText.textContent = translations[lang].dropText;
+        }
+        updateSearchLabel();
+        localStorage.setItem("language", lang);
+        if(cachedJsonData) processJSON(cachedJsonData);
       }
-    });
-    dropArea.addEventListener("click", () => fileInput.click());
-    fileInput.addEventListener("change", () => {
-      if (fileInput.files && fileInput.files.length > 0) {
-        handleFile(fileInput.files[0]);
+      
+      languageRadios.forEach(radio => {
+        radio.addEventListener("change", () => {
+          updateLanguage(radio.value);
+        });
+      });
+      
+      if(localStorage.getItem("language")) {
+        const savedLang = localStorage.getItem("language");
+        updateLanguage(savedLang);
+        document.querySelector(`input[name="language"][value="${savedLang}"]`).checked = true;
       }
-    });
-
-    // --- ОБРАБОТКА ФАЙЛА и автоповтор парсинга ---
-    function handleFile(file) {
-      const reader = new FileReader();
-      reader.onload = function (event) {
-        try {
-          cachedJsonData = JSON.parse(event.target.result);
-          processJSON(cachedJsonData);
-        } catch (error) {
-          outputDiv.textContent = "Ошибка: Неверный формат JSON!";
+      
+      searchInsideCheck.addEventListener("change", function() {
+        updateSearchLabel();
+        if(cachedJsonData) processJSON(cachedJsonData);
+      });
+      
+      searchWordInput.addEventListener("input", function() {
+        if(cachedJsonData) processJSON(cachedJsonData);
+      });
+      
+      function handleFile(file) {
+        selectedFileName = file.name;
+        isCanceled = false;
+        currentFileReader = new FileReader();
+        currentFileReader.onprogress = function(e) {
+          if (e.lengthComputable) {
+            const percent = Math.round((e.loaded / e.total) * 100);
+            progressBarInner.style.width = percent + "%";
+          }
+        };
+        currentFileReader.onloadstart = function(e) {
+          progressBarInner.style.width = "0%";
+          progressOverlay.style.display = "flex";
+        };
+        currentFileReader.onload = function(e) {
+          if(isCanceled) return;
+          try {
+            cachedJsonData = JSON.parse(e.target.result);
+            processJSON(cachedJsonData);
+            const currentLang = document.querySelector('input[name="language"]:checked').value;
+            dropText.textContent = translations[currentLang].fileSelected + file.name;
+            const isLight = document.body.classList.contains("light-theme");
+            dropArea.style.backgroundColor = isLight ? "var(--light-drop-selected)" : "var(--dark-drop-bg)";
+          } catch(err) {
+            outputDiv.textContent = "Error: Invalid JSON format!";
+            outputDiv.style.display = "block";
+            copyBtn.style.display = "none";
+            downloadBtn.style.display = "none";
+          }
+          progressOverlay.style.display = "none";
+        };
+        currentFileReader.onerror = function(e) {
+          progressOverlay.style.display = "none";
+        };
+        currentFileReader.onabort = function(e) {
+          progressOverlay.style.display = "none";
+        };
+        currentFileReader.readAsText(file);
+      }
+      
+      fileInput.addEventListener("change", function() {
+        if(fileInput.files && fileInput.files.length > 0) {
+          handleFile(fileInput.files[0]);
+        }
+      });
+      
+      dropArea.addEventListener("dragover", function(e) {
+        e.preventDefault();
+        dropArea.style.backgroundColor = "#555";
+      });
+      
+      dropArea.addEventListener("dragleave", function() {
+        const isLight = document.body.classList.contains("light-theme");
+        dropArea.style.backgroundColor = isLight ? "var(--light-drop-bg)" : "var(--dark-drop-bg)";
+      });
+      
+      dropArea.addEventListener("drop", function(e) {
+        e.preventDefault();
+        const isLight = document.body.classList.contains("light-theme");
+        dropArea.style.backgroundColor = isLight ? "var(--light-drop-bg)" : "var(--dark-drop-bg)";
+        const file = e.dataTransfer.files[0];
+        if(file) {
+          fileInput.files = e.dataTransfer.files;
+          handleFile(file);
+        }
+      });
+      
+      dropArea.addEventListener("click", function() {
+        fileInput.click();
+      });
+      
+      function processJSON(jsonData) {
+        const messages = jsonData.messages || [];
+        const searchWord = searchWordInput.value.trim();
+        const searchInside = searchInsideCheck.checked;
+        const results = [];
+        const dates = [];
+        const currentLang = document.querySelector('input[name="language"]:checked').value;
+        const locale = currentLang === "en" ? "en-US" : (currentLang === "ru" ? "ru-RU" : "uk-UA");
+        messages.forEach(msg => {
+          let messageText = "";
+          if(typeof msg.text === "string") {
+            messageText = msg.text;
+          } else if(Array.isArray(msg.text)) {
+            messageText = msg.text.map(part => (typeof part === "string" ? part : part.text)).join("");
+          }
+          let match = false;
+          if(searchWord) {
+            match = searchInside ? messageText.includes(searchWord) : messageText.startsWith(searchWord);
+          }
+          if(match) {
+            let dateObj = null;
+            if(msg.date) {
+              dateObj = new Date(msg.date);
+            } else if(msg.date_unixtime) {
+              dateObj = new Date(msg.date_unixtime * 1000);
+            }
+            if(dateObj) {
+              const formattedDate = dateObj.toLocaleString(locale, {
+                year:"numeric", month:"2-digit", day:"2-digit",
+                hour:"2-digit", minute:"2-digit", second:"2-digit"
+              }).replace(",", "");
+              const dayOfWeek = dateObj.toLocaleDateString(locale, {weekday:"long"});
+              results.push(`${formattedDate} (${dayOfWeek})\n\n${messageText}\n\n-----------------------------------\n`);
+              dates.push(dateObj);
+            } else {
+              results.push(`${messageText}\n\n-----------------------------------\n`);
+            }
+          }
+        });
+        if(results.length === 0) {
+          outputDiv.textContent = translations[currentLang].noMessages;
           outputDiv.style.display = "block";
           copyBtn.style.display = "none";
           downloadBtn.style.display = "none";
+          return;
         }
-      };
-      reader.readAsText(file);
-    }
-    // Автообновление при изменении слова или режима поиска
-    searchWordInput.addEventListener("input", () => {
-      if (cachedJsonData) processJSON(cachedJsonData);
-    });
-    searchInsideCheck.addEventListener("change", () => {
-      if (cachedJsonData) processJSON(cachedJsonData);
-    });
-
-    // --- ПАРСИНГ JSON и фильтрация сообщений ---
-    function processJSON(jsonData) {
-      const messages     = jsonData.messages || [];
-      const searchWord   = searchWordInput.value.trim();
-      const searchInside = searchInsideCheck.checked;
-
-      const results = [];
-      const dates   = [];
-
-      messages.forEach(msg => {
-        let messageText = "";
-        if (typeof msg.text === "string") {
-          messageText = msg.text;
-        } else if (Array.isArray(msg.text)) {
-          messageText = msg.text.map(part => (typeof part === "string" ? part : part.text)).join("");
+        if(dates.length > 0) {
+          dates.sort((a, b) => a - b);
+          const firstDate = formatDateForFile(dates[0]);
+          const lastDate = formatDateForFile(dates[dates.length - 1]);
+          generatedFileName = `notes-${firstDate}-to-${lastDate}.txt`;
+        } else {
+          generatedFileName = "notes.txt";
         }
-
-        let match = false;
-        if (searchWord) {
-          match = searchInside ? messageText.includes(searchWord) : messageText.startsWith(searchWord);
+        filteredText = results.join("\n");
+        outputDiv.textContent = filteredText;
+        outputDiv.style.display = "block";
+        copyBtn.style.display = "inline-block";
+        downloadBtn.style.display = "inline-block";
+      }
+      
+      function formatDateForFile(date) {
+        return date.toLocaleDateString("ru-RU", {year:"2-digit", month:"2-digit", day:"2-digit"}).replace(/\./g, "-");
+      }
+      
+      copyBtn.addEventListener("click", function() {
+        navigator.clipboard.writeText(filteredText)
+          .then(() => {
+            const originalText = copyBtn.textContent;
+            const isLight = document.body.classList.contains("light-theme");
+            copyBtn.style.backgroundColor = isLight ? "var(--btn-light-pressed)" : "var(--btn-dark-pressed)";
+            const currentLang = document.querySelector('input[name="language"]:checked').value;
+            copyBtn.textContent = currentLang === "en" ? "Copied" : (currentLang === "ru" ? "Скопировано" : "Скопійовано");
+            copyBtn.disabled = true;
+            setTimeout(() => {
+              copyBtn.textContent = translations[currentLang].copyBtn;
+              copyBtn.style.backgroundColor = "";
+              copyBtn.disabled = false;
+            }, 3000);
+          });
+      });
+      
+      downloadBtn.addEventListener("click", function() {
+        const blob = new Blob([filteredText], { type: "text/plain" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = generatedFileName;
+        link.click();
+      });
+      
+      themeToggleBtn.addEventListener("click", function() {
+        if(document.body.classList.contains("light-theme")) {
+          document.body.classList.remove("light-theme");
+          themeToggleBtn.textContent = "Light mode";
+        } else {
+          document.body.classList.add("light-theme");
+          themeToggleBtn.textContent = "Dark mode";
         }
-        if (match) {
-          let dateObj = null;
-          if (msg.date) {
-            dateObj = new Date(msg.date);
-          } else if (msg.date_unixtime) {
-            dateObj = new Date(msg.date_unixtime * 1000);
-          }
-          if (dateObj) {
-            const formattedDate = dateObj.toLocaleString("ru-RU", {
-              year: "numeric", month: "2-digit", day: "2-digit",
-              hour: "2-digit", minute: "2-digit", second: "2-digit"
-            }).replace(",", "");
-            const dayOfWeek = dateObj.toLocaleDateString("ru-RU", { weekday: "long" });
-            results.push(`${formattedDate} (${dayOfWeek})\n\n${messageText}\n\n-----------------------------------\n`);
-            dates.push(dateObj);
-          } else {
-            results.push(`${messageText}\n\n-----------------------------------\n`);
-          }
+        if(cachedJsonData) {
+          const currentLang = document.querySelector('input[name="language"]:checked').value;
+          dropText.textContent = translations[currentLang].fileSelected + selectedFileName;
+          const isLight = document.body.classList.contains("light-theme");
+          dropArea.style.backgroundColor = isLight ? "var(--light-drop-selected)" : "var(--dark-drop-bg)";
+          processJSON(cachedJsonData);
         }
       });
-
-      if (results.length === 0) {
-        outputDiv.textContent = "Сообщений с заданным словом не найдено.";
-        outputDiv.style.display = "block";
-        copyBtn.style.display = "none";
-        downloadBtn.style.display = "none";
-        return;
-      }
-
-      if (dates.length > 0) {
-        dates.sort((a, b) => a - b);
-        const firstDate = formatDateForFile(dates[0]);
-        const lastDate  = formatDateForFile(dates[dates.length - 1]);
-        generatedFileName = `notes-${firstDate}-to-${lastDate}.txt`;
-      } else {
-        generatedFileName = `notes.txt`;
-      }
-
-      filteredText = results.join("\n");
-      outputDiv.textContent = filteredText;
-      outputDiv.style.display = "block";
-      copyBtn.style.display = "inline-block";
-      downloadBtn.style.display = "inline-block";
-    }
-
-    function formatDateForFile(date) {
-      return date.toLocaleDateString("ru-RU", {
-        year: "2-digit",
-        month: "2-digit",
-        day: "2-digit"
-      }).replace(/\./g, "-");
-    }
-
-    // --- КОПИРОВАНИЕ (без alert, с изменением кнопки) ---
-    copyBtn.addEventListener("click", function () {
-      navigator.clipboard.writeText(filteredText)
-        .then(() => {
-          const originalText = copyBtn.textContent;
-          copyBtn.textContent = "Скопировано";
-          copyBtn.style.backgroundColor = "#333";
-          copyBtn.disabled = true;
-          setTimeout(() => {
-            copyBtn.textContent = originalText;
-            copyBtn.style.backgroundColor = "";
-            copyBtn.disabled = false;
-          }, 3000);
-        })
-        .catch(() => {
-          // Можно добавить обработку ошибки, если потребуется.
-        });
+      
+      cancelBtn.addEventListener("click", function() {
+        if(currentFileReader) {
+          isCanceled = true;
+          currentFileReader.abort();
+        }
+        progressOverlay.style.display = "none";
+      });
     });
-
-    // --- СКАЧИВАНИЕ ---
-    downloadBtn.addEventListener("click", function () {
-      const blob = new Blob([filteredText], { type: "text/plain" });
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = generatedFileName;
-      link.click();
-    });
-  });
-</script>
-
+  </script>
 </body>
 </html>
