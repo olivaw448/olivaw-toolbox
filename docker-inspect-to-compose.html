@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Docker inspect converter to docker compose</title>
+  <link rel="icon" href="https://img.icons8.com/?size=100&id=986&format=png&color=000000" type="image/x-icon">
   <style>
-    /* Тёмная тема */
     body {
       background-color: #1e1e1e;
       color: #d4d4d4;
@@ -12,6 +12,16 @@
       margin: 0;
       padding: 20px;
       line-height: 1.6;
+    }
+    header {
+      text-align: right;
+      padding: 5px 10px;
+      margin-bottom: 10px;
+    }
+    #tool-link {
+      color: white;
+      text-decoration: none;
+      font-size: 0.9em;
     }
     h1 {
       text-align: center;
@@ -21,7 +31,30 @@
       text-align: center;
       font-size: 0.9em;
       color: #9e9e9e;
+      margin-bottom: 10px;
+    }
+    #language-options {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
       margin-bottom: 20px;
+      font-size: 0.9em;
+    }
+    #language-options label {
+      cursor: pointer;
+    }
+    .top-section, .bottom-section {
+      background-color: #252526;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 10px auto;
+      width: 80%;
+      max-width: 800px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+    .bottom-section {
+      text-align: center;
     }
     #drop-area {
       border: 2px dashed #444;
@@ -30,10 +63,23 @@
       text-align: center;
       margin-bottom: 20px;
       cursor: pointer;
-      transition: background-color 0.3s;
+      transition: background-color 0.3s, opacity 0.3s;
+      position: relative;
     }
-    #drop-area.hover {
-      background-color: #333;
+    #drop-area.disabled {
+      background-color: rgba(50, 50, 50, 0.5);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    #drop-area.disabled::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.1) 10px, transparent 10px, transparent 20px);
+      pointer-events: none;
     }
     #drop-area p {
       margin: 10px 0;
@@ -60,56 +106,106 @@
       border-radius: 4px;
       cursor: pointer;
     }
-    #output {
+    #output, #user-input {
       width: 100%;
-      height: 300px;
-      background-color: #252526;
+      background-color: #1e1e1e;
       color: #d4d4d4;
-      border: none;
+      border: 1px solid #555;
       border-radius: 4px;
       padding: 10px;
       font-family: "Courier New", Courier, monospace;
-      resize: vertical;
+      box-sizing: border-box;
+    }
+    #user-input {
+      min-height: 10px;
+      max-height: 250px;
+      resize: none;
+      overflow-y: auto;
+      line-height: 1.4;
+    }
+    #output {
+      resize: none;
+      overflow-y: hidden;
+    }
+    .input-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+    .convert-button {
+      background-color: #007acc;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 10px;
+      border-radius: 4px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <h1>Docker inspect converter to docker compose</h1>
-  <p class="description">Конвертируйте вывод docker inspect в корректный docker-compose.yml файл.</p>
+  <header>
+    <a href="https://olivaw448.github.io/somepages/" id="tool-link">olivaw448-tools</a>
+  </header>
   
-  <div id="drop-area">
-    <label for="file-input" class="button">Выбрать файл</label>
-    <input type="file" id="file-input" accept=".json" style="display:none;">
-    <p>Или перетащите файл сюда</p>
+  <div class="top-section">
+    <h1 id="page-title">Docker inspect converter to docker-compose.yml</h1>
+    <p id="page-description" class="description">You can use file or text of output</p>
+    <div id="language-options">
+      <label><input type="radio" name="language" value="en" checked> English</label>
+      <label><input type="radio" name="language" value="ru"> Русский</label>
+      <label><input type="radio" name="language" value="ua"> Українська</label>
+    </div>
+    
+    <div id="drop-area">
+      <label for="file-input" class="button" id="file-label">Choose file</label>
+      <input type="file" id="file-input" accept=".json" style="display:none;">
+      <p id="drop-text">Or drag and drop file here</p>
+    </div>
+    
+    <div class="input-container">
+      <textarea id="user-input" placeholder="Or paste text here"></textarea>
+      <button id="convert-btn" class="convert-button">Convert</button>
+    </div>
   </div>
-  
-  <div id="buttons">
-    <button id="copy-btn">Копировать</button>
-    <button id="download-btn">Скачать файл</button>
+
+  <div class="bottom-section">
+    <div id="buttons">
+      <button id="copy-btn">Copy</button>
+      <button id="download-btn">Download file</button>
+    </div>
+    
+    <textarea id="output" placeholder="docker-compose.yml will appear here" readonly></textarea>
   </div>
-  
-  <textarea id="output" placeholder="Здесь появится docker-compose.yml" readonly></textarea>
   
   <script>
-    // Функция конвертации docker inspect в docker-compose.yml
+    function autoResize(textarea) {
+      textarea.style.height = "auto";
+      textarea.style.height = textarea.scrollHeight + "px";
+    }
+    
+    document.getElementById("user-input").addEventListener("input", function() {
+      autoResize(this);
+      const dropArea = document.getElementById("drop-area");
+      dropArea.classList.toggle("disabled", this.value.trim().length > 0);
+    });
+  
     function convertInspectToCompose(data) {
-      // Ожидается JSON-массив ровно из одного объекта
       if (!Array.isArray(data) || data.length !== 1) {
-        throw new Error("Ожидается JSON-массив с одним объектом, полученный из команды 'docker inspect container_id-or-container_name' или 'docker inspect network_name'.");
+        throw new Error("Expected a JSON array with one object, obtained from 'docker inspect container_id-or-container_name' or 'docker inspect network_name'.");
       }
       
       const obj = data[0];
       
-      // Если присутствует Config – обрабатываем как вывод контейнера
       if (obj.Config) {
-        // Извлекаем имя контейнера (удаляем ведущий слеш, если есть)
         const serviceName = obj.Name ? obj.Name.replace(/^\//, '') : "service";
         const image = obj.Config.Image || "";
         const command = obj.Config.Cmd ? obj.Config.Cmd.join(" ") : "";
         const env = obj.Config.Env || [];
         const workingDir = obj.Config.WorkingDir || "";
   
-        // Проброшенные порты из HostConfig.PortBindings
         const ports = [];
         if (obj.HostConfig && obj.HostConfig.PortBindings) {
           for (const portKey in obj.HostConfig.PortBindings) {
@@ -122,7 +218,6 @@
           }
         }
   
-        // Монтирования (volumes) из Mounts
         const volumes = [];
         if (Array.isArray(obj.Mounts)) {
           obj.Mounts.forEach(mount => {
@@ -132,7 +227,6 @@
           });
         }
   
-        // Формируем YAML с нужными отступами
         let yaml = `version: '3.8'
 services:
   ${serviceName}:
@@ -178,13 +272,10 @@ services:
   
         return yaml;
   
-      // Если присутствует Containers – обрабатываем как вывод сети
       } else if (obj.Containers) {
-        // Имя сети
         const networkName = obj.Name ? obj.Name.replace(/^\//, '') : "network";
         const driver = obj.Driver || "bridge";
   
-        // IPAM (берём первый конфиг)
         let ipamStr = "";
         if (obj.IPAM && Array.isArray(obj.IPAM.Config) && obj.IPAM.Config.length > 0) {
           const cfg = obj.IPAM.Config[0];
@@ -201,7 +292,6 @@ services:
           }
         }
   
-        // Опции сети
         let optionsStr = "";
         if (obj.Options && Object.keys(obj.Options).length > 0) {
           optionsStr = "    options:";
@@ -220,18 +310,16 @@ ${ipamStr ? ipamStr : ""}${optionsStr ? "\n" + optionsStr : ""}`;
         return yaml;
   
       } else {
-        throw new Error("Неизвестный формат docker inspect файла. Ожидается вывод контейнера (с Config) или сети (с Containers).");
+        throw new Error("Unknown format of docker inspect output. Expected container output (with Config) or network (with Containers).");
       }
     }
     
-    // Элементы страницы
     const fileInput = document.getElementById('file-input');
     const dropArea = document.getElementById('drop-area');
     const outputArea = document.getElementById('output');
     const copyBtn = document.getElementById('copy-btn');
     const downloadBtn = document.getElementById('download-btn');
     
-    // Обработка выбранного файла
     function handleFile(file) {
       const reader = new FileReader();
       reader.onload = function(e) {
@@ -239,22 +327,21 @@ ${ipamStr ? ipamStr : ""}${optionsStr ? "\n" + optionsStr : ""}`;
           const json = JSON.parse(e.target.result);
           const composeYaml = convertInspectToCompose(json);
           outputArea.value = composeYaml;
+          autoResize(outputArea);
         } catch (err) {
-          alert("Ошибка при разборе файла: " + err.message);
+          alert("Error parsing file: " + err.message);
           outputArea.value = "";
         }
       };
       reader.readAsText(file);
     }
     
-    // Обработчик выбора файла
     fileInput.addEventListener('change', function(e) {
       if (e.target.files.length > 0) {
         handleFile(e.target.files[0]);
       }
     });
     
-    // Drag & drop
     dropArea.addEventListener('dragover', function(e) {
       e.preventDefault();
       dropArea.classList.add('hover');
@@ -271,15 +358,28 @@ ${ipamStr ? ipamStr : ""}${optionsStr ? "\n" + optionsStr : ""}`;
       }
     });
     
-    // Копирование результата в буфер обмена
+    document.getElementById('convert-btn').addEventListener('click', function() {
+      const userInput = document.getElementById('user-input').value.trim();
+      if (userInput !== "") {
+        try {
+          const json = JSON.parse(userInput);
+          const composeYaml = convertInspectToCompose(json);
+          outputArea.value = composeYaml;
+          autoResize(outputArea);
+        } catch (err) {
+          alert("Error parsing JSON: " + err.message);
+          outputArea.value = "";
+        }
+      }
+    });
+    
     copyBtn.addEventListener('click', function() {
       if (!outputArea.value) return;
       navigator.clipboard.writeText(outputArea.value)
-        .then(() => alert("Скопировано в буфер обмена!"))
-        .catch(err => alert("Ошибка копирования: " + err));
+        .then(() => alert("Copied to clipboard!"))
+        .catch(err => alert("Copy error: " + err));
     });
     
-    // Скачивание результата как файл docker-compose.yml
     downloadBtn.addEventListener('click', function() {
       if (!outputArea.value) return;
       const blob = new Blob([outputArea.value], { type: 'text/yaml' });
@@ -292,6 +392,73 @@ ${ipamStr ? ipamStr : ""}${optionsStr ? "\n" + optionsStr : ""}`;
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     });
+    
+    const translations = {
+      en: {
+        title: "Docker inspect converter to docker-compose.yml",
+        description: "You can use file or text of output",
+        fileButton: "Choose file",
+        dropText: "Or drag and drop file here",
+        userInputPlaceholder: "Or paste text here",
+        convertButton: "Convert",
+        copyButton: "Copy",
+        downloadButton: "Download file",
+        outputPlaceholder: "docker-compose.yml will appear here"
+      },
+      ru: {
+        title: "Конвертер docker inspect в docker-compose.yml",
+        description: "Можно использовать файл или вставить текст вывода",
+        fileButton: "Выбрать файл",
+        dropText: "Или перетащите файл сюда",
+        userInputPlaceholder: "Или вставьте сюда текстом",
+        convertButton: "Конвертировать",
+        copyButton: "Копировать",
+        downloadButton: "Скачать файл",
+        outputPlaceholder: "Здесь появится docker-compose.yml"
+      },
+      ua: {
+        title: "Конвертер docker inspect в docker-compose.yml",
+        description: "Ви можете використати файл або вставити текст виводу",
+        fileButton: "Вибрати файл",
+        dropText: "Або перетягніть файл сюди",
+        userInputPlaceholder: "Або вставте сюди текст",
+        convertButton: "Конвертувати",
+        copyButton: "Копіювати",
+        downloadButton: "Завантажити файл",
+        outputPlaceholder: "Тут з’явиться docker-compose.yml"
+      }
+    };
+    
+    function updateLanguage(lang) {
+      document.getElementById("page-title").innerText = translations[lang].title;
+      document.getElementById("page-description").innerText = translations[lang].description;
+      document.getElementById("file-label").innerText = translations[lang].fileButton;
+      document.getElementById("drop-text").innerText = translations[lang].dropText;
+      document.getElementById("user-input").placeholder = translations[lang].userInputPlaceholder;
+      document.getElementById("convert-btn").innerText = translations[lang].convertButton;
+      document.getElementById("copy-btn").innerText = translations[lang].copyButton;
+      document.getElementById("download-btn").innerText = translations[lang].downloadButton;
+      document.getElementById("output").placeholder = translations[lang].outputPlaceholder;
+      localStorage.setItem("selectedLanguage", lang);
+    }
+    
+    const languageRadios = document.getElementsByName("language");
+    languageRadios.forEach(radio => {
+      radio.addEventListener("change", function() {
+        if (this.checked) {
+          updateLanguage(this.value);
+        }
+      });
+    });
+    
+    const savedLang = localStorage.getItem("selectedLanguage") || "en";
+    for (const radio of languageRadios) {
+      if (radio.value === savedLang) {
+        radio.checked = true;
+        break;
+      }
+    }
+    updateLanguage(savedLang);
   </script>
 </body>
 </html>
