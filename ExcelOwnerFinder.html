@@ -41,7 +41,7 @@
       margin-top: 0;
     }
     h3 {
-      margin: 0.5rem 0 0.5rem 0;
+      margin: 0.5rem 0;
       font-size: 1.1rem;
       color: #555;
     }
@@ -164,12 +164,13 @@
       margin-right: 5px;
     }
     .author-link {
-      position: absolute;
+      position: fixed;
       top: 10px;
       right: 10px;
       color: grey;
       font-size: 0.9em;
       text-decoration: none;
+      z-index: 10000;
     }
   </style>
 </head>
@@ -267,12 +268,10 @@
       <div id="output"></div>
     </div>
   </div>
-  
-  <div style="position: fixed; top: 10px; right: 10px; font-size: 0.9em; color: grey;">
-    <a href="https://olivaw448.github.io/somepages/" target="_blank" style="color: grey; text-decoration: none;">
-      olivaw448-tools
-    </a>
-  </div>
+
+  <a class="author-link" href="https://olivaw448.github.io/somepages/" target="_blank">
+    olivaw448-tools
+  </a>
   
   <div id="overlay">
     <div id="overlayContent">
@@ -449,6 +448,7 @@
       const output = document.getElementById('output');
       output.innerHTML = "";
   
+      // Настройки для портов:
       const useIgnorePortTeam = ignorePortTeamFileCheckbox.checked;
       let usePortColumnTeam = false, portColumnTeam = 0;
       if (!useIgnorePortTeam && portColumnTeamFileCheckbox.checked) {
@@ -485,17 +485,6 @@
               const searchCell = vulnSheet[cellSearchRef];
               if (vulnCell && vulnCell.v && searchCell && searchCell.v) {
                 let searchTerm = searchCell.v.toString().trim();
-                if (usePortColumnUser) {
-                  let portCellRef = XLSX.utils.encode_cell({ r: row, c: portColumnUser - 1 });
-                  let portCell = vulnSheet[portCellRef];
-                  let portVal = "";
-                  if (portCell && portCell.v) { portVal = portCell.v.toString().trim(); }
-                  if (portVal !== "") { 
-                    searchTerm = stripPort(searchTerm.toLowerCase()) + ":" + portVal; 
-                  }
-                } else if (useIgnorePortUser) {
-                  searchTerm = stripPort(searchTerm.toLowerCase());
-                }
                 vulnerabilityRecords.push({
                   vulnName: vulnCell.v.toString().trim(),
                   searchTerm: searchTerm
@@ -514,9 +503,10 @@
               let tokens = record.searchTerm.split(sepRegex).map(s => s.trim()).filter(Boolean);
               tokens.forEach(token => {
                 let tokenLower = token.toLowerCase();
+                if (useIgnorePortUser) { tokenLower = stripPort(tokenLower); }
                 const key = record.vulnName + "_" + tokenLower;
                 if (!vulnResults.has(key)) {
-                  vulnResults.set(key, { vulnName: record.vulnName, token: token, teams: new Set() });
+                  vulnResults.set(key, { vulnName: record.vulnName, token: tokenLower, teams: new Set() });
                 }
               });
             });
@@ -530,6 +520,7 @@
           }
         };
         vulnReader.readAsArrayBuffer(vulnFileInput.files[0]);
+  
       } else {
         const ipListRaw = document.getElementById('ipList').value;
         const escapedSep = escapeRegex(separatorInput);
@@ -555,7 +546,7 @@
             const workbook = XLSX.read(data, { type: 'array' });
             let targetSheetName = sheetNameInput || workbook.SheetNames[0];
             if (!workbook.SheetNames.includes(targetSheetName)) {
-              alert(`Sheet "${targetSheetInput}" not found in the file.`);
+              alert(`Sheet "${targetSheetName}" not found in the file.`);
               finishProcessing();
               return;
             }
@@ -717,7 +708,7 @@
               }
             }
             vulnResults.forEach(vulnObj => {
-              const tokenLower = vulnObj.token.toLowerCase();
+              let tokenLower = vulnObj.token.toLowerCase();
               if (useSubstringSearch) {
                 if (segLower.includes(tokenLower)) { vulnObj.teams.add(currentTeam); }
               } else {
@@ -736,41 +727,40 @@
     }
   
     function finalizeResults(userWorkMap, itemToTeams, output) {
-      const labelToItems = new Map();
+      finalizeResultsGrouped(userWorkMap, itemToTeams, output);
+    }
+  
+    function finalizeResultsGrouped(userWorkMap, itemToTeams, output) {
+      const teamToTokens = new Map();
+      const notFound = new Set();
       const useNoPortOutput = ignorePortUserInputCheckbox.checked;
   
       for (const [uWork, origSet] of userWorkMap.entries()) {
         let displayVal = useNoPortOutput ? uWork : Array.from(origSet).join(", ");
         if (!itemToTeams.has(uWork)) {
-          const label = "Not found in the file:";
-          if (!labelToItems.has(label)) { labelToItems.set(label, new Set()); }
-          labelToItems.get(label).add(displayVal);
+          notFound.add(displayVal);
         } else {
-          const teams = itemToTeams.get(uWork);
-          const normTeams = [...teams].map(t => (t === "" ? "No team name" : t));
-          const uniqueTeams = [...new Set(normTeams)];
-          let label = uniqueTeams.length === 1 ? uniqueTeams[0] : "In multiple teams: " + uniqueTeams.sort().join(" & ");
-          if (!labelToItems.has(label)) { labelToItems.set(label, new Set()); }
-          labelToItems.get(label).add(displayVal);
+          for (const team of itemToTeams.get(uWork)) {
+            const teamName = team === "" ? "No team name" : team;
+            if (!teamToTokens.has(teamName)) {
+              teamToTokens.set(teamName, new Set());
+            }
+            teamToTokens.get(teamName).add(displayVal);
+          }
         }
       }
   
-      if (labelToItems.size === 0) {
-        output.innerHTML = "<p>No matches found.</p>";
-        updateProgress(100);
-        return;
-      }
-  
       let html = "<table style='border-collapse: collapse; width: 100%;'><thead><tr style='background-color: #f0f0f0;'>" +
-                 "<th style='width:30%; border:1px solid #000; padding:8px;'>Team</th>" +
-                 "<th style='width:70%; border:1px solid #000; padding:8px;'>Results</th>" +
+                 "<th style='border:1px solid #000; padding:8px;'>Team</th>" +
+                 "<th style='border:1px solid #000; padding:8px;'>Results</th>" +
                  "</tr></thead><tbody>";
-      for (const [label, itemsSet] of labelToItems.entries()) {
-        if (!label || itemsSet.size === 0) continue;
-        const itemsArr = [...itemsSet];
-        const joined = itemsArr.join(", ");
-        html += `<tr style='border:1px solid #000;'><td style='border:1px solid #000; padding:8px;'>${label}</td>` +
-                `<td style='border:1px solid #000; padding:8px;'>${joined}</td></tr>`;
+      teamToTokens.forEach((tokens, team) => {
+        html += `<tr style='border:1px solid #000;'><td style='border:1px solid #000; padding:8px;'>${team}</td>` +
+                `<td style='border:1px solid #000; padding:8px;'>${Array.from(tokens).join(", ")}</td></tr>`;
+      });
+      if (notFound.size > 0) {
+        html += `<tr style='border:1px solid #000;'><td style='border:1px solid #000; padding:8px;'>Not found in the file:</td>` +
+                `<td style='border:1px solid #000; padding:8px;'>${Array.from(notFound).join(", ")}</td></tr>`;
       }
       html += "</tbody></table>";
       output.innerHTML = html;
@@ -778,25 +768,35 @@
     }
   
     function finalizeResultsVuln(output) {
+      const grouped = {};
+      vulnResults.forEach(vulnObj => {
+        const vuln = vulnObj.vulnName;
+        const token = vulnObj.token;
+        let teams = vulnObj.teams;
+        if (teams.size === 0) {
+          teams = new Set(["Not found in the file:"]);
+        }
+        teams.forEach(team => {
+          if (!grouped[vuln]) grouped[vuln] = {};
+          if (!grouped[vuln][team]) grouped[vuln][team] = new Set();
+          grouped[vuln][team].add(token);
+        });
+      });
+  
       let html = "<table style='border-collapse: collapse; width: 100%;'><thead><tr style='background-color: #f0f0f0;'>" +
-                 "<th style='border:1px solid #000; padding:8px;'>Vunl name</th>" +
+                 "<th style='border:1px solid #000; padding:8px;'>Vuln name</th>" +
                  "<th style='border:1px solid #000; padding:8px;'>Team</th>" +
                  "<th style='border:1px solid #000; padding:8px;'>Results</th>" +
                  "</tr></thead><tbody>";
-      vulnResults.forEach(vulnObj => {
-        let teams = Array.from(vulnObj.teams);
-        if (teams.length === 0) {
-          html += `<tr style='border:1px solid #000;'><td style='border:1px solid #000; padding:8px;'>${vulnObj.vulnName}</td>` +
-                  `<td style='border:1px solid #000; padding:8px;'>Not found in the file:</td>` +
-                  `<td style='border:1px solid #000; padding:8px;'>${vulnObj.token}</td></tr>`;
-        } else {
-          teams.forEach(team => {
-            html += `<tr style='border:1px solid #000;'><td style='border:1px solid #000; padding:8px;'>${vulnObj.vulnName}</td>` +
-                    `<td style='border:1px solid #000; padding:8px;'>${team}</td>` +
-                    `<td style='border:1px solid #000; padding:8px;'>${vulnObj.token}</td></tr>`;
-          });
+      for (let vuln in grouped) {
+        for (let team in grouped[vuln]) {
+          let tokensArr = Array.from(grouped[vuln][team]);
+          let tokensStr = tokensArr.join(", ");
+          html += `<tr style='border:1px solid #000;'><td style='border:1px solid #000; padding:8px;'>${vuln}</td>` +
+                  `<td style='border:1px solid #000; padding:8px;'>${team}</td>` +
+                  `<td style='border:1px solid #000; padding:8px;'>${tokensStr}</td></tr>`;
         }
-      });
+      }
       html += "</tbody></table>";
       output.innerHTML = html;
       updateProgress(100);
