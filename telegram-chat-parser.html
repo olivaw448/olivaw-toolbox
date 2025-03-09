@@ -65,7 +65,6 @@
       border-top: 1px solid #888;
       margin: 20px 0;
     }
-    /* Center input areas */
     #search-container,
     #search-options,
     #author-option {
@@ -279,6 +278,17 @@
         <span id="show-author-label">Show message author</span>
       </label>
     </div>
+    <div id="date-range-option">
+      <label>
+        <input type="checkbox" id="date-range-checkbox" />
+        <span id="date-range-label"></span>
+      </label>
+    </div>
+    <div id="date-range-fields" style="display:none;">
+      <input type="date" id="date-from" placeholder="">
+      <span>-</span>
+      <input type="date" id="date-to" placeholder="">
+    </div>
     <div id="drop-area">
       <p id="drop-text">Drag and drop a JSON or HTML file here or click to select</p>
       <input type="file" id="file-input" accept=".json,.html,.htm" />
@@ -296,15 +306,13 @@
     </div>
   </div>
   <script>
-    // Helper to parse dates with potential dd.mm.yyyy format
     function parseDate(dateStr) {
-      const regex = /^(\d{2})\.(\d{2})\.(\d{4})(.*)$/;
+      const regex = /^(\d{2})[\/.](\d{2})[\/.](\d{4})(.*)$/;
       if (regex.test(dateStr)) {
         return new Date(dateStr.replace(regex, "$3-$2-$1$4"));
       }
       return new Date(dateStr);
     }
-    
     document.addEventListener("DOMContentLoaded", function () {
       const dropArea = document.getElementById("drop-area");
       const fileInput = document.getElementById("file-input");
@@ -321,14 +329,14 @@
       const progressOverlay = document.getElementById("progress-overlay");
       const progressBarInner = document.getElementById("progress-bar-inner");
       const cancelBtn = document.getElementById("cancel-btn");
-      
+      const dateRangeCheckbox = document.getElementById("date-range-checkbox");
+      const dateRangeFields = document.getElementById("date-range-fields");
       let filteredText = "";
       let generatedFileName = "notes.txt";
       let cachedJsonData = null;
       let selectedFileName = "";
       let currentFileReader = null;
       let isCanceled = false;
-      
       const translations = {
         en: {
           title: "Telegram Chat Parser",
@@ -343,7 +351,10 @@
           cancel: "Cancel",
           searchInsideLabel: "Search string inside messages",
           showAuthorLabel: "Show message author",
-          authorLabel: "Author: "
+          authorLabel: "Author: ",
+          dateRangeLabel: "Date range",
+          dateFromPlaceholder: "From",
+          dateToPlaceholder: "To"
         },
         ru: {
           title: "Парсер Telegram Чата",
@@ -358,7 +369,10 @@
           cancel: "Отмена",
           searchInsideLabel: "Искать строку внутри сообщений",
           showAuthorLabel: "Показывать автора сообщения",
-          authorLabel: "Автор: "
+          authorLabel: "Автор: ",
+          dateRangeLabel: "Диапазон дат",
+          dateFromPlaceholder: "От",
+          dateToPlaceholder: "До"
         },
         ua: {
           title: "Парсер Telegram Чату",
@@ -373,10 +387,12 @@
           cancel: "Скасувати",
           searchInsideLabel: "Шукати рядок всередині повідомлень",
           showAuthorLabel: "Показувати автора повідомлення",
-          authorLabel: "Автор: "
+          authorLabel: "Автор: ",
+          dateRangeLabel: "Діапазон дат",
+          dateFromPlaceholder: "Від",
+          dateToPlaceholder: "До"
         }
       };
-      
       function escapeHTML(str) {
         return str.replace(/&/g, "&amp;")
                   .replace(/</g, "&lt;")
@@ -384,13 +400,10 @@
                   .replace(/"/g, "&quot;")
                   .replace(/'/g, "&#039;");
       }
-      
-      // For media references, return file name wrapped in **.
       function extractFileName(path) {
         const parts = path.split("/");
         return "**" + parts[parts.length - 1] + "**";
       }
-      
       function updateSearchLabel() {
         const currentLang = document.querySelector('input[name="language"]:checked').value;
         if (searchInsideCheck.checked) {
@@ -399,7 +412,6 @@
           searchLabel.textContent = translations[currentLang].searchLabelBegin;
         }
       }
-      
       function updateLanguage(lang) {
         document.getElementById("title").textContent = translations[lang].title;
         document.getElementById("description").textContent = translations[lang].description;
@@ -408,6 +420,9 @@
         cancelBtn.textContent = translations[lang].cancel;
         document.getElementById("search-inside-label").textContent = translations[lang].searchInsideLabel;
         document.getElementById("show-author-label").textContent = translations[lang].showAuthorLabel;
+        document.getElementById("date-range-label").textContent = translations[lang].dateRangeLabel;
+        document.getElementById("date-from").placeholder = translations[lang].dateFromPlaceholder;
+        document.getElementById("date-to").placeholder = translations[lang].dateToPlaceholder;
         if (selectedFileName) {
           dropText.textContent = translations[lang].fileSelected + selectedFileName;
         } else {
@@ -423,19 +438,16 @@
           }
         }
       }
-      
       languageRadios.forEach(radio => {
         radio.addEventListener("change", () => {
           updateLanguage(radio.value);
         });
       });
-      
       if (localStorage.getItem("language")) {
         const savedLang = localStorage.getItem("language");
         updateLanguage(savedLang);
         document.querySelector(`input[name="language"][value="${savedLang}"]`).checked = true;
       }
-      
       searchInsideCheck.addEventListener("change", function () {
         updateSearchLabel();
         if (cachedJsonData) {
@@ -446,7 +458,6 @@
           }
         }
       });
-      
       searchWordInput.addEventListener("input", function () {
         if (cachedJsonData) {
           if (isHTMLFile(cachedJsonData)) {
@@ -456,7 +467,6 @@
           }
         }
       });
-      
       showAuthorCheck.addEventListener("change", function () {
         if (cachedJsonData) {
           if (isHTMLFile(cachedJsonData)) {
@@ -466,11 +476,41 @@
           }
         }
       });
-      
+      dateRangeCheckbox.addEventListener("change", function () {
+        if (dateRangeCheckbox.checked) {
+          dateRangeFields.style.display = "block";
+        } else {
+          dateRangeFields.style.display = "none";
+        }
+        if (cachedJsonData) {
+          if (isHTMLFile(cachedJsonData)) {
+            processHTML(cachedJsonData.rawContent);
+          } else {
+            processJSON(cachedJsonData);
+          }
+        }
+      });
+      document.getElementById("date-from").addEventListener("change", function () {
+        if (cachedJsonData) {
+          if (isHTMLFile(cachedJsonData)) {
+            processHTML(cachedJsonData.rawContent);
+          } else {
+            processJSON(cachedJsonData);
+          }
+        }
+      });
+      document.getElementById("date-to").addEventListener("change", function () {
+        if (cachedJsonData) {
+          if (isHTMLFile(cachedJsonData)) {
+            processHTML(cachedJsonData.rawContent);
+          } else {
+            processJSON(cachedJsonData);
+          }
+        }
+      });
       function isHTMLFile(contentObj) {
         return contentObj.isHTML;
       }
-      
       function handleFile(file) {
         selectedFileName = file.name;
         isCanceled = false;
@@ -481,7 +521,7 @@
             progressBarInner.style.width = percent + "%";
           }
         };
-        currentFileReader.onloadstart = function (e) {
+        currentFileReader.onloadstart = function () {
           progressBarInner.style.width = "0%";
           progressOverlay.style.display = "flex";
         };
@@ -511,31 +551,27 @@
             : "var(--dark-drop-bg)";
           progressOverlay.style.display = "none";
         };
-        currentFileReader.onerror = function (e) {
+        currentFileReader.onerror = function () {
           progressOverlay.style.display = "none";
         };
-        currentFileReader.onabort = function (e) {
+        currentFileReader.onabort = function () {
           progressOverlay.style.display = "none";
         };
         currentFileReader.readAsText(file);
       }
-      
       fileInput.addEventListener("change", function () {
         if (fileInput.files && fileInput.files.length > 0) {
           handleFile(fileInput.files[0]);
         }
       });
-      
       dropArea.addEventListener("dragover", function (e) {
         e.preventDefault();
         dropArea.style.backgroundColor = "#555";
       });
-      
       dropArea.addEventListener("dragleave", function () {
         const isLight = document.body.classList.contains("light-theme");
         dropArea.style.backgroundColor = isLight ? "var(--light-drop-bg)" : "var(--dark-drop-bg)";
       });
-      
       dropArea.addEventListener("drop", function (e) {
         e.preventDefault();
         const isLight = document.body.classList.contains("light-theme");
@@ -546,11 +582,9 @@
           handleFile(file);
         }
       });
-      
       dropArea.addEventListener("click", function () {
         fileInput.click();
       });
-      
       function processJSON(jsonData) {
         const messages = jsonData.messages || [];
         const searchWord = searchWordInput.value.trim().toLowerCase();
@@ -559,8 +593,7 @@
         const results = [];
         const dates = [];
         const currentLang = document.querySelector('input[name="language"]:checked').value;
-        const locale =
-          currentLang === "en" ? "en-US" : (currentLang === "ru" ? "ru-RU" : "uk-UA");
+        const locale = currentLang === "en" ? "en-US" : (currentLang === "ru" ? "ru-RU" : "uk-UA");
         messages.forEach(msg => {
           let messageText = "";
           if (typeof msg.text === "string") {
@@ -581,6 +614,16 @@
               dateObj = parseDate(msg.date);
             } else if (msg.date_unixtime) {
               dateObj = new Date(msg.date_unixtime * 1000);
+            }
+            if (dateRangeCheckbox.checked) {
+              const dateFromVal = document.getElementById("date-from").value;
+              const dateToVal = document.getElementById("date-to").value;
+              let fromDate = dateFromVal ? new Date(dateFromVal) : null;
+              let toDate = dateToVal ? new Date(dateToVal) : null;
+              if (toDate) { toDate.setHours(23,59,59,999); }
+              if (!dateObj) return;
+              if (fromDate && dateObj < fromDate) return;
+              if (toDate && dateObj > toDate) return;
             }
             let authorLine = "";
             if (showAuthor) {
@@ -635,7 +678,6 @@
         copyBtn.style.display = "inline-block";
         downloadBtn.style.display = "inline-block";
       }
-      
       function processHTML(htmlContent) {
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlContent, "text/html");
@@ -643,14 +685,12 @@
         const results = [];
         const dates = [];
         const currentLang = document.querySelector('input[name="language"]:checked').value;
-        const locale =
-          currentLang === "en" ? "en-US" : (currentLang === "ru" ? "ru-RU" : "uk-UA");
+        const locale = currentLang === "en" ? "en-US" : (currentLang === "ru" ? "ru-RU" : "uk-UA");
         const searchWord = searchWordInput.value.trim().toLowerCase();
         const searchInside = searchInsideCheck.checked;
         const showAuthor = showAuthorCheck.checked;
         messages.forEach(msg => {
           if (msg.classList.contains("service")) return;
-          // Extract plain text for filtering (preserve newline breaks).
           let textForSearch = "";
           const textElem = msg.querySelector(".text");
           if (textElem) {
@@ -659,7 +699,6 @@
             tempDiv.innerHTML = htmlText;
             textForSearch = tempDiv.textContent.trim();
           }
-          // Build media info (as file names wrapped in **)
           let mediaInfo = "";
           const photoLink = msg.querySelector("a.media_photo");
           if (photoLink) {
@@ -703,6 +742,16 @@
                 dateObj = new Date(dateElem.textContent.trim());
               }
               if (dateObj && !isNaN(dateObj.getTime())) {
+                if (dateRangeCheckbox.checked) {
+                  const dateFromVal = document.getElementById("date-from").value;
+                  const dateToVal = document.getElementById("date-to").value;
+                  let fromDate = dateFromVal ? new Date(dateFromVal) : null;
+                  let toDate = dateToVal ? new Date(dateToVal) : null;
+                  if (toDate) { toDate.setHours(23,59,59,999); }
+                  if (!dateObj) return;
+                  if (fromDate && dateObj < fromDate) return;
+                  if (toDate && dateObj > toDate) return;
+                }
                 dateStr = dateObj.toLocaleString(locale, {
                   year: "numeric",
                   month: "2-digit",
@@ -760,7 +809,6 @@
         } else {
           generatedFileName = "notes.txt";
         }
-        // Join results preserving \n as newlines.
         const plainTextResult = results.join("");
         outputDiv.innerText = plainTextResult;
         outputDiv.style.display = "block";
@@ -768,11 +816,9 @@
         downloadBtn.style.display = "inline-block";
         filteredText = plainTextResult;
       }
-      
       function formatDateForFile(date) {
         return date.toLocaleDateString("ru-RU", { year: "2-digit", month: "2-digit", day: "2-digit" }).replace(/\./g, "-");
       }
-      
       copyBtn.addEventListener("click", function () {
         navigator.clipboard.writeText(filteredText).then(() => {
           const isLight = document.body.classList.contains("light-theme");
@@ -787,7 +833,6 @@
           }, 3000);
         });
       });
-      
       downloadBtn.addEventListener("click", function () {
         const blob = new Blob([filteredText], { type: "text/plain" });
         const link = document.createElement("a");
@@ -795,7 +840,6 @@
         link.download = generatedFileName;
         link.click();
       });
-      
       themeToggleBtn.addEventListener("click", function () {
         if (document.body.classList.contains("light-theme")) {
           document.body.classList.remove("light-theme");
@@ -818,7 +862,6 @@
           }
         }
       });
-      
       cancelBtn.addEventListener("click", function () {
         if (currentFileReader) {
           isCanceled = true;
@@ -826,17 +869,14 @@
         }
         progressOverlay.style.display = "none";
       });
-      
       dropArea.addEventListener("dragover", function (e) {
         e.preventDefault();
         dropArea.style.backgroundColor = "#555";
       });
-      
       dropArea.addEventListener("dragleave", function () {
         const isLight = document.body.classList.contains("light-theme");
         dropArea.style.backgroundColor = isLight ? "var(--light-drop-bg)" : "var(--dark-drop-bg)";
       });
-      
       dropArea.addEventListener("drop", function (e) {
         e.preventDefault();
         const isLight = document.body.classList.contains("light-theme");
@@ -847,7 +887,6 @@
           handleFile(file);
         }
       });
-      
       dropArea.addEventListener("click", function () {
         fileInput.click();
       });
