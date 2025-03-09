@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat export parser</title>
+  <link rel="icon" href="https://img.icons8.com/?size=100&id=986&format=png&color=000000" type="image/x-icon">
+  <style>
+    :root {
+      --bg-dark: #343541;
+      --text-dark: #ffffff;
+      --border-dark: #555;
+      --bg-light: #ffffff;
+      --text-light: #000000;
+      --border-light: #ccc;
+      --dark-drop-bg: #444654;
+      --dark-output-bg: #444654;
+      --light-drop-bg: #f0f0f0;
+      --light-drop-selected: #e5e5e5;
+      --light-output-bg: #f0f0f0;
+      --btn-bg: #888;
+      --btn-bg-hover: #666;
+      --btn-dark-pressed: #333;
+      --btn-light-pressed: #bbb;
+    }
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      position: relative;
+    }
+    /* Language selector styles */
+    .language-selector {
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10000;
+      display: flex;
+      gap: 8px;
+    }
+    .language-selector label {
+      display: inline-block;
+      padding: 4px 8px;
+      font-size: 0.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      background-color: #a6a6a6;
+      color: #fff;
+      border: none;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    /* Using :has pseudo-class to style the selected language button */
+    .language-selector label:has(input:checked) {
+      background-color: #999999;
+    }
+    .language-selector input[type="radio"] {
+      display: none;
+    }
+    /* Main container and other styles */
+    .container {
+      text-align: center;
+      max-width: 90%;
+      padding: 20px;
+      box-sizing: border-box;
+      margin-top: 80px;
+    }
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    p.description {
+      font-size: 1rem;
+      margin-bottom: 10px;
+      color: #aaa;
+    }
+    /* Script selection dropdown */
+    #script-select-container {
+      margin-bottom: 20px;
+    }
+    #script-select-container label {
+      font-size: 0.9rem;
+      margin-right: 8px;
+    }
+    #script-select {
+      padding: 4px 8px;
+      font-size: 0.9rem;
+      border: 1px solid #888;
+      border-radius: 4px;
+    }
+    hr.separator {
+      border: none;
+      border-top: 1px solid #888;
+      margin: 20px 0;
+    }
+    #search-container,
+    #search-options,
+    #author-option {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    #search-label {
+      font-size: 1rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+    #search-word {
+      padding: 8px;
+      font-size: 1rem;
+      border: 1px solid #888;
+      border-radius: 4px;
+      width: 60%;
+      max-width: 300px;
+    }
+    #drop-area {
+      border: 2px dashed var(--border-dark);
+      padding: 20px;
+      margin: 20px 0;
+      cursor: pointer;
+      background-color: var(--dark-drop-bg);
+      color: var(--text-dark);
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+    input[type="file"] {
+      display: none;
+    }
+    #drop-text {
+      margin: 0;
+      font-size: 1rem;
+    }
+    #copy-btn,
+    #download-btn {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: var(--btn-bg);
+      color: var(--text-dark);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    #copy-btn:hover,
+    #download-btn:hover {
+      background-color: var(--btn-bg-hover);
+    }
+    #output {
+      white-space: pre-wrap;
+      text-align: left;
+      background-color: var(--dark-output-bg);
+      padding: 10px;
+      border: 1px solid var(--border-dark);
+      margin-top: 10px;
+      border-radius: 4px;
+      overflow: auto;
+      display: none;
+    }
+    #top-right-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      color: var(--text-dark);
+    }
+    #top-right-btn:hover {
+      text-decoration: underline;
+    }
+    #theme-toggle-btn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: var(--btn-bg);
+      border: none;
+      padding: 5px 10px;
+      font-size: 0.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      color: var(--text-dark);
+      transition: background-color 0.3s ease;
+    }
+    #theme-toggle-btn:hover {
+      background-color: var(--btn-bg-hover);
+    }
+    .light-theme {
+      background-color: var(--bg-light);
+      color: var(--text-light);
+    }
+    .light-theme #drop-area {
+      background-color: var(--light-drop-bg);
+      border: 2px dashed var(--border-light);
+      color: var(--text-light);
+    }
+    .light-theme #output {
+      background-color: var(--light-output-bg);
+      border: 1px solid var(--border-light);
+      color: var(--text-light);
+    }
+    .light-theme #copy-btn,
+    .light-theme #download-btn {
+      background-color: #ccc;
+      color: var(--text-light);
+    }
+    .light-theme #top-right-btn {
+      color: var(--text-light);
+    }
+    .light-theme #theme-toggle-btn {
+      background-color: #ccc;
+      color: var(--text-light);
+    }
+    @media (max-width: 600px) {
+      h2 {
+        font-size: 2rem;
+      }
+      #search-word {
+        width: 80%;
+      }
+      #copy-btn,
+      #download-btn,
+      #theme-toggle-btn {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+      }
+    }
+    #progress-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+    #progress-container {
+      background: #222;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      color: #fff;
+      width: 80%;
+      max-width: 300px;
+    }
+    #progress-bar {
+      width: 100%;
+      height: 20px;
+      margin-bottom: 10px;
+      background: #444;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    #progress-bar-inner {
+      height: 100%;
+      width: 0%;
+      background: #10a37f;
+      transition: width 0.2s ease;
+    }
+    #cancel-btn {
+      background: var(--btn-bg);
+      color: var(--text-dark);
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    #cancel-btn:hover {
+      background-color: var(--btn-bg-hover);
+    }
+    .light-theme #cancel-btn {
+      background: #ccc;
+      color: var(--text-light);
+    }
+  </style>
+</head>
+<body>
+  <div class="language-selector">
+    <label class="lang-en">
+      <input type="radio" name="language" value="en" checked>
+      <span>English</span>
+    </label>
+    <label class="lang-ru">
+      <input type="radio" name="language" value="ru">
+      <span>Русский</span>
+    </label>
+    <label class="lang-ua">
+      <input type="radio" name="language" value="ua">
+      <span>Українська</span>
+    </label>
+  </div>
+  <button id="top-right-btn" onclick="window.location.href='https://olivaw448.github.io/somepages/'">olivaw448-tools</button>
+  <button id="theme-toggle-btn">Light mode</button>
+  <div class="container">
+    <h2 id="title">Chat export parser</h2>
+    <p class="description" id="description">Sample text</p>
+    <div id="script-select-container">
+      <label for="script-select">Export type:</label>
+      <select id="script-select">
+        <option value="telegram">Telegram</option>
+        <option value="whatsapp">Whatsapp</option>
+      </select>
+    </div>
+    <hr class="separator" />
+    <div id="search-container">
+      <label for="search-word" id="search-label">Enter a search word at the beginning of each message:</label>
+      <input type="text" id="search-word" value="Psycho" />
+    </div>
+    <div id="search-options">
+      <label>
+        <input type="checkbox" id="search-inside" />
+        <span id="search-inside-label">Search string inside messages</span>
+      </label>
+    </div>
+    <div id="author-option">
+      <label>
+        <input type="checkbox" id="show-author" />
+        <span id="show-author-label">Show message author</span>
+      </label>
+    </div>
+    <div id="date-range-option">
+      <label>
+        <input type="checkbox" id="date-range-checkbox" />
+        <span id="date-range-label"></span>
+      </label>
+    </div>
+    <div id="date-range-fields" style="display:none;">
+      <input type="date" id="date-from" placeholder="">
+      <span>-</span>
+      <input type="date" id="date-to" placeholder="">
+    </div>
+    <div id="drop-area">
+      <p id="drop-text">Drag and drop a JSON or HTML file here or click to select</p>
+      <input type="file" id="file-input" accept=".json,.html,.htm" />
+    </div>
+    <button id="copy-btn" style="display:none;">Copy</button>
+    <button id="download-btn" style="display:none;">Download result</button>
+    <div id="output"></div>
+  </div>
+  <div id="progress-overlay">
+    <div id="progress-container">
+      <div id="progress-bar">
+        <div id="progress-bar-inner"></div>
+      </div>
+      <button id="cancel-btn">Cancel</button>
+    </div>
+  </div>
+  <script src="telegram.js"></script>
+  <script src=".js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+  <script>
+    // Handler for export type selection
+    const scriptSelect = document.getElementById("script-select");
+    const fileInput = document.getElementById("file-input");
+    const dropText = document.getElementById("drop-text");
+    scriptSelect.addEventListener("change", function() {
+      // Reset selected file
+      fileInput.value = "";
+      // Get current language from global translations defined in telegram.js
+      const currentLang = document.querySelector('input[name="language"]:checked').value;
+      // Update drop area text with supported file info (script name in lowercase with .js extension)
+      dropText.textContent = translations[currentLang].dropText + " (Supported file: " + scriptSelect.value.toLowerCase() + ".js)";
+    });
+  </script>
+</body>
+</html>
