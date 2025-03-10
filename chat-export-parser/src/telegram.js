@@ -1,15 +1,14 @@
-// Supported file extensions for this parser: JSON and HTML
-const supportedExtensions = ['json', 'html'];
-
-function parseDate(dateStr) {
-    const regex = /^(\d{2})[\/.](\d{2})[\/.](\d{4})(.*)$/;
-    if (regex.test(dateStr)) {
-      return new Date(dateStr.replace(regex, "$3-$2-$1$4"));
+(function initTelegramModule() {
+  function initTelegram() {
+    if (window.telegramModuleInitialized) return;
+    window.telegramModuleInitialized = true;
+    const supportedExtensions = ['json', 'html'];
+    function parseDate(dateStr) {
+      const regex = /^(\d{2})[\/.](\d{2})[\/.](\d{4})(.*)$/;
+      return regex.test(dateStr)
+        ? new Date(dateStr.replace(regex, "$3-$2-$1$4"))
+        : new Date(dateStr);
     }
-    return new Date(dateStr);
-  }
-  
-  document.addEventListener("DOMContentLoaded", function () {
     const dropArea = document.getElementById("drop-area");
     const fileInput = document.getElementById("file-input");
     const dropText = document.getElementById("drop-text");
@@ -89,7 +88,6 @@ function parseDate(dateStr) {
         dateToPlaceholder: "До"
       }
     };
-  
     function escapeHTML(str) {
       return str.replace(/&/g, "&amp;")
                 .replace(/</g, "&lt;")
@@ -97,21 +95,20 @@ function parseDate(dateStr) {
                 .replace(/"/g, "&quot;")
                 .replace(/'/g, "&#039;");
     }
-  
     function extractFileName(path) {
       const parts = path.split("/");
       return "**" + parts[parts.length - 1] + "**";
     }
-  
     function updateSearchLabel() {
       const currentLang = document.querySelector('input[name="language"]:checked').value;
-      if (searchInsideCheck.checked) {
-        searchLabel.textContent = translations[currentLang].searchLabelAnywhere;
-      } else {
-        searchLabel.textContent = translations[currentLang].searchLabelBegin;
-      }
+      searchLabel.textContent = searchInsideCheck.checked
+        ? translations[currentLang].searchLabelAnywhere
+        : translations[currentLang].searchLabelBegin;
     }
-  
+    window.getTelegramDropText = function() {
+      const currentLang = document.querySelector('input[name="language"]:checked')?.value || "en";
+      return translations[currentLang].dropText;
+    };
     function updateLanguage(lang) {
       document.getElementById("title").textContent = translations[lang].title;
       document.getElementById("description").textContent = translations[lang].description;
@@ -123,112 +120,41 @@ function parseDate(dateStr) {
       document.getElementById("date-range-label").textContent = translations[lang].dateRangeLabel;
       document.getElementById("date-from").placeholder = translations[lang].dateFromPlaceholder;
       document.getElementById("date-to").placeholder = translations[lang].dateToPlaceholder;
-      if (selectedFileName) {
-        dropText.textContent = translations[lang].fileSelected + selectedFileName;
-      } else {
-        dropText.textContent = translations[lang].dropText;
-      }
+      dropText.textContent = selectedFileName
+        ? translations[lang].fileSelected + selectedFileName
+        : translations[lang].dropText;
       updateSearchLabel();
       localStorage.setItem("language", lang);
-      if (cachedJsonData) {
-        if (isHTMLFile(cachedJsonData)) {
-          processHTML(cachedJsonData.rawContent);
-        } else {
-          processJSON(cachedJsonData);
-        }
-      }
+      updateDropText();
     }
-  
     languageRadios.forEach(radio => {
-      radio.addEventListener("change", () => {
-        updateLanguage(radio.value);
-      });
+      radio.addEventListener("change", () => updateLanguage(radio.value));
     });
-  
     if (localStorage.getItem("language")) {
       const savedLang = localStorage.getItem("language");
       updateLanguage(savedLang);
       document.querySelector(`input[name="language"][value="${savedLang}"]`).checked = true;
+    } else {
+      updateLanguage("en");
     }
-  
-    searchInsideCheck.addEventListener("change", function () {
-      updateSearchLabel();
-      if (cachedJsonData) {
-        if (isHTMLFile(cachedJsonData)) {
-          processHTML(cachedJsonData.rawContent);
-        } else {
-          processJSON(cachedJsonData);
-        }
-      }
-    });
-  
-    searchWordInput.addEventListener("input", function () {
-      if (cachedJsonData) {
-        if (isHTMLFile(cachedJsonData)) {
-          processHTML(cachedJsonData.rawContent);
-        } else {
-          processJSON(cachedJsonData);
-        }
-      }
-    });
-  
-    showAuthorCheck.addEventListener("change", function () {
-      if (cachedJsonData) {
-        if (isHTMLFile(cachedJsonData)) {
-          processHTML(cachedJsonData.rawContent);
-        } else {
-          processJSON(cachedJsonData);
-        }
-      }
-    });
-  
+    searchInsideCheck.addEventListener("change", updateSearchLabel);
+    searchWordInput.addEventListener("input", function () {});
+    showAuthorCheck.addEventListener("change", function () {});
     dateRangeCheckbox.addEventListener("change", function () {
-      if (dateRangeCheckbox.checked) {
-        dateRangeFields.style.display = "block";
-      } else {
-        dateRangeFields.style.display = "none";
-      }
-      if (cachedJsonData) {
-        if (isHTMLFile(cachedJsonData)) {
-          processHTML(cachedJsonData.rawContent);
-        } else {
-          processJSON(cachedJsonData);
-        }
-      }
+      dateRangeFields.style.display = dateRangeCheckbox.checked ? "block" : "none";
     });
-  
-    document.getElementById("date-from").addEventListener("change", function () {
-      if (cachedJsonData) {
-        if (isHTMLFile(cachedJsonData)) {
-          processHTML(cachedJsonData.rawContent);
-        } else {
-          processJSON(cachedJsonData);
-        }
-      }
-    });
-  
-    document.getElementById("date-to").addEventListener("change", function () {
-      if (cachedJsonData) {
-        if (isHTMLFile(cachedJsonData)) {
-          processHTML(cachedJsonData.rawContent);
-        } else {
-          processJSON(cachedJsonData);
-        }
-      }
-    });
-  
+    document.getElementById("date-from").addEventListener("change", function () {});
+    document.getElementById("date-to").addEventListener("change", function () {});
     function isHTMLFile(contentObj) {
       return contentObj.isHTML;
     }
-  
     function handleFile(file) {
       selectedFileName = file.name;
       isCanceled = false;
       currentFileReader = new FileReader();
       currentFileReader.onprogress = function (e) {
         if (e.lengthComputable) {
-          const percent = Math.round((e.loaded / e.total) * 100);
-          progressBarInner.style.width = percent + "%";
+          progressBarInner.style.width = Math.round((e.loaded / e.total) * 100) + "%";
         }
       };
       currentFileReader.onloadstart = function () {
@@ -255,8 +181,7 @@ function parseDate(dateStr) {
         }
         const currentLang = document.querySelector('input[name="language"]:checked').value;
         dropText.textContent = translations[currentLang].fileSelected + file.name;
-        const isLight = document.body.classList.contains("light-theme");
-        dropArea.style.backgroundColor = isLight
+        dropArea.style.backgroundColor = document.body.classList.contains("light-theme")
           ? "var(--light-drop-selected)"
           : "var(--dark-drop-bg)";
         progressOverlay.style.display = "none";
@@ -269,38 +194,38 @@ function parseDate(dateStr) {
       };
       currentFileReader.readAsText(file);
     }
-  
     fileInput.addEventListener("change", function () {
       if (fileInput.files && fileInput.files.length > 0) {
         handleFile(fileInput.files[0]);
       }
     });
-  
     dropArea.addEventListener("dragover", function (e) {
       e.preventDefault();
       dropArea.style.backgroundColor = "#555";
     });
-  
     dropArea.addEventListener("dragleave", function () {
-      const isLight = document.body.classList.contains("light-theme");
-      dropArea.style.backgroundColor = isLight ? "var(--light-drop-bg)" : "var(--dark-drop-bg)";
+      dropArea.style.backgroundColor = document.body.classList.contains("light-theme")
+        ? "var(--light-drop-bg)"
+        : "var(--dark-drop-bg)";
     });
-  
     dropArea.addEventListener("drop", function (e) {
       e.preventDefault();
-      const isLight = document.body.classList.contains("light-theme");
-      dropArea.style.backgroundColor = isLight ? "var(--light-drop-bg)" : "var(--dark-drop-bg)";
+      dropArea.style.backgroundColor = document.body.classList.contains("light-theme")
+        ? "var(--light-drop-bg)"
+        : "var(--dark-drop-bg)";
       const file = e.dataTransfer.files[0];
       if (file) {
         fileInput.files = e.dataTransfer.files;
         handleFile(file);
       }
     });
-  
-    dropArea.addEventListener("click", function () {
+    function handleDropClick(e) {
+      e.stopPropagation();
       fileInput.click();
-    });
-  
+    }
+    // Remove any duplicate click handlers before adding one.
+    dropArea.removeEventListener("click", handleDropClick);
+    dropArea.addEventListener("click", handleDropClick);
     function processJSON(jsonData) {
       const messages = jsonData.messages || [];
       const searchWord = searchWordInput.value.trim().toLowerCase();
@@ -317,10 +242,8 @@ function parseDate(dateStr) {
         } else if (Array.isArray(msg.text)) {
           messageText = msg.text.map(part => (typeof part === "string" ? part : part.text)).join("");
         }
-        let match = false;
-        if (searchWord === "") {
-          match = true;
-        } else {
+        let match = searchWord === "" ? true : false;
+        if (!match) {
           const lowerMsg = messageText.toLowerCase();
           match = searchInside ? lowerMsg.includes(searchWord) : lowerMsg.startsWith(searchWord);
         }
@@ -349,12 +272,8 @@ function parseDate(dateStr) {
             }
           }
           let attachments = [];
-          if (msg.photo) {
-            attachments.push(extractFileName(msg.photo));
-          }
-          if (msg.file) {
-            attachments.push(extractFileName(msg.file));
-          }
+          if (msg.photo) attachments.push(extractFileName(msg.photo));
+          if (msg.file) attachments.push(extractFileName(msg.file));
           let attachmentsStr = attachments.length ? "\n\n" + attachments.join("\n") : "";
           if (dateObj) {
             const formattedDate = dateObj.toLocaleString(locale, {
@@ -388,13 +307,14 @@ function parseDate(dateStr) {
       } else {
         generatedFileName = "notes.txt";
       }
-      filteredText = results.join("\n");
-      outputDiv.textContent = filteredText;
+      const plainTextResult = results.join("");
+      const finalResult = plainTextResult.trimEnd();
+      outputDiv.innerText = finalResult;
       outputDiv.style.display = "block";
       copyBtn.style.display = "inline-block";
       downloadBtn.style.display = "inline-block";
+      filteredText = finalResult;
     }
-  
     function processHTML(htmlContent) {
       const parser = new DOMParser();
       const doc = parser.parseFromString(htmlContent, "text/html");
@@ -419,31 +339,22 @@ function parseDate(dateStr) {
         let mediaInfo = "";
         const photoLink = msg.querySelector("a.media_photo");
         if (photoLink) {
-          const imgHref = photoLink.getAttribute("href");
-          mediaInfo += extractFileName(imgHref);
+          mediaInfo += extractFileName(photoLink.getAttribute("href"));
         }
         const videoLink = msg.querySelector("a.video_file_wrap") || msg.querySelector("a.media_video");
         if (videoLink) {
-          const videoHref = videoLink.getAttribute("href");
-          mediaInfo += extractFileName(videoHref);
+          mediaInfo += extractFileName(videoLink.getAttribute("href"));
         }
         const fileLink = msg.querySelector("a.media_file");
         if (fileLink) {
-          const fileHref = fileLink.getAttribute("href");
-          mediaInfo += extractFileName(fileHref);
+          mediaInfo += extractFileName(fileLink.getAttribute("href"));
         }
         const voiceLink = msg.querySelector("a.media_voice_message");
         if (voiceLink) {
-          const voiceHref = voiceLink.getAttribute("href");
-          mediaInfo += extractFileName(voiceHref);
+          mediaInfo += extractFileName(voiceLink.getAttribute("href"));
         }
         const lowerText = textForSearch.toLowerCase();
-        let includeMsg = false;
-        if (searchWord === "") {
-          includeMsg = true;
-        } else {
-          includeMsg = searchInside ? lowerText.includes(searchWord) : lowerText.startsWith(searchWord);
-        }
+        let includeMsg = searchWord === "" ? true : (searchInside ? lowerText.includes(searchWord) : lowerText.startsWith(searchWord));
         if (includeMsg) {
           let dateStr = "";
           let dateObj = null;
@@ -499,12 +410,7 @@ function parseDate(dateStr) {
               authorLine = "\n" + translations[currentLang].authorLabel + authorText;
             }
           }
-          let finalMsg = "";
-          if (dateStr) {
-            finalMsg = `${dateStr}${authorLine}\n\n${textForSearch}`;
-          } else {
-            finalMsg = `${textForSearch}${authorLine}`;
-          }
+          let finalMsg = dateStr ? `${dateStr}${authorLine}\n\n${textForSearch}` : `${textForSearch}${authorLine}`;
           if (mediaInfo) {
             finalMsg += `\n\n${mediaInfo}`;
           }
@@ -527,17 +433,16 @@ function parseDate(dateStr) {
         generatedFileName = "notes.txt";
       }
       const plainTextResult = results.join("");
-      outputDiv.innerText = plainTextResult;
+      const finalResult = plainTextResult.trimEnd();
+      outputDiv.innerText = finalResult;
       outputDiv.style.display = "block";
       copyBtn.style.display = "inline-block";
       downloadBtn.style.display = "inline-block";
-      filteredText = plainTextResult;
+      filteredText = finalResult;
     }
-  
     function formatDateForFile(date) {
       return date.toLocaleDateString("ru-RU", { year: "2-digit", month: "2-digit", day: "2-digit" }).replace(/\./g, "-");
     }
-  
     copyBtn.addEventListener("click", function () {
       navigator.clipboard.writeText(filteredText).then(() => {
         const isLight = document.body.classList.contains("light-theme");
@@ -552,7 +457,6 @@ function parseDate(dateStr) {
         }, 3000);
       });
     });
-  
     downloadBtn.addEventListener("click", function () {
       const blob = new Blob([filteredText], { type: "text/plain" });
       const link = document.createElement("a");
@@ -560,7 +464,6 @@ function parseDate(dateStr) {
       link.download = generatedFileName;
       link.click();
     });
-  
     themeToggleBtn.addEventListener("click", function () {
       if (document.body.classList.contains("light-theme")) {
         document.body.classList.remove("light-theme");
@@ -571,19 +474,14 @@ function parseDate(dateStr) {
       }
       if (cachedJsonData) {
         const currentLang = document.querySelector('input[name="language"]:checked').value;
-        if (selectedFileName) {
-          dropText.textContent = translations[currentLang].fileSelected + selectedFileName;
-        }
-        const isLight = document.body.classList.contains("light-theme");
-        dropArea.style.backgroundColor = isLight ? "var(--light-drop-selected)" : "var(--dark-drop-bg)";
-        if (isHTMLFile(cachedJsonData)) {
-          processHTML(cachedJsonData.rawContent);
-        } else {
-          processJSON(cachedJsonData);
-        }
+        dropText.textContent = selectedFileName
+          ? translations[currentLang].fileSelected + selectedFileName
+          : translations[currentLang].dropText;
+        dropArea.style.backgroundColor = document.body.classList.contains("light-theme")
+          ? "var(--light-drop-selected)"
+          : "var(--dark-drop-bg)";
       }
     });
-  
     cancelBtn.addEventListener("click", function () {
       if (currentFileReader) {
         isCanceled = true;
@@ -591,30 +489,51 @@ function parseDate(dateStr) {
       }
       progressOverlay.style.display = "none";
     });
-  
     dropArea.addEventListener("dragover", function (e) {
       e.preventDefault();
       dropArea.style.backgroundColor = "#555";
     });
-  
     dropArea.addEventListener("dragleave", function () {
-      const isLight = document.body.classList.contains("light-theme");
-      dropArea.style.backgroundColor = isLight ? "var(--light-drop-bg)" : "var(--dark-drop-bg)";
+      dropArea.style.backgroundColor = document.body.classList.contains("light-theme")
+        ? "var(--light-drop-bg)"
+        : "var(--dark-drop-bg)";
     });
-  
     dropArea.addEventListener("drop", function (e) {
       e.preventDefault();
-      const isLight = document.body.classList.contains("light-theme");
-      dropArea.style.backgroundColor = isLight ? "var(--light-drop-bg)" : "var(--dark-drop-bg)";
+      dropArea.style.backgroundColor = document.body.classList.contains("light-theme")
+        ? "var(--light-drop-bg)"
+        : "var(--dark-drop-bg)";
       const file = e.dataTransfer.files[0];
       if (file) {
         fileInput.files = e.dataTransfer.files;
         handleFile(file);
       }
     });
-  
-    dropArea.addEventListener("click", function () {
+    function handleDropClick(e) {
+      e.stopPropagation();
       fileInput.click();
-    });
-  });
-  
+    }
+    // Ensure the click handler is added only once.
+    dropArea.removeEventListener("click", handleDropClick);
+    dropArea.addEventListener("click", handleDropClick);
+    function refreshParsedResults() {
+      if (!cachedJsonData) return;
+      if (isHTMLFile(cachedJsonData)) {
+        processHTML(cachedJsonData.rawContent);
+      } else {
+        processJSON(cachedJsonData);
+      }
+    }
+    searchWordInput.addEventListener('input', refreshParsedResults);
+    searchInsideCheck.addEventListener('change', refreshParsedResults);
+    showAuthorCheck.addEventListener('change', refreshParsedResults);
+    dateRangeCheckbox.addEventListener('change', refreshParsedResults);
+    document.getElementById("date-from").addEventListener('change', refreshParsedResults);
+    document.getElementById("date-to").addEventListener('change', refreshParsedResults);
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initTelegram);
+  } else {
+    initTelegram();
+  }
+})();

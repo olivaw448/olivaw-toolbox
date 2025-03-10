@@ -22,6 +22,8 @@
       --btn-bg-hover: #666;
       --btn-dark-pressed: #333;
       --btn-light-pressed: #bbb;
+      --export-btn-bg: #a6a6a6;
+      --export-btn-selected: #999999;
     }
     body {
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -35,7 +37,6 @@
       min-height: 100vh;
       position: relative;
     }
-    /* Language selector styles */
     .language-selector {
       position: fixed;
       top: 10px;
@@ -57,14 +58,12 @@
       transition: background-color 0.3s ease;
       user-select: none;
     }
-    /* Using :has pseudo-class to style the selected language button */
     .language-selector label:has(input:checked) {
       background-color: #999999;
     }
     .language-selector input[type="radio"] {
       display: none;
     }
-    /* Main container and other styles */
     .container {
       text-align: center;
       max-width: 90%;
@@ -81,19 +80,22 @@
       margin-bottom: 10px;
       color: #aaa;
     }
-    /* Script selection dropdown */
-    #script-select-container {
+    #export-type-bar {
       margin-bottom: 20px;
     }
-    #script-select-container label {
+    #export-type-bar button {
+      padding: 6px 12px;
       font-size: 0.9rem;
+      border: none;
+      border-radius: 4px;
+      background-color: var(--export-btn-bg);
+      color: var(--text-dark);
+      cursor: pointer;
+      transition: background-color 0.3s ease;
       margin-right: 8px;
     }
-    #script-select {
-      padding: 4px 8px;
-      font-size: 0.9rem;
-      border: 1px solid #888;
-      border-radius: 4px;
+    #export-type-bar button.selected {
+      background-color: var(--export-btn-selected);
     }
     hr.separator {
       border: none;
@@ -224,6 +226,7 @@
       }
       #search-word {
         width: 80%;
+        max-width: 80%;
       }
       #copy-btn,
       #download-btn,
@@ -305,12 +308,9 @@
   <div class="container">
     <h2 id="title">Chat export parser</h2>
     <p class="description" id="description">Sample text</p>
-    <div id="script-select-container">
-      <label for="script-select">Export type:</label>
-      <select id="script-select">
-        <option value="telegram">Telegram</option>
-        <option value="whatsapp">Whatsapp</option>
-      </select>
+    <div id="export-type-bar">
+      <button id="btn-telegram" data-type="telegram" class="selected">Telegram</button>
+      <button id="btn-whatsapp" data-type="whatsapp">WhatsApp (coming soon)</button>
     </div>
     <hr class="separator" />
     <div id="search-container">
@@ -341,8 +341,8 @@
       <input type="date" id="date-to" placeholder="">
     </div>
     <div id="drop-area">
-      <p id="drop-text">Drag and drop a JSON or HTML file here or click to select</p>
-      <input type="file" id="file-input" accept=".json,.html,.htm" />
+      <p id="drop-text">Loading export script...</p>
+      <input type="file" id="file-input" />
     </div>
     <button id="copy-btn" style="display:none;">Copy</button>
     <button id="download-btn" style="display:none;">Download result</button>
@@ -356,21 +356,60 @@
       <button id="cancel-btn">Cancel</button>
     </div>
   </div>
-  <script src="telegram.js"></script>
-  <script src=".js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
   <script>
-    // Handler for export type selection
-    const scriptSelect = document.getElementById("script-select");
-    const fileInput = document.getElementById("file-input");
-    const dropText = document.getElementById("drop-text");
-    scriptSelect.addEventListener("change", function() {
-      // Reset selected file
-      fileInput.value = "";
-      // Get current language from global translations defined in telegram.js
-      const currentLang = document.querySelector('input[name="language"]:checked').value;
-      // Update drop area text with supported file info (script name in lowercase with .js extension)
-      dropText.textContent = translations[currentLang].dropText + " (Supported file: " + scriptSelect.value.toLowerCase() + ".js)";
+    let currentExportType = localStorage.getItem("exportType") || "telegram";
+    function updateExportButtons() {
+      document.querySelectorAll("#export-type-bar button").forEach(btn => {
+        if (btn.dataset.type === currentExportType) {
+          btn.classList.add("selected");
+        } else {
+          btn.classList.remove("selected");
+        }
+      });
+    }
+    updateExportButtons();
+    document.querySelectorAll("#export-type-bar button").forEach(btn => {
+      btn.addEventListener("click", function() {
+        currentExportType = this.dataset.type;
+        localStorage.setItem("exportType", currentExportType);
+        updateExportButtons();
+        loadExportScript(currentExportType + ".js");
+      });
+    });
+    let currentExportScript = null;
+    function loadExportScript(scriptName) {
+      if (currentExportScript) {
+        currentExportScript.remove();
+      }
+      currentExportScript = document.createElement("script");
+      currentExportScript.src = scriptName;
+      currentExportScript.onload = function() {
+        updateDropText();
+      };
+      document.body.appendChild(currentExportScript);
+    }
+    loadExportScript(currentExportType + ".js");
+    function updateDropText() {
+      let baseDropText = "";
+      if (currentExportType === "telegram") {
+        if (typeof window.getTelegramDropText === "function") {
+          baseDropText = window.getTelegramDropText();
+        }
+      } else if (currentExportType === "whatsapp") {
+        if (typeof window.getWhatsappDropText === "function") {
+          baseDropText = window.getWhatsappDropText();
+        }
+      }
+      document.getElementById("drop-text").textContent = baseDropText;
+    }
+    window.addEventListener("load", function() {
+      updateDropText();
+    });
+    document.querySelectorAll('input[name="language"]').forEach(radio => {
+      radio.addEventListener("change", function() {
+        updateDropText();
+      });
     });
   </script>
 </body>
