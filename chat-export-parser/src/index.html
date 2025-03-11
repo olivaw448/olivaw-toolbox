@@ -308,13 +308,13 @@
 <body>
   <!-- Global Variables and Initialization -->
   <script>
-    // If language is not set in localStorage, default to "en" and store it.
+    // Set default language if not set in localStorage
     if (!localStorage.getItem("language")) {
       localStorage.setItem("language", "en");
     }
     var currentLanguage = localStorage.getItem("language");
     var currentExportType = localStorage.getItem("exportType") || "telegram";
-    
+
     // Function to update the language selector UI
     function updateLanguageSelectorUI() {
       document.querySelectorAll('.language-selector label').forEach(label => {
@@ -322,6 +322,7 @@
         const span = label.querySelector('span');
         if (input.value === currentLanguage) {
           input.checked = true;
+          // Prepend "> " if not already present
           if (!span.textContent.startsWith("> ")) {
             span.textContent = "> " + span.textContent;
           }
@@ -333,9 +334,9 @@
         }
       });
     }
-    
-    // Initialize language selector UI on page load
-    updateLanguageSelectorUI();
+
+    // Wait until DOM is fully loaded before updating the language selector UI
+    document.addEventListener("DOMContentLoaded", updateLanguageSelectorUI);
   </script>
 
   <!-- Language Selector -->
