@@ -58,7 +58,7 @@
       transition: background-color 0.3s ease;
       user-select: none;
     }
-    .language-selector label:has(input:checked) {
+    .language-selector label.selected {
       background-color: #999999;
     }
     .language-selector input[type="radio"] {
@@ -130,13 +130,15 @@
       color: var(--text-dark);
       border-radius: 8px;
       transition: background-color 0.3s ease;
-    }
-    input[type="file"] {
-      display: none;
+      position: relative;
     }
     #drop-text {
       margin: 0;
       font-size: 1rem;
+    }
+    /* Скрытый input для файла */
+    #file-input {
+      display: none;
     }
     #copy-btn,
     #download-btn {
@@ -164,6 +166,8 @@
       border-radius: 4px;
       overflow: auto;
       display: none;
+      max-width: 80vw;
+      overflow-wrap: break-word;
     }
     #top-right-btn {
       position: absolute;
@@ -289,20 +293,28 @@
   </style>
 </head>
 <body>
+  <!-- Global Variables -->
+  <script>
+    var currentLanguage = localStorage.getItem("language") || "en";
+    var currentExportType = localStorage.getItem("exportType") || "telegram";
+  </script>
+  
+  <!-- Language Selector -->
   <div class="language-selector">
-    <label class="lang-en">
-      <input type="radio" name="language" value="en" checked>
+    <label data-lang="en">
+      <input type="radio" name="language" value="en">
       <span>English</span>
     </label>
-    <label class="lang-ru">
+    <label data-lang="ru">
       <input type="radio" name="language" value="ru">
       <span>Русский</span>
     </label>
-    <label class="lang-ua">
+    <label data-lang="ua">
       <input type="radio" name="language" value="ua">
       <span>Українська</span>
     </label>
   </div>
+  
   <button id="top-right-btn" onclick="window.location.href='https://olivaw448.github.io/somepages/'">olivaw448-tools</button>
   <button id="theme-toggle-btn">Light mode</button>
   <div class="container">
@@ -315,7 +327,7 @@
     <hr class="separator" />
     <div id="search-container">
       <label for="search-word" id="search-label">Enter a search word at the beginning of each message:</label>
-      <input type="text" id="search-word" value="Psycho" />
+      <input type="text" id="search-word" value="">
     </div>
     <div id="search-options">
       <label>
@@ -332,22 +344,23 @@
     <div id="date-range-option">
       <label>
         <input type="checkbox" id="date-range-checkbox" />
-        <span id="date-range-label"></span>
+        <span id="date-range-label">Date range</span>
       </label>
     </div>
     <div id="date-range-fields" style="display:none;">
-      <input type="date" id="date-from" placeholder="">
+      <input type="date" id="date-from" placeholder="From">
       <span>-</span>
-      <input type="date" id="date-to" placeholder="">
+      <input type="date" id="date-to" placeholder="To">
     </div>
     <div id="drop-area">
       <p id="drop-text">Loading export script...</p>
-      <input type="file" id="file-input" />
+      <input type="file" id="file-input" style="display:none;">
     </div>
     <button id="copy-btn" style="display:none;">Copy</button>
     <button id="download-btn" style="display:none;">Download result</button>
     <div id="output"></div>
   </div>
+  
   <div id="progress-overlay">
     <div id="progress-container">
       <div id="progress-bar">
@@ -356,9 +369,111 @@
       <button id="cancel-btn">Cancel</button>
     </div>
   </div>
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
   <script>
-    let currentExportType = localStorage.getItem("exportType") || "telegram";
+    const exportTypeTranslations = {
+      telegram: {
+        en: {
+          title: "Telegram Chat Parser",
+          description: "Telegram Sample text",
+          searchLabel: "Enter a search word at the beginning of each message:",
+          searchInsideLabel: "Search string inside messages",
+          showAuthorLabel: "Show message author"
+        },
+        ru: {
+          title: "Парсер Telegram Чата",
+          description: "Пример текста для Telegram",
+          searchLabel: "Введите слово для поиска в начале каждого сообщения:",
+          searchInsideLabel: "Искать строку внутри сообщений",
+          showAuthorLabel: "Показывать автора сообщения"
+        },
+        ua: {
+          title: "Парсер Telegram чату",
+          description: "Приклад тексту для Telegram",
+          searchLabel: "Введіть слово для пошуку на початку кожного повідомлення:",
+          searchInsideLabel: "Шукати рядок усередині повідомлень",
+          showAuthorLabel: "Показувати автора повідомлення"
+        }
+      },
+      whatsapp: {
+        en: {
+          title: "WhatsApp Chat Parser",
+          description: "WhatsApp Sample text",
+          searchLabel: "Enter a search word at the beginning of each message:",
+          searchInsideLabel: "Search string inside messages",
+          showAuthorLabel: "Show message author"
+        },
+        ru: {
+          title: "Парсер WhatsApp Чата",
+          description: "Пример текста для WhatsApp",
+          searchLabel: "Введите слово для поиска в начале каждого сообщения:",
+          searchInsideLabel: "Искать строку внутри сообщений",
+          showAuthorLabel: "Показывать автора сообщения"
+        },
+        ua: {
+          title: "Парсер WhatsApp чату",
+          description: "Приклад тексту для WhatsApp",
+          searchLabel: "Введіть слово для пошуку на початку кожного повідомлення:",
+          searchInsideLabel: "Шукати рядок усередині повідомлень",
+          showAuthorLabel: "Показувати автора повідомлення"
+        }
+      }
+    };
+    
+    function updateIndexInterface() {
+      const texts = exportTypeTranslations[currentExportType][currentLanguage];
+      document.getElementById("title").textContent = texts.title;
+      document.getElementById("description").textContent = texts.description;
+      document.getElementById("search-label").textContent = texts.searchLabel;
+      document.getElementById("search-inside-label").textContent = texts.searchInsideLabel;
+      document.getElementById("show-author-label").textContent = texts.showAuthorLabel;
+      
+      // Обновляем текст кнопок экспорта (пример)
+      if (currentExportType === "telegram") {
+        document.getElementById("btn-telegram").textContent = texts.title.split(" ")[0];
+        document.getElementById("btn-whatsapp").textContent = exportTypeTranslations.whatsapp[currentLanguage].title.split(" ")[0];
+      } else {
+        document.getElementById("btn-telegram").textContent = exportTypeTranslations.telegram[currentLanguage].title.split(" ")[0];
+        document.getElementById("btn-whatsapp").textContent = texts.title.split(" ")[0];
+      }
+      
+      updateLanguageSelectorUI();
+      
+      // Обновляем drop text, если соответствующая функция экспортного скрипта загружена
+      if (currentExportType === "telegram" && typeof window.getTelegramDropText === "function") {
+        document.getElementById("drop-text").textContent = window.getTelegramDropText();
+      } else if (currentExportType === "whatsapp" && typeof window.getWhatsappDropText === "function") {
+        document.getElementById("drop-text").textContent = window.getWhatsappDropText();
+      }
+    }
+    
+    function updateLanguageSelectorUI() {
+      document.querySelectorAll('.language-selector label').forEach(label => {
+        const input = label.querySelector('input[name="language"]');
+        const span = label.querySelector('span');
+        if (input.value === currentLanguage) {
+          span.textContent = "> " + (input.value === "en" ? "English" : input.value === "ru" ? "Русский" : "Українська");
+          label.classList.add("selected");
+          input.checked = true;
+        } else {
+          span.textContent = (input.value === "en" ? "English" : input.value === "ru" ? "Русский" : "Українська");
+          label.classList.remove("selected");
+        }
+      });
+    }
+    
+    document.querySelectorAll('input[name="language"]').forEach(radio => {
+      radio.addEventListener("change", function() {
+        currentLanguage = this.value;
+        localStorage.setItem("language", currentLanguage);
+        updateIndexInterface();
+        if (typeof window.updateInterface === "function") {
+          window.updateInterface();
+        }
+      });
+    });
+    
     function updateExportButtons() {
       document.querySelectorAll("#export-type-bar button").forEach(btn => {
         if (btn.dataset.type === currentExportType) {
@@ -367,50 +482,49 @@
           btn.classList.remove("selected");
         }
       });
+      resetFileInput();
     }
-    updateExportButtons();
+    
     document.querySelectorAll("#export-type-bar button").forEach(btn => {
       btn.addEventListener("click", function() {
         currentExportType = this.dataset.type;
         localStorage.setItem("exportType", currentExportType);
         updateExportButtons();
         loadExportScript(currentExportType + ".js");
+        updateIndexInterface();
       });
     });
-    let currentExportScript = null;
+    
+    function resetFileInput() {
+      const dropArea = document.getElementById("drop-area");
+      const oldInput = document.getElementById("file-input");
+      if (oldInput) { oldInput.remove(); }
+      const newInput = document.createElement("input");
+      newInput.type = "file";
+      newInput.id = "file-input";
+      newInput.style.display = "none";
+      dropArea.appendChild(newInput);
+    }
+    
     function loadExportScript(scriptName) {
-      if (currentExportScript) {
-        currentExportScript.remove();
-      }
+      let currentExportScript = document.getElementById("current-export-script");
+      if (currentExportScript) { currentExportScript.remove(); }
       currentExportScript = document.createElement("script");
       currentExportScript.src = scriptName;
+      currentExportScript.id = "current-export-script";
       currentExportScript.onload = function() {
-        updateDropText();
+        if (currentExportType === "telegram" && typeof window.getTelegramDropText === "function") {
+          document.getElementById("drop-text").textContent = window.getTelegramDropText();
+        } else if (currentExportType === "whatsapp" && typeof window.getWhatsappDropText === "function") {
+          document.getElementById("drop-text").textContent = window.getWhatsappDropText();
+        }
       };
       document.body.appendChild(currentExportScript);
     }
+    
+    updateIndexInterface();
+    updateExportButtons();
     loadExportScript(currentExportType + ".js");
-    function updateDropText() {
-      let baseDropText = "";
-      if (currentExportType === "telegram") {
-        if (typeof window.getTelegramDropText === "function") {
-          baseDropText = window.getTelegramDropText();
-        }
-      } else if (currentExportType === "whatsapp") {
-        if (typeof window.getWhatsappDropText === "function") {
-          baseDropText = window.getWhatsappDropText();
-        }
-      }
-      document.getElementById("drop-text").textContent = baseDropText;
-    }
-    window.addEventListener("load", function() {
-      updateDropText();
-    });
-    document.querySelectorAll('input[name="language"]').forEach(radio => {
-      radio.addEventListener("change", function() {
-        updateDropText();
-      });
-    });
   </script>
 </body>
 </html>

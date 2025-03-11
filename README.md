@@ -1,7 +1,7 @@
 # somepages
 Just my stuff
 
-[Olivaw-toolbox page](https://olivaw448.github.io/somepages/)
+[Olivaw-toolbox page](https://olivaw448.github.io/olivaw-toolbox/)
 
 ** All tools works locally in your browser **
 Without additional requests to other services/systems

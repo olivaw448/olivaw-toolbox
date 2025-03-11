@@ -1,0 +1,17 @@
+[10.09.24, 16:11:24] ~User1: ‎Messages and calls are protected by through encryption. No stranger can read or listen to them, even with WhatsApp.
+[10.09.24, 16:11:24] ~User1:
+[10.09.24, 16:11:11] ~User1: Hi. How are you?
+
+3th line for test
+
+Shopping List:
+- Spoons
+- Steel (stainless)
+- Stones
+
+End of Message and new empty line below
+
+[10.09.24, 16:15:01] ~User1: 🌞 Thanks again
+[10.03.25, 13:01:34] User2: Test message
+New line in same "Test message"
+[05.02.25, 09:10:24] User2: End of conversation
