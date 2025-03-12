@@ -1,233 +1,232 @@
 {
-    "name": "Anonymous Chat",
-    "type": "personal_chat",
-    "id": 123456789,
-    "messages": [
-      {
-        "id": 5839201,
-        "type": "message",
-        "date": "2025-03-07T10:27:46",
-        "date_unixtime": 1741336066,
-        "from": "User2",
-        "from_id": "user987654321",
-        "reply_to_message_id": 1000001,
-        "text": "Test message 42",
-        "text_entities": [
-          {
-            "type": "plain",
-            "text": "Example phrase 57"
-          }
-        ]
-      },
-      {
-        "id": 7543210,
-        "type": "message",
-        "date": "2025-03-07T07:56:41",
-        "date_unixtime": 1741327001,
-        "from": "User1",
-        "from_id": "user123456789",
-        "file": "(File not included. Change data exporting settings to download.)",
-        "file_size": 123456,
-        "media_type": "voice_message",
-        "mime_type": "audio/ogg",
-        "duration_seconds": 37,
-        "text": "",
-        "text_entities": []
-      },
-      {
-        "id": 6452310,
-        "type": "message",
-        "date": "2025-03-07T09:18:21",
-        "date_unixtime": 1741331901,
-        "from": "User1",
-        "from_id": "user123456789",
-        "reply_to_message_id": 5839201,
-        "text": "Thanks a lot 55",
-        "text_entities": [
-          {
-            "type": "plain",
-            "text": "Example phrase 66"
-          }
-        ]
-      },
-      {
-        "id": 8321475,
-        "type": "message",
-        "date": "2025-03-07T22:05:45",
-        "date_unixtime": 1741377945,
-        "from": "User1",
-        "from_id": "user123456789",
-        "text": "Curious emoji 77",
-        "text_entities": [
-          {
-            "type": "plain",
-            "text": "Curious phrase 82"
-          }
-        ]
-      },
-      {
-        "id": 7733221,
-        "type": "message",
-        "date": "2025-03-07T22:05:45",
-        "date_unixtime": 1741377945,
-        "from": "User1",
-        "from_id": "user123456789",
-        "forwarded_from": "Channel 99",
-        "photo": "photos/photo_ABCDEF@07-03-2025_22-05-45.jpg",
-        "photo_file_size": 98765,
-        "width": 1024,
-        "height": 768,
-        "text": [
-          {
-            "type": "bold",
-            "text": "Bold headline 47"
-          },
-          "\n\nDetailed report 88"
-        ],
-        "text_entities": [
-          {
-            "type": "bold",
-            "text": "Bold headline 63"
-          },
-          {
-            "type": "plain",
-            "text": "Detailed report 99"
-          }
-        ]
-      },
-      {
-        "id": 9123456,
-        "type": "message",
-        "date": "2025-03-07T22:13:07",
-        "date_unixtime": 1741378387,
-        "edited": "2025-03-07T22:13:15",
-        "edited_unixtime": 1741378395,
-        "from": "User2",
-        "from_id": "user987654321",
-        "reply_to_message_id": 7733221,
-        "text": "Amazing fact 68",
-        "text_entities": [
-          {
-            "type": "plain",
-            "text": "Surprising result 91"
-          }
-        ],
-        "reactions": [
-          {
-            "type": "emoji",
-            "count": 1,
-            "emoji": "🔥",
-            "recent": [
-              {
-                "from": "User1",
-                "from_id": "user123456789",
-                "date": "2025-03-07T22:13:15"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": 8345678,
-        "type": "message",
-        "date": "2025-03-07T22:12:35",
-        "date_unixtime": 1741378355,
-        "from": "User2",
-        "from_id": "user987654321",
-        "text": "Random update 33",
-        "text_entities": [
-          {
-            "type": "plain",
-            "text": "Random update 77"
-          }
-        ]
-      },
-      {
-        "id": 7456321,
-        "type": "message",
-        "date": "2025-03-07T22:22:38",
-        "date_unixtime": 1741378958,
-        "edited": "2025-03-07T22:54:03",
-        "edited_unixtime": 1741380843,
-        "from": "User1",
-        "from_id": "user123456789",
-        "text": "Daily update 99",
-        "text_entities": [
-          {
-            "type": "plain",
-            "text": "Status check 55"
-          }
-        ],
-        "reactions": [
-          {
-            "type": "emoji",
-            "count": 1,
-            "emoji": "💡",
-            "recent": [
-              {
-                "from": "User2",
-                "from_id": "user987654321",
-                "date": "2025-03-07T22:54:03"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": 6574830,
-        "type": "message",
-        "date": "2025-03-08T10:42:20",
-        "date_unixtime": 1741423340,
-        "from": "User1",
-        "from_id": "user123456789",
-        "forwarded_from": "User1",
-        "text": [
-          {
-            "type": "link",
-            "text": "https://example.com/link99"
-          }
-        ],
-        "text_entities": [
-          {
-            "type": "link",
-            "text": "https://example.com/link77"
-          }
-        ]
-      },
-      {
-        "id": 5123478,
-        "type": "message",
-        "date": "2025-03-09T16:23:21",
-        "date_unixtime": 1741530201,
-        "from": "User2",
-        "from_id": "user987654321",
-        "photo": "photos/photo_XYZ123@09-03-2025_16-23-21.jpg",
-        "photo_file_size": 2890,
-        "width": 320,
-        "height": 240,
-        "text": "Test message 77\n(ignore 12)",
-        "text_entities": [
-          {
-            "type": "plain",
-            "text": "Example note 66"
-          }
-        ]
-      },
-      {
-        "id": 6234571,
-        "type": "message",
-        "date": "2025-03-09T16:23:52",
-        "date_unixtime": 1741530232,
-        "from": "User2",
-        "from_id": "user987654321",
-        "text": "Quick update 44",
-        "text_entities": [
-          {
-            "type": "plain",
-            "text": "Status OK 33"
-          }
-        ]
-      }
-    ]
-  }
-  
+  "name": "Anonymous Chat",
+  "type": "personal_chat",
+  "id": 123456789,
+  "messages": [
+    {
+      "id": 7543210,
+      "type": "message",
+      "date": "2025-03-07T07:56:41",
+      "date_unixtime": 1741327001,
+      "from": "User1",
+      "from_id": "user123456789",
+      "file": "(File not included. Change data exporting settings to download.)",
+      "file_size": 123456,
+      "media_type": "voice_message",
+      "mime_type": "audio/ogg",
+      "duration_seconds": 37,
+      "text": "",
+      "text_entities": []
+    },
+    {
+      "id": 6452310,
+      "type": "message",
+      "date": "2025-03-07T09:18:21",
+      "date_unixtime": 1741331901,
+      "from": "User1",
+      "from_id": "user123456789",
+      "reply_to_message_id": 5839201,
+      "text": "Thanks a lot 55",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "Example phrase 66"
+        }
+      ]
+    },
+    {
+      "id": 5839201,
+      "type": "message",
+      "date": "2025-03-07T10:27:46",
+      "date_unixtime": 1741336066,
+      "from": "User2",
+      "from_id": "user987654321",
+      "reply_to_message_id": 1000001,
+      "text": "Test message 42",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "Example phrase 57"
+        }
+      ]
+    },
+    {
+      "id": 8321475,
+      "type": "message",
+      "date": "2025-03-07T22:05:45",
+      "date_unixtime": 1741377945,
+      "from": "User1",
+      "from_id": "user123456789",
+      "text": "Curious emoji 77",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "Curious phrase 82"
+        }
+      ]
+    },
+    {
+      "id": 7733221,
+      "type": "message",
+      "date": "2025-03-07T22:05:45",
+      "date_unixtime": 1741377945,
+      "from": "User1",
+      "from_id": "user123456789",
+      "forwarded_from": "Channel 99",
+      "photo": "photos/photo_ABCDEF@07-03-2025_22-05-45.jpg",
+      "photo_file_size": 98765,
+      "width": 1024,
+      "height": 768,
+      "text": [
+        {
+          "type": "bold",
+          "text": "Bold headline 47"
+        },
+        "\n\nDetailed report 88"
+      ],
+      "text_entities": [
+        {
+          "type": "bold",
+          "text": "Bold headline 63"
+        },
+        {
+          "type": "plain",
+          "text": "Detailed report 99"
+        }
+      ]
+    },
+    {
+      "id": 8345678,
+      "type": "message",
+      "date": "2025-03-07T22:12:35",
+      "date_unixtime": 1741378355,
+      "from": "User2",
+      "from_id": "user987654321",
+      "text": "Random update 33",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "Random update 77"
+        }
+      ]
+    },
+    {
+      "id": 9123456,
+      "type": "message",
+      "date": "2025-03-07T22:13:07",
+      "date_unixtime": 1741378387,
+      "edited": "2025-03-07T22:13:15",
+      "edited_unixtime": 1741378395,
+      "from": "User2",
+      "from_id": "user987654321",
+      "reply_to_message_id": 7733221,
+      "text": "Amazing fact 68",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "Surprising result 91"
+        }
+      ],
+      "reactions": [
+        {
+          "type": "emoji",
+          "count": 1,
+          "emoji": "🔥",
+          "recent": [
+            {
+              "from": "User1",
+              "from_id": "user123456789",
+              "date": "2025-03-07T22:13:15"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 7456321,
+      "type": "message",
+      "date": "2025-03-07T22:22:38",
+      "date_unixtime": 1741378958,
+      "edited": "2025-03-07T22:54:03",
+      "edited_unixtime": 1741380843,
+      "from": "User1",
+      "from_id": "user123456789",
+      "text": "Daily update 99",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "Status check 55"
+        }
+      ],
+      "reactions": [
+        {
+          "type": "emoji",
+          "count": 1,
+          "emoji": "💡",
+          "recent": [
+            {
+              "from": "User2",
+              "from_id": "user987654321",
+              "date": "2025-03-07T22:54:03"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6574830,
+      "type": "message",
+      "date": "2025-03-08T10:42:20",
+      "date_unixtime": 1741423340,
+      "from": "User1",
+      "from_id": "user123456789",
+      "forwarded_from": "User1",
+      "text": [
+        {
+          "type": "link",
+          "text": "https://example.com/link99"
+        }
+      ],
+      "text_entities": [
+        {
+          "type": "link",
+          "text": "https://example.com/link77"
+        }
+      ]
+    },
+    {
+      "id": 5123478,
+      "type": "message",
+      "date": "2025-03-09T16:23:21",
+      "date_unixtime": 1741530201,
+      "from": "User2",
+      "from_id": "user987654321",
+      "photo": "photos/photo_XYZ123@09-03-2025_16-23-21.jpg",
+      "photo_file_size": 2890,
+      "width": 320,
+      "height": 240,
+      "text": "Test message 77\n(ignore 12)",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "Example note 66"
+        }
+      ]
+    },
+    {
+      "id": 6234571,
+      "type": "message",
+      "date": "2025-03-09T16:23:52",
+      "date_unixtime": 1741530232,
+      "from": "User2",
+      "from_id": "user987654321",
+      "text": "Quick update 44",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "Status OK 33"
+        }
+      ]
+    }
+  ]
+}
