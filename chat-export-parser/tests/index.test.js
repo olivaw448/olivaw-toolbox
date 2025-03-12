@@ -67,6 +67,32 @@ describe('HTML Page Test: Chat Export Parser', () => {
       .toBe(expectedText.replace(/\r\n/g, '\n').trim());
   }, 60000);
 
+  /*test('Checkbox "Date range" shows additional date input fields', async () => {
+    console.log("Type input: T");
+    await page.type('#search-word', 'T');
+
+    console.log("CheckBox: show-author");
+    await page.click('#show-author');
+
+    console.log("CheckBox: message-id");
+    await page.click('#message-id-checkbox');
+
+    console.log("CheckBox: date-range-checkbox");
+    await page.click('#date-range-checkbox');
+    const dateRangeFieldsVisible = await page.$eval('#date-range-fields', el => window.getComputedStyle(el).display);
+
+    expect(dateRangeVisibility).toBe('block');
+
+    await page.type('#date-from', '2025-03-08');
+    await page.type('#date-to', '2025-03-09');
+
+    new Promise(r => setTimeout(r, 1000));
+
+    const outputTextWithDateRange = await page.$eval('#output', el => el.innerText);
+
+    expect(outputTextWithDateRange.length).toBeGreaterThan(0);
+  }, 30000);*/
+
   // WhatsApp tests
   test('Wait for WhatsApp button', async () => {
     await page.waitForSelector('#export-type-bar button[data-type="whatsapp"]', { visible: true });

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,6 +24,7 @@
       --export-btn-bg: #a6a6a6;
       --export-btn-selected: #999999;
     }
+
     body {
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       background-color: var(--bg-dark);
@@ -35,6 +37,7 @@
       min-height: 100vh;
       position: relative;
     }
+
     .language-selector {
       position: fixed;
       top: 10px;
@@ -44,6 +47,7 @@
       display: flex;
       gap: 8px;
     }
+
     .language-selector label {
       display: inline-block;
       padding: 4px 8px;
@@ -56,12 +60,15 @@
       transition: background-color 0.3s ease;
       user-select: none;
     }
+
     .language-selector label.selected {
       background-color: #999999;
     }
+
     .language-selector input[type="radio"] {
       display: none;
     }
+
     .container {
       text-align: center;
       max-width: 90%;
@@ -69,10 +76,12 @@
       box-sizing: border-box;
       margin-top: 80px;
     }
+
     /* Block 1: Export Type Buttons */
     #export-type-bar {
       margin-bottom: 20px;
     }
+
     #export-type-bar button {
       padding: 6px 12px;
       font-size: 0.9rem;
@@ -84,27 +93,33 @@
       transition: background-color 0.3s ease;
       margin-right: 8px;
     }
+
     #export-type-bar button.selected {
       background-color: var(--export-btn-selected);
     }
+
     /* Block 2: Script Interface with placeholder texts */
     #script-interface {
       margin-bottom: 20px;
     }
+
     #script-interface h2 {
       font-size: 2.5rem;
       margin-bottom: 10px;
     }
+
     #script-interface p.description {
       font-size: 1rem;
       margin-bottom: 10px;
       color: #aaa;
     }
+
     hr.separator {
       border: none;
       border-top: 1px solid #888;
       margin: 20px 0;
     }
+
     /* Search container with a thin dark border */
     #search-container {
       margin-bottom: 20px;
@@ -112,24 +127,32 @@
       border: 1px solid var(--border-dark);
       border-radius: 4px;
     }
+
     #search-label {
       font-size: 1rem;
       margin-bottom: 10px;
       display: block;
     }
+
     #search-word {
       padding: 8px;
       font-size: 1rem;
       border: 1px solid #888;
       border-radius: 4px;
-      width: 60%;
-      max-width: 300px;
+      width: 80%;
+      max-width: 80vw;
+      min-height: 40px;
+      resize: none;
+      overflow-y: hidden;
+      box-sizing: border-box;
     }
+
     /* Block 3: Future Parameters Container with spacing for inner elements */
-    #future-parameters-container > div > div {
+    #future-parameters-container>div>div {
       margin: 5px;
       margin-bottom: 15px;
     }
+
     /* Block 4: Drop Area */
     #drop-area {
       border: 2px dashed var(--border-dark);
@@ -142,14 +165,17 @@
       transition: background-color 0.3s ease;
       position: relative;
     }
+
     #drop-text {
       margin: 0;
       font-size: 1rem;
     }
+
     /* Hidden file input */
     #file-input {
       display: none;
     }
+
     #copy-btn,
     #download-btn {
       margin-top: 10px;
@@ -162,10 +188,12 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
+
     #copy-btn:hover,
     #download-btn:hover {
       background-color: var(--btn-bg-hover);
     }
+
     /* Output area */
     #output {
       white-space: pre-wrap;
@@ -180,6 +208,7 @@
       max-width: 80vw;
       overflow-wrap: break-word;
     }
+
     /* Top-right link button */
     #top-right-btn {
       position: absolute;
@@ -191,9 +220,11 @@
       cursor: pointer;
       color: var(--text-dark);
     }
+
     #top-right-btn:hover {
       text-decoration: underline;
     }
+
     /* Theme toggle button */
     #theme-toggle-btn {
       position: absolute;
@@ -208,43 +239,53 @@
       color: var(--text-dark);
       transition: background-color 0.3s ease;
     }
+
     #theme-toggle-btn:hover {
       background-color: var(--btn-bg-hover);
     }
+
     .light-theme {
       background-color: var(--bg-light);
       color: var(--text-light);
     }
+
     .light-theme #drop-area {
       background-color: var(--light-drop-bg);
       border: 2px dashed var(--border-light);
       color: var(--text-light);
     }
+
     .light-theme #output {
       background-color: var(--light-output-bg);
       border: 1px solid var(--border-light);
       color: var(--text-light);
     }
+
     .light-theme #copy-btn,
     .light-theme #download-btn {
       background-color: #ccc;
       color: var(--text-light);
     }
+
     .light-theme #top-right-btn {
       color: var(--text-light);
     }
+
     .light-theme #theme-toggle-btn {
       background-color: #ccc;
       color: var(--text-light);
     }
+
     @media (max-width: 600px) {
       #script-interface h2 {
         font-size: 2rem;
       }
+
       #search-word {
         width: 80%;
         max-width: 80%;
       }
+
       #copy-btn,
       #download-btn,
       #theme-toggle-btn {
@@ -252,6 +293,7 @@
         padding: 5px 10px;
       }
     }
+
     /* Progress overlay */
     #progress-overlay {
       position: fixed;
@@ -265,6 +307,7 @@
       justify-content: center;
       align-items: center;
     }
+
     #progress-container {
       background: #222;
       padding: 20px;
@@ -274,6 +317,7 @@
       width: 80%;
       max-width: 300px;
     }
+
     #progress-bar {
       width: 100%;
       height: 20px;
@@ -282,12 +326,14 @@
       border-radius: 4px;
       overflow: hidden;
     }
+
     #progress-bar-inner {
       height: 100%;
       width: 0%;
       background: #10a37f;
       transition: width 0.2s ease;
     }
+
     #cancel-btn {
       background: var(--btn-bg);
       color: var(--text-dark);
@@ -297,15 +343,18 @@
       cursor: pointer;
       font-size: 0.9rem;
     }
+
     #cancel-btn:hover {
       background-color: var(--btn-bg-hover);
     }
+
     .light-theme #cancel-btn {
       background: #ccc;
       color: var(--text-light);
     }
   </style>
 </head>
+
 <body>
   <!-- Global Variables and Initialization -->
   <script>
@@ -344,20 +393,21 @@
   <div class="language-selector">
     <label data-lang="en">
       <input type="radio" name="language" value="en">
-      <span>English</span>
+      <span>EN</span>
     </label>
     <label data-lang="ru">
       <input type="radio" name="language" value="ru">
-      <span>Русский</span>
+      <span>RU</span>
     </label>
     <label data-lang="ua">
       <input type="radio" name="language" value="ua">
-      <span>Українська</span>
+      <span>UA</span>
     </label>
   </div>
 
   <!-- Top right link and theme toggle -->
-  <button id="top-right-btn" onclick="window.location.href='https://olivaw448.github.io/olivaw-toolbox/'">olivaw448-tools</button>
+  <button id="top-right-btn"
+    onclick="window.location.href='https://olivaw448.github.io/olivaw-toolbox/'">olivaw448-tools</button>
   <button id="theme-toggle-btn">Light mode</button>
 
   <div class="container">
@@ -375,7 +425,7 @@
       <hr class="separator" />
       <div id="search-container">
         <label for="search-word" id="search-label">Enter a search word:</label>
-        <input type="text" id="search-word" value="">
+        <textarea id="search-word" rows="1" placeholder="Enter search text"></textarea>
       </div>
     </div>
 
@@ -413,7 +463,7 @@
   <script>
     // Language selection: update global variable, localStorage, and UI.
     document.querySelectorAll('input[name="language"]').forEach(radio => {
-      radio.addEventListener("change", function() {
+      radio.addEventListener("change", function () {
         currentLanguage = this.value;
         localStorage.setItem("language", currentLanguage);
         updateLanguageSelectorUI();
@@ -444,7 +494,7 @@
 
     // Event listener for export type buttons.
     document.querySelectorAll("#export-type-bar button").forEach(btn => {
-      btn.addEventListener("click", function() {
+      btn.addEventListener("click", function () {
         currentExportType = this.dataset.type;
         localStorage.setItem("exportType", currentExportType);
         updateExportButtons();
@@ -455,15 +505,24 @@
     // Initial setup: mark the correct export type and load its script.
     updateExportButtons();
     loadExportScript(currentExportType + ".js");
-  </script>
 
-  <!-- Light/Dark mode toggle -->
-  <script>
-    document.getElementById("theme-toggle-btn").addEventListener("click", function() {
-      document.body.classList.toggle("light-theme");
-      // Update toggle button text based on the current theme.
-      this.textContent = document.body.classList.contains("light-theme") ? "Dark mode" : "Light mode";
+
+    // Part of code for test area (input #search-word)
+    function autoResizeTextarea(elem) {
+      elem.style.height = 'auto';
+      elem.style.height = elem.scrollHeight + 'px';
+    }
+
+    const searchTextarea = document.getElementById('search-word');
+    searchTextarea.addEventListener('input', function () {
+      autoResizeTextarea(this);
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+      autoResizeTextarea(searchTextarea);
     });
   </script>
+
 </body>
+
 </html>

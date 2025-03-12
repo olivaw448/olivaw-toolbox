@@ -1,6 +1,5 @@
 (function initWhatsAppModule() {
-  // Replace old event listeners by cloning the file-input and drop-area elements
-  // This removes any previously attached event handlers from earlier module initializations.
+  // Replace old event listeners by cloning file-input and drop-area elements
   const fileInputOld = document.getElementById("file-input");
   if (fileInputOld) {
     const newFileInput = fileInputOld.cloneNode(true);
@@ -41,7 +40,7 @@
     const titleElem = document.getElementById("title");
     const descriptionElem = document.getElementById("description");
 
-    // Local translations for WhatsApp
+    // Local translations for WhatsApp (extended with filter-author keys)
     const translations = {
       en: {
         title: "WhatsApp Chat Parser",
@@ -61,7 +60,10 @@
         dateFromPlaceholder: "From",
         dateToPlaceholder: "To",
         whatsappDropText: "Drag and drop a ZIP or TXT file here or click to select",
-        whatsappNoChatFile: "Error: _chat.txt not found in ZIP archive."
+        whatsappNoChatFile: "Error: _chat.txt not found in ZIP archive.",
+        // New keys for filtering by author
+        filterAuthorLabel: "Search by author name(s):",
+        filterAuthorInputPlaceholder: "Enter author name(s) separated by comma"
       },
       ru: {
         title: "Парсер WhatsApp Чата",
@@ -81,7 +83,10 @@
         dateFromPlaceholder: "От",
         dateToPlaceholder: "До",
         whatsappDropText: "Перетащите ZIP или TXT файл сюда или нажмите для выбора",
-        whatsappNoChatFile: "Ошибка: Файл _chat.txt не найден в ZIP архиве."
+        whatsappNoChatFile: "Ошибка: Файл _chat.txt не найден в ZIP архиве.",
+        // New keys for filtering by author
+        filterAuthorLabel: "Искать по имени или именам авторов:",
+        filterAuthorInputPlaceholder: "Введите имя/имена автора через запятую"
       },
       ua: {
         title: "Парсер WhatsApp чату",
@@ -101,11 +106,14 @@
         dateFromPlaceholder: "Від",
         dateToPlaceholder: "До",
         whatsappDropText: "Перетягніть ZIP або TXT файл сюди або натисніть для вибору",
-        whatsappNoChatFile: "Помилка: Файл _chat.txt не знайден в ZIP архиві."
+        whatsappNoChatFile: "Помилка: Файл _chat.txt не знайден в ZIP архиві.",
+        // New keys for filtering by author
+        filterAuthorLabel: "Шукати за іменем або іменами авторів:",
+        filterAuthorInputPlaceholder: "Введіть ім'я/імена автора через кому"
       }
     };
 
-    // Insert dynamic parameter elements for WhatsApp into the container
+    // Insert dynamic parameter elements for WhatsApp
     const parametersContainer = document.getElementById("future-parameters-container");
     if (parametersContainer) {
       parametersContainer.innerHTML = `
@@ -119,6 +127,13 @@
             <label for="show-author">${translations[currentLanguage].showAuthorLabel}</label>
           </div>
           <div>
+            <input type="checkbox" id="filter-author">
+            <label for="filter-author">${translations[currentLanguage].filterAuthorLabel}</label>
+          </div>
+          <div id="filter-author-container" style="display:none; margin-left:20px;">
+            <input type="text" id="filter-author-input" placeholder="${translations[currentLanguage].filterAuthorInputPlaceholder}">
+          </div>
+          <div>
             <input type="checkbox" id="date-range-checkbox">
             <label id="date-range-label" for="date-range-checkbox">${translations[currentLanguage].dateRangeLabel}</label>
           </div>
@@ -130,12 +145,12 @@
       `;
     }
 
-    // Utility function to normalize newline characters
+    // Utility function to normalize newlines
     function normalizeNewlines(text) {
       return text.replace(/\r\n/g, "\n");
     }
 
-    // Function to parse WhatsApp date and time into a Date object
+    // Function to parse WhatsApp date/time into a Date object
     function parseWhatsAppDate(dateStr, timeStr) {
       const parts = dateStr.split('.');
       if (parts.length < 3) return null;
@@ -151,7 +166,7 @@
       return new Date(year, month, day, hours, minutes, seconds);
     }
 
-    // Function to format a date for the filename using ru-RU locale
+    // Function to format date for filename
     function formatDateForFile(date) {
       return date.toLocaleDateString("ru-RU", {
         year: "2-digit",
@@ -160,10 +175,7 @@
       }).replace(/\./g, "-");
     }
 
-    // Global regex to parse messages from the chat export
-    const headerRegex = /\[(\d{2}\.\d{2}\.\d{2}),\s*(\d{2}:\d{2}:\d{2})\]\s*(?:~\s*)?([^:]+):([\s\S]*?)(?=\n?\[\d{2}\.\d{2}\.\d{2},|\s*$)/g;
-
-    // Function to update drop area text and date placeholders
+    // Function to update drop area and parameter texts
     function updateInterface() {
       if (selectedFileName === "") {
         dropText.textContent = translations[currentLanguage].whatsappDropText;
@@ -190,6 +202,8 @@
         if (searchInsideLabel) searchInsideLabel.textContent = translations[currentLanguage].searchInsideLabel;
         const showAuthorLabel = whatsappParams.querySelector('label[for="show-author"]');
         if (showAuthorLabel) showAuthorLabel.textContent = translations[currentLanguage].showAuthorLabel;
+        const filterAuthorLabel = whatsappParams.querySelector('label[for="filter-author"]');
+        if (filterAuthorLabel) filterAuthorLabel.textContent = translations[currentLanguage].filterAuthorLabel;
         const dateRangeLabelElem = whatsappParams.querySelector('label[for="date-range-checkbox"]');
         if (dateRangeLabelElem) dateRangeLabelElem.textContent = translations[currentLanguage].dateRangeLabel;
       }
@@ -206,7 +220,6 @@
         processWhatsApp(cachedFileContent);
       }
     }
-    // Bind language change events to update the interface
     document.querySelectorAll('input[name="language"]').forEach(radio => {
       radio.addEventListener("change", updateWhatsAppInterface);
       radio.addEventListener("click", updateWhatsAppInterface);
@@ -220,6 +233,8 @@
       }
       let messages = [];
       let match;
+      // Global regex to parse WhatsApp messages
+      const headerRegex = /\[(\d{2}\.\d{2}\.\d{2}),\s*(\d{2}:\d{2}:\d{2})\]\s*(?:~\s*)?([^:]+):([\s\S]*?)(?=\n?\[\d{2}\.\d{2}\.\d{2},|\s*$)/g;
       while ((match = headerRegex.exec(content)) !== null) {
         let username = match[3].trim();
         if (username.startsWith("~")) {
@@ -235,7 +250,28 @@
       }
       console.log("WhatsApp: Total messages parsed:", messages.length);
 
-      // Filter messages based on date range and search keyword
+      // Build reply mapping for WhatsApp messages (using first 11 characters of text)
+      const replyMap = {};
+      messages.forEach(msg => {
+        let txt = msg.text.trim();
+        if (txt.length > 0 && msg.id) {
+          let snippet = txt.substring(0, 11) + (txt.length > 11 ? "..." : "");
+          // Для WhatsApp у нас нет id в сообщениях, поэтому можно не использовать эту мапу, если не требуется
+          // Если потребуется, можно добавить генерацию id на основе порядка
+        }
+      });
+
+      // Apply additional filter: Search by author name if filter-author checkbox checked
+      const filterAuthorCheckbox = document.getElementById("filter-author");
+      let filterAuthorNames = [];
+      if (filterAuthorCheckbox && filterAuthorCheckbox.checked) {
+        const filterAuthorInput = document.getElementById("filter-author-input");
+        if (filterAuthorInput) {
+          filterAuthorNames = filterAuthorInput.value.split(",").map(s => s.trim().toLowerCase()).filter(s => s);
+        }
+      }
+
+      // Filter messages based on date range and search keyword and author filter
       let fromDate = null, toDate = null;
       const dateRangeCheckbox = document.getElementById("date-range-checkbox");
       if (dateRangeCheckbox && dateRangeCheckbox.checked) {
@@ -246,15 +282,18 @@
         if (toDate) { toDate.setHours(23, 59, 59, 999); }
       }
       const searchWord = searchWordInput.value.trim().toLowerCase();
-      const searchInsideCheck = document.getElementById("search-inside");
+      const searchInsideCheckbox = document.getElementById("search-inside");
       const filteredMessages = messages.filter(msg => {
         if (searchWord !== "") {
           const lowerText = msg.text.toLowerCase();
-          if (searchInsideCheck && searchInsideCheck.checked) {
+          if (searchInsideCheckbox && searchInsideCheckbox.checked) {
             if (!lowerText.includes(searchWord)) return false;
           } else {
             if (!lowerText.startsWith(searchWord)) return false;
           }
+        }
+        if (filterAuthorNames.length > 0) {
+          if (!filterAuthorNames.some(name => msg.username.toLowerCase().includes(name))) return false;
         }
         if (fromDate && msg.date < fromDate) return false;
         if (toDate && msg.date > toDate) return false;
@@ -293,8 +332,8 @@
           { weekday: "long" }
         );
         let authorLine = "";
-        const showAuthorCheck = document.getElementById("show-author");
-        if (showAuthorCheck && showAuthorCheck.checked) {
+        const showAuthorCheckbox = document.getElementById("show-author");
+        if (showAuthorCheckbox && showAuthorCheckbox.checked) {
           authorLine = "\n" + translations[currentLanguage].authorLabel + msg.username;
         }
         results.push(`${formattedDate} (${dayOfWeek})${authorLine}\n\n${msg.text}\n\n-----------------------------------\n\n`);
@@ -323,16 +362,23 @@
     // Function to reset filters when a new file is chosen
     function resetFilters() {
       if (searchWordInput) searchWordInput.value = "";
-      const searchInsideCheck = document.getElementById("search-inside");
-      if (searchInsideCheck) searchInsideCheck.checked = false;
-      const showAuthorCheck = document.getElementById("show-author");
-      if (showAuthorCheck) showAuthorCheck.checked = false;
+      const searchInsideCheckbox = document.getElementById("search-inside");
+      if (searchInsideCheckbox) searchInsideCheckbox.checked = false;
+      const showAuthorCheckbox = document.getElementById("show-author");
+      if (showAuthorCheckbox) showAuthorCheckbox.checked = false;
       const dateRangeCheckbox = document.getElementById("date-range-checkbox");
       if (dateRangeCheckbox) {
         dateRangeCheckbox.checked = false;
         const dateRangeFields = document.getElementById("date-range-fields");
         if (dateRangeFields) dateRangeFields.style.display = "none";
       }
+      // Also reset filter by author
+      const filterAuthorCheckbox = document.getElementById("filter-author");
+      if (filterAuthorCheckbox) filterAuthorCheckbox.checked = false;
+      const filterAuthorContainer = document.getElementById("filter-author-container");
+      if (filterAuthorContainer) filterAuthorContainer.style.display = "none";
+      const filterAuthorInput = document.getElementById("filter-author-input");
+      if (filterAuthorInput) filterAuthorInput.value = "";
       updateInterface();
     }
 
@@ -409,7 +455,7 @@
       }
     }
 
-    // Add event listener for file input change
+    // File input change event
     fileInput.addEventListener("change", function () {
       if (currentExportType !== "whatsapp") {
         console.log("WhatsApp: Ignoring fileInput change – currentExportType is not whatsapp");
@@ -422,7 +468,7 @@
       }
     });
 
-    // Add event listener for drop area click
+    // Drop area click event
     dropArea.addEventListener("click", function () {
       if (currentExportType !== "whatsapp") {
         console.log("WhatsApp: Ignoring dropArea click – currentExportType is not whatsapp");
@@ -432,7 +478,7 @@
       fileInput.click();
     });
 
-    // Add drag and drop event listeners
+    // Drag and drop event listeners
     dropArea.addEventListener("dragover", function (e) {
       e.preventDefault();
       dropArea.style.backgroundColor = "#555";
@@ -460,7 +506,7 @@
       }
     });
 
-    // Add event listeners for filter inputs to re-process the file when changed
+    // Filter event listeners for WhatsApp
     searchWordInput.addEventListener("input", function () {
       if (cachedFileContent && currentExportType === "whatsapp") processWhatsApp(cachedFileContent);
     });
@@ -490,8 +536,23 @@
     document.getElementById("date-to").addEventListener("change", function () {
       if (cachedFileContent && currentExportType === "whatsapp") processWhatsApp(cachedFileContent);
     });
+    // Event listener for filter-author checkbox
+    const filterAuthorCheckboxElem = document.getElementById("filter-author");
+    if (filterAuthorCheckboxElem) {
+      filterAuthorCheckboxElem.addEventListener("change", function () {
+        const container = document.getElementById("filter-author-container");
+        container.style.display = this.checked ? "block" : "none";
+        if (cachedFileContent && currentExportType === "whatsapp") processWhatsApp(cachedFileContent);
+      });
+    }
+    const filterAuthorInputElem = document.getElementById("filter-author-input");
+    if (filterAuthorInputElem) {
+      filterAuthorInputElem.addEventListener("input", function () {
+        if (cachedFileContent && currentExportType === "whatsapp") processWhatsApp(cachedFileContent);
+      });
+    }
 
-    // Add event listener for the Copy button
+    // Event listener for the Copy button
     copyBtn.addEventListener("click", function () {
       navigator.clipboard.writeText(filteredText).then(() => {
         copyBtn.style.backgroundColor = document.body.classList.contains("light-theme")
@@ -507,7 +568,7 @@
       });
     });
 
-    // Add event listener for the Download button
+    // Event listener for the Download button
     downloadBtn.addEventListener("click", function () {
       const blob = new Blob([filteredText], { type: "text/plain" });
       const link = document.createElement("a");
@@ -516,7 +577,7 @@
       link.click();
     });
 
-    // Add event listener for the theme toggle button
+    // Theme toggle event using the pattern from whatsapp.js (fixed)
     themeToggleBtn.addEventListener("click", function () {
       if (document.body.classList.contains("light-theme")) {
         document.body.classList.remove("light-theme");
@@ -525,6 +586,7 @@
         document.body.classList.add("light-theme");
         themeToggleBtn.textContent = "Dark mode";
       }
+      // Update drop area text and background after theme toggle
       if (cachedFileContent && currentExportType === "whatsapp") {
         dropText.textContent = selectedFileName === ""
           ? translations[currentLanguage].whatsappDropText
@@ -535,7 +597,7 @@
       }
     });
 
-    // Add event listener for the Cancel button
+    // Event listener for the Cancel button
     cancelBtn.addEventListener("click", function () {
       if (currentFileReader) {
         isCanceled = true;
@@ -545,7 +607,7 @@
       progressOverlay.style.display = "none";
     });
 
-    // Call updateWhatsAppInterface immediately after initialization to set the correct texts
+    // Call updateWhatsAppInterface immediately after initialization to set texts
     updateWhatsAppInterface();
   }
 
