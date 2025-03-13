@@ -32,15 +32,15 @@ End of Message and new empty line below
 
 -----------------------------------
 
-02/05/2025 09:10:24 AM (Wednesday)
-
-End of conversation
-
------------------------------------
-
 03/10/2025 01:01:34 PM (Monday)
 
 Test message
 New line in same "Test message"
+
+-----------------------------------
+
+10/10/2025 09:10:24 AM (Friday)
+
+End of conversation
 
 -----------------------------------

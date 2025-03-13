@@ -80,6 +80,7 @@
     /* Block 1: Export Type Buttons */
     #export-type-bar {
       margin-bottom: 20px;
+      
     }
 
     #export-type-bar button {
@@ -92,6 +93,10 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
       margin-right: 8px;
+      /* For small screen */
+      flex: 1 1 auto;
+      margin: 5px;
+      min-width: 100px;
     }
 
     #export-type-bar button.selected {
@@ -196,6 +201,21 @@
 
     /* Output area */
     #output {
+      white-space: pre-wrap;
+      text-align: left;
+      background-color: var(--dark-output-bg);
+      padding: 10px;
+      border: 1px solid var(--border-dark);
+      margin-top: 10px;
+      border-radius: 4px;
+      overflow: auto;
+      display: none;
+      max-width: 80vw;
+      overflow-wrap: break-word;
+    }
+
+    /* Analytic area */
+    #analytic {
       white-space: pre-wrap;
       text-align: left;
       background-color: var(--dark-output-bg);
@@ -407,7 +427,7 @@
 
   <!-- Top right link and theme toggle -->
   <button id="top-right-btn"
-    onclick="window.location.href='https://olivaw448.github.io/olivaw-toolbox/'">olivaw448-tools</button>
+    onclick="window.location.href='../../index.html'">olivaw448-tools</button>
   <button id="theme-toggle-btn">Light mode</button>
 
   <div class="container">
@@ -415,7 +435,8 @@
     <div id="export-type-bar">
       <button data-type="telegram" class="selected">Telegram</button>
       <button data-type="whatsapp">WhatsApp</button>
-      <button data-type="matrix">[matrix] (in process)</button>
+      <button data-type="matrix">[matrix]</button>
+      <button data-type="analytic">analytic (in process)</button>
     </div>
 
     <!-- Block 2: Script Interface with placeholder texts -->
@@ -434,6 +455,9 @@
       <!-- Container for future parameters added by external JS scripts -->
     </div>
 
+    <!-- Analytic Block -->
+    <div id="analytic"></div>
+
     <!-- Block 4: Drop Area -->
     <div id="drop-area">
       <p id="drop-text">Loading export script...</p>
@@ -444,6 +468,7 @@
 
     <!-- Output Block -->
     <div id="output"></div>
+
   </div>
 
   <!-- Progress Overlay -->

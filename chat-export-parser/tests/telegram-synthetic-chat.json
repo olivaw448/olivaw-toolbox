@@ -1,0 +1,5805 @@
+{
+  "name": "Synthetic Chat",
+  "type": "group_chat",
+  "id": 987654321,
+  "messages": [
+    {
+      "id": 1001,
+      "type": "message",
+      "date": "01-01-2023 14:29:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Interesting photo 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "photo": "photos/photo_ABCDEF@07-03-2025_22-05-45.jpg",
+      "width": 1024,
+      "height": 600
+    },
+    {
+      "id": 1003,
+      "type": "message",
+      "date": "02-01-2023 08:17:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Sounds interesting!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1005,
+      "type": "message",
+      "date": "02-01-2023 14:43:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "How's everyone doing? 🤔",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1007,
+      "type": "message",
+      "date": "02-01-2023 20:36:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "That's an awesome idea! 💡",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1009,
+      "type": "message",
+      "date": "02-01-2023 23:03:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Thanks for sharing! 👍",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1011,
+      "type": "message",
+      "date": "03-01-2023 15:48:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "True, indeed 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1013,
+      "type": "message",
+      "date": "04-01-2023 03:39:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "I totally agree!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1015,
+      "type": "message",
+      "date": "05-01-2023 03:12:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "True, indeed 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1011
+    },
+    {
+      "id": 1017,
+      "type": "message",
+      "date": "05-01-2023 20:05:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Thanks for sharing! 👍",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1019,
+      "type": "message",
+      "date": "06-01-2023 04:52:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "I'll check it out soon.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1021,
+      "type": "message",
+      "date": "06-01-2023 19:17:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "That's an awesome idea! 💡",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1019
+    },
+    {
+      "id": 1023,
+      "type": "message",
+      "date": "07-01-2023 13:37:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1019
+    },
+    {
+      "id": 1025,
+      "type": "message",
+      "date": "08-01-2023 06:38:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "True, indeed 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1015
+    },
+    {
+      "id": 1027,
+      "type": "message",
+      "date": "08-01-2023 12:43:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "True, indeed 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1029,
+      "type": "message",
+      "date": "08-01-2023 21:22:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "I totally agree!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1005
+    },
+    {
+      "id": 1031,
+      "type": "message",
+      "date": "09-01-2023 15:26:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Can you explain more?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1009
+    },
+    {
+      "id": 1033,
+      "type": "message",
+      "date": "09-01-2023 20:01:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Good point! 🤓",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1025
+    },
+    {
+      "id": 1035,
+      "type": "message",
+      "date": "10-01-2023 01:34:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Good point! 🤓",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1037,
+      "type": "message",
+      "date": "10-01-2023 20:02:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "What do you guys think?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1039,
+      "type": "message",
+      "date": "11-01-2023 13:26:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Good point! 🤓",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1041,
+      "type": "message",
+      "date": "11-01-2023 22:43:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "I'll check it out soon.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1043,
+      "type": "message",
+      "date": "12-01-2023 07:41:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1045,
+      "type": "message",
+      "date": "12-01-2023 15:21:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Check this out! 📸",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1001,
+      "photo": "photos/photo_ABCDEF@07-03-2025_22-05-45.jpg",
+      "width": 640,
+      "height": 600
+    },
+    {
+      "id": 1047,
+      "type": "message",
+      "date": "13-01-2023 05:05:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "That's an awesome idea! 💡",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1049,
+      "type": "message",
+      "date": "13-01-2023 21:35:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1051,
+      "type": "message",
+      "date": "14-01-2023 04:53:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "True, indeed 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1053,
+      "type": "message",
+      "date": "14-01-2023 20:00:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "That's an awesome idea! 💡",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1055,
+      "type": "message",
+      "date": "15-01-2023 01:26:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1057,
+      "type": "message",
+      "date": "15-01-2023 16:47:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "I totally agree!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1053
+    },
+    {
+      "id": 1059,
+      "type": "message",
+      "date": "16-01-2023 13:46:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "I totally agree!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1061,
+      "type": "message",
+      "date": "17-01-2023 12:54:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "I totally agree!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1063,
+      "type": "message",
+      "date": "17-01-2023 21:27:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "I totally agree!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1065,
+      "type": "message",
+      "date": "18-01-2023 21:18:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Here's what I found...",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1067,
+      "type": "message",
+      "date": "19-01-2023 16:19:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "I'll check it out soon.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1031
+    },
+    {
+      "id": 1069,
+      "type": "message",
+      "date": "19-01-2023 20:38:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "Can you explain more?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1071,
+      "type": "message",
+      "date": "20-01-2023 11:32:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "I totally agree!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1073,
+      "type": "message",
+      "date": "20-01-2023 20:37:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Haha, funny 😂",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1075,
+      "type": "message",
+      "date": "21-01-2023 17:43:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1011
+    },
+    {
+      "id": 1077,
+      "type": "message",
+      "date": "21-01-2023 20:52:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "That's an awesome idea! 💡",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1049
+    },
+    {
+      "id": 1079,
+      "type": "message",
+      "date": "22-01-2023 20:29:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1081,
+      "type": "message",
+      "date": "23-01-2023 02:40:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "Absolutely! 🚀",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1083,
+      "type": "message",
+      "date": "23-01-2023 19:51:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1085,
+      "type": "message",
+      "date": "24-01-2023 09:05:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "Can you explain more?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1087,
+      "type": "message",
+      "date": "24-01-2023 23:06:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Check this out! 📸",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "photo": "photos/photo_ABCDEF@07-03-2025_22-05-45.jpg",
+      "width": 800,
+      "height": 600
+    },
+    {
+      "id": 1089,
+      "type": "message",
+      "date": "25-01-2023 17:22:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "I totally agree!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1091,
+      "type": "message",
+      "date": "26-01-2023 12:42:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Check this out! 📸",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1087,
+      "photo": "photos/photo_RANDOMIMG@10-04-2025_14-15-22.jpg",
+      "width": 640,
+      "height": 768
+    },
+    {
+      "id": 1093,
+      "type": "message",
+      "date": "26-01-2023 17:47:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Can you explain more?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1095,
+      "type": "message",
+      "date": "27-01-2023 02:54:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "Here's what I found...",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1097,
+      "type": "message",
+      "date": "27-01-2023 07:19:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Check this out! 📸",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1049,
+      "photo": "photos/photo_ABCDEF@07-03-2025_22-05-45.jpg",
+      "width": 640,
+      "height": 480
+    },
+    {
+      "id": 1099,
+      "type": "message",
+      "date": "27-01-2023 20:13:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "I totally agree!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1037
+    },
+    {
+      "id": 1101,
+      "type": "message",
+      "date": "28-01-2023 16:51:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "What do you guys think?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1103,
+      "type": "message",
+      "date": "29-01-2023 10:08:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "Any updates on this?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1105,
+      "type": "message",
+      "date": "29-01-2023 19:02:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1107,
+      "type": "message",
+      "date": "29-01-2023 21:31:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Here's what I found...",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1075
+    },
+    {
+      "id": 1109,
+      "type": "message",
+      "date": "30-01-2023 00:32:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Check this out! 📸",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "photo": "photos/photo_ABCDEF@07-03-2025_22-05-45.jpg",
+      "width": 1024,
+      "height": 480
+    },
+    {
+      "id": 1111,
+      "type": "message",
+      "date": "30-01-2023 14:34:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "Good point! 🤓",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1113,
+      "type": "message",
+      "date": "31-01-2023 13:33:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "That's an awesome idea! 💡",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1115,
+      "type": "message",
+      "date": "01-02-2023 00:31:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1117,
+      "type": "message",
+      "date": "01-02-2023 20:24:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Good point! 🤓",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1119,
+      "type": "message",
+      "date": "02-02-2023 06:08:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "True, indeed 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1121,
+      "type": "message",
+      "date": "02-02-2023 07:07:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1123,
+      "type": "message",
+      "date": "02-02-2023 11:55:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "Any updates on this?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1125,
+      "type": "message",
+      "date": "03-02-2023 06:20:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Sounds interesting!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1095
+    },
+    {
+      "id": 1127,
+      "type": "message",
+      "date": "03-02-2023 23:41:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Absolutely! 🚀",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1129,
+      "type": "message",
+      "date": "04-02-2023 19:08:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "I'll check it out soon.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1131,
+      "type": "message",
+      "date": "05-02-2023 00:38:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Absolutely! 🚀",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1133,
+      "type": "message",
+      "date": "05-02-2023 04:10:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Good point! 🤓",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1107
+    },
+    {
+      "id": 1135,
+      "type": "message",
+      "date": "05-02-2023 13:14:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Thanks for sharing! 👍",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1137,
+      "type": "message",
+      "date": "06-02-2023 11:28:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Check this out! 📸",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "photo": "photos/photo_XYZ123@09-03-2025_16-23-21.jpg",
+      "width": 640,
+      "height": 768
+    },
+    {
+      "id": 1139,
+      "type": "message",
+      "date": "07-02-2023 05:07:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1141,
+      "type": "message",
+      "date": "07-02-2023 21:20:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "True, indeed 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1143,
+      "type": "message",
+      "date": "08-02-2023 17:09:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Absolutely! 🚀",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1145,
+      "type": "message",
+      "date": "09-02-2023 14:51:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "How's everyone doing? 🤔",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1133
+    },
+    {
+      "id": 1147,
+      "type": "message",
+      "date": "10-02-2023 08:39:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1149,
+      "type": "message",
+      "date": "11-02-2023 08:33:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Good point! 🤓",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1151,
+      "type": "message",
+      "date": "11-02-2023 12:59:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Thanks for sharing! 👍",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1153,
+      "type": "message",
+      "date": "11-02-2023 20:54:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1155,
+      "type": "message",
+      "date": "12-02-2023 02:47:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Thanks for sharing! 👍",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1143
+    },
+    {
+      "id": 1157,
+      "type": "message",
+      "date": "12-02-2023 06:06:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "That's an awesome idea! 💡",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1153
+    },
+    {
+      "id": 1159,
+      "type": "message",
+      "date": "13-02-2023 02:28:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1123
+    },
+    {
+      "id": 1161,
+      "type": "message",
+      "date": "13-02-2023 03:19:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Interesting photo 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "photo": "photos/photo_XYZ123@09-03-2025_16-23-21.jpg",
+      "width": 1024,
+      "height": 480
+    },
+    {
+      "id": 1163,
+      "type": "message",
+      "date": "14-02-2023 02:05:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Absolutely! 🚀",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1165,
+      "type": "message",
+      "date": "14-02-2023 09:17:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Look at this!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "photo": "photos/photo_ABCDEF@07-03-2025_22-05-45.jpg",
+      "width": 1024,
+      "height": 768
+    },
+    {
+      "id": 1167,
+      "type": "message",
+      "date": "14-02-2023 17:40:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "I'll check it out soon.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1169,
+      "type": "message",
+      "date": "15-02-2023 04:07:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Thanks for sharing! 👍",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1171,
+      "type": "message",
+      "date": "15-02-2023 15:45:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "I'll check it out soon.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1157
+    },
+    {
+      "id": 1173,
+      "type": "message",
+      "date": "16-02-2023 01:17:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "Can you explain more?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1175,
+      "type": "message",
+      "date": "16-02-2023 15:38:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "I'll check it out soon.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1177,
+      "type": "message",
+      "date": "17-02-2023 09:08:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "True, indeed 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1179,
+      "type": "message",
+      "date": "18-02-2023 05:17:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Haha, funny 😂",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1085
+    },
+    {
+      "id": 1181,
+      "type": "message",
+      "date": "18-02-2023 10:04:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1155
+    },
+    {
+      "id": 1183,
+      "type": "message",
+      "date": "18-02-2023 22:17:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1185,
+      "type": "message",
+      "date": "19-02-2023 16:57:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "That's an awesome idea! 💡",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1187,
+      "type": "message",
+      "date": "20-02-2023 08:05:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "Good point! 🤓",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1189,
+      "type": "message",
+      "date": "21-02-2023 00:29:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "I'll check it out soon.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1191,
+      "type": "message",
+      "date": "21-02-2023 09:41:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "True, indeed 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1193,
+      "type": "message",
+      "date": "22-02-2023 00:18:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "That's an awesome idea! 💡",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1105
+    },
+    {
+      "id": 1195,
+      "type": "message",
+      "date": "22-02-2023 11:21:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "That's an awesome idea! 💡",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1197,
+      "type": "message",
+      "date": "22-02-2023 14:37:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1199,
+      "type": "message",
+      "date": "23-02-2023 08:35:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "Good point! 🤓",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1201,
+      "type": "message",
+      "date": "23-02-2023 08:53:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "What do you guys think?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1127
+    },
+    {
+      "id": 1203,
+      "type": "message",
+      "date": "23-02-2023 16:02:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "What do you guys think?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1205,
+      "type": "message",
+      "date": "24-02-2023 08:09:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "I totally agree!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1207,
+      "type": "message",
+      "date": "24-02-2023 17:50:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "That's an awesome idea! 💡",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1157
+    },
+    {
+      "id": 1209,
+      "type": "message",
+      "date": "25-02-2023 00:44:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Interesting photo 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "photo": "photos/photo_ABCDEF@07-03-2025_22-05-45.jpg",
+      "width": 640,
+      "height": 768
+    },
+    {
+      "id": 1211,
+      "type": "message",
+      "date": "25-02-2023 05:25:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1213,
+      "type": "message",
+      "date": "25-02-2023 19:50:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1215,
+      "type": "message",
+      "date": "26-02-2023 11:57:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "I totally agree!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1121
+    },
+    {
+      "id": 1217,
+      "type": "message",
+      "date": "27-02-2023 09:10:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "How's everyone doing? 🤔",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1219,
+      "type": "message",
+      "date": "28-02-2023 01:32:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Here's what I found...",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1177
+    },
+    {
+      "id": 1221,
+      "type": "message",
+      "date": "28-02-2023 09:27:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Absolutely! 🚀",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1223,
+      "type": "message",
+      "date": "28-02-2023 19:01:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "How's everyone doing? 🤔",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1225,
+      "type": "message",
+      "date": "01-03-2023 00:17:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1227,
+      "type": "message",
+      "date": "01-03-2023 21:05:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1229,
+      "type": "message",
+      "date": "02-03-2023 11:36:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Sounds interesting!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1231,
+      "type": "message",
+      "date": "03-03-2023 00:35:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Thanks for sharing! 👍",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1227
+    },
+    {
+      "id": 1233,
+      "type": "message",
+      "date": "03-03-2023 20:51:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "That's an awesome idea! 💡",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1235,
+      "type": "message",
+      "date": "04-03-2023 08:21:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1197
+    },
+    {
+      "id": 1237,
+      "type": "message",
+      "date": "05-03-2023 07:23:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Haha, funny 😂",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1239,
+      "type": "message",
+      "date": "05-03-2023 18:24:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1241,
+      "type": "message",
+      "date": "06-03-2023 14:22:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Good point! 🤓",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1243,
+      "type": "message",
+      "date": "06-03-2023 15:46:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "What do you guys think?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1245,
+      "type": "message",
+      "date": "07-03-2023 05:32:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "I totally agree!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1247,
+      "type": "message",
+      "date": "08-03-2023 04:41:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1249,
+      "type": "message",
+      "date": "09-03-2023 00:38:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Interesting photo 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "photo": "photos/photo_ABCDEF@07-03-2025_22-05-45.jpg",
+      "width": 640,
+      "height": 600
+    },
+    {
+      "id": 1251,
+      "type": "message",
+      "date": "09-03-2023 19:21:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "True, indeed 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1219
+    },
+    {
+      "id": 1253,
+      "type": "message",
+      "date": "09-03-2023 23:20:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "What do you guys think?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1255,
+      "type": "message",
+      "date": "10-03-2023 12:35:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1257,
+      "type": "message",
+      "date": "11-03-2023 09:29:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Any updates on this?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1259,
+      "type": "message",
+      "date": "12-03-2023 06:48:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1261,
+      "type": "message",
+      "date": "13-03-2023 04:29:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Absolutely! 🚀",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1175
+    },
+    {
+      "id": 1263,
+      "type": "message",
+      "date": "13-03-2023 19:34:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Here's what I found...",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1265,
+      "type": "message",
+      "date": "14-03-2023 15:30:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Can you explain more?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1267,
+      "type": "message",
+      "date": "15-03-2023 08:15:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "True, indeed 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1269,
+      "type": "message",
+      "date": "15-03-2023 14:51:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Here's what I found...",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1271,
+      "type": "message",
+      "date": "16-03-2023 07:02:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "That's an awesome idea! 💡",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1273,
+      "type": "message",
+      "date": "16-03-2023 15:30:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Look at this!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "photo": "photos/photo_XYZ123@09-03-2025_16-23-21.jpg",
+      "width": 1024,
+      "height": 600
+    },
+    {
+      "id": 1275,
+      "type": "message",
+      "date": "17-03-2023 10:22:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "How's everyone doing? 🤔",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1277,
+      "type": "message",
+      "date": "17-03-2023 14:33:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Sounds interesting!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1279,
+      "type": "message",
+      "date": "17-03-2023 18:04:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Here's what I found...",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1281,
+      "type": "message",
+      "date": "18-03-2023 12:39:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Thanks for sharing! 👍",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1283,
+      "type": "message",
+      "date": "19-03-2023 08:22:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "What do you guys think?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1227
+    },
+    {
+      "id": 1285,
+      "type": "message",
+      "date": "19-03-2023 08:29:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Check this out! 📸",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1187,
+      "photo": "photos/photo_XYZ123@09-03-2025_16-23-21.jpg",
+      "width": 800,
+      "height": 480
+    },
+    {
+      "id": 1287,
+      "type": "message",
+      "date": "19-03-2023 08:45:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "I totally agree!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1289,
+      "type": "message",
+      "date": "19-03-2023 11:26:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "I'll check it out soon.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1291,
+      "type": "message",
+      "date": "19-03-2023 23:33:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "What do you guys think?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1293,
+      "type": "message",
+      "date": "20-03-2023 02:52:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "True, indeed 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1295,
+      "type": "message",
+      "date": "20-03-2023 23:05:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "I totally agree!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1297,
+      "type": "message",
+      "date": "21-03-2023 14:04:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "I totally agree!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1299,
+      "type": "message",
+      "date": "22-03-2023 00:13:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Here's what I found...",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1301,
+      "type": "message",
+      "date": "22-03-2023 11:48:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "How's everyone doing? 🤔",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1281
+    },
+    {
+      "id": 1303,
+      "type": "message",
+      "date": "23-03-2023 00:47:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1203
+    },
+    {
+      "id": 1305,
+      "type": "message",
+      "date": "23-03-2023 17:44:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Here's what I found...",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1283
+    },
+    {
+      "id": 1307,
+      "type": "message",
+      "date": "24-03-2023 03:29:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "What do you guys think?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1297
+    },
+    {
+      "id": 1309,
+      "type": "message",
+      "date": "24-03-2023 14:55:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Any updates on this?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1311,
+      "type": "message",
+      "date": "24-03-2023 20:40:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Good point! 🤓",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1313,
+      "type": "message",
+      "date": "25-03-2023 14:20:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Here's what I found...",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1315,
+      "type": "message",
+      "date": "25-03-2023 18:50:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "That's an awesome idea! 💡",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1317,
+      "type": "message",
+      "date": "26-03-2023 16:17:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Sounds interesting!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1319,
+      "type": "message",
+      "date": "27-03-2023 12:00:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Sounds interesting!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1321,
+      "type": "message",
+      "date": "27-03-2023 21:12:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Absolutely! 🚀",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1323,
+      "type": "message",
+      "date": "28-03-2023 19:45:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1325,
+      "type": "message",
+      "date": "29-03-2023 04:48:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Any updates on this?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1327,
+      "type": "message",
+      "date": "29-03-2023 22:47:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "I'll check it out soon.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1329,
+      "type": "message",
+      "date": "29-03-2023 23:43:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Check this out! 📸",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "photo": "photos/photo_RANDOMIMG@10-04-2025_14-15-22.jpg",
+      "width": 640,
+      "height": 480
+    },
+    {
+      "id": 1331,
+      "type": "message",
+      "date": "30-03-2023 20:36:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Haha, funny 😂",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1333,
+      "type": "message",
+      "date": "31-03-2023 17:25:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "How's everyone doing? 🤔",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1335,
+      "type": "message",
+      "date": "31-03-2023 23:24:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Here's what I found...",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1307
+    },
+    {
+      "id": 1337,
+      "type": "message",
+      "date": "01-04-2023 01:28:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1299
+    },
+    {
+      "id": 1339,
+      "type": "message",
+      "date": "01-04-2023 07:33:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1341,
+      "type": "message",
+      "date": "02-04-2023 06:41:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Haha, funny 😂",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1343,
+      "type": "message",
+      "date": "02-04-2023 23:02:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Sounds interesting!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1345,
+      "type": "message",
+      "date": "03-04-2023 17:22:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Haha, funny 😂",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1347,
+      "type": "message",
+      "date": "03-04-2023 18:30:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Sounds interesting!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1349,
+      "type": "message",
+      "date": "04-04-2023 00:59:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "True, indeed 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1351,
+      "type": "message",
+      "date": "04-04-2023 12:27:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "True, indeed 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1295
+    },
+    {
+      "id": 1353,
+      "type": "message",
+      "date": "04-04-2023 18:18:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "Check this out! 📸",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "photo": "photos/photo_ABCDEF@07-03-2025_22-05-45.jpg",
+      "width": 800,
+      "height": 600
+    },
+    {
+      "id": 1355,
+      "type": "message",
+      "date": "04-04-2023 19:50:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Can you explain more?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1357,
+      "type": "message",
+      "date": "05-04-2023 11:46:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "Any updates on this?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1303
+    },
+    {
+      "id": 1359,
+      "type": "message",
+      "date": "05-04-2023 23:50:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Thanks for sharing! 👍",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1361,
+      "type": "message",
+      "date": "06-04-2023 04:43:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Any updates on this?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1351
+    },
+    {
+      "id": 1363,
+      "type": "message",
+      "date": "06-04-2023 13:50:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "True, indeed 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1365,
+      "type": "message",
+      "date": "07-04-2023 09:59:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "I totally agree!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1367,
+      "type": "message",
+      "date": "07-04-2023 19:44:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "How's everyone doing? 🤔",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1341
+    },
+    {
+      "id": 1369,
+      "type": "message",
+      "date": "08-04-2023 00:23:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "How's everyone doing? 🤔",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1371,
+      "type": "message",
+      "date": "08-04-2023 08:11:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "What do you guys think?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1373,
+      "type": "message",
+      "date": "08-04-2023 18:38:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1291
+    },
+    {
+      "id": 1375,
+      "type": "message",
+      "date": "09-04-2023 10:38:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Here's what I found...",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1377,
+      "type": "message",
+      "date": "10-04-2023 08:58:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "I'll check it out soon.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1379,
+      "type": "message",
+      "date": "11-04-2023 04:57:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Can you explain more?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1357
+    },
+    {
+      "id": 1381,
+      "type": "message",
+      "date": "11-04-2023 17:47:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Can you explain more?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1383,
+      "type": "message",
+      "date": "11-04-2023 21:47:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "That's an awesome idea! 💡",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1359
+    },
+    {
+      "id": 1385,
+      "type": "message",
+      "date": "12-04-2023 09:04:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Thanks for sharing! 👍",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1289
+    },
+    {
+      "id": 1387,
+      "type": "message",
+      "date": "13-04-2023 08:07:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1389,
+      "type": "message",
+      "date": "13-04-2023 21:27:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Haha, funny 😂",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1391,
+      "type": "message",
+      "date": "14-04-2023 08:23:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Sounds interesting!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1393,
+      "type": "message",
+      "date": "14-04-2023 10:07:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1395,
+      "type": "message",
+      "date": "15-04-2023 01:54:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "Absolutely! 🚀",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1397,
+      "type": "message",
+      "date": "15-04-2023 05:47:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Here's what I found...",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1399,
+      "type": "message",
+      "date": "15-04-2023 12:57:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1401,
+      "type": "message",
+      "date": "15-04-2023 19:59:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1335
+    },
+    {
+      "id": 1403,
+      "type": "message",
+      "date": "16-04-2023 12:18:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1405,
+      "type": "message",
+      "date": "16-04-2023 17:52:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Can you explain more?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1407,
+      "type": "message",
+      "date": "16-04-2023 18:05:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "That's an awesome idea! 💡",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1319
+    },
+    {
+      "id": 1409,
+      "type": "message",
+      "date": "17-04-2023 08:23:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Haha, funny 😂",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1411,
+      "type": "message",
+      "date": "17-04-2023 12:23:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Can you explain more?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1413,
+      "type": "message",
+      "date": "18-04-2023 04:45:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Can you explain more?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1415,
+      "type": "message",
+      "date": "18-04-2023 13:39:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Any updates on this?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1417,
+      "type": "message",
+      "date": "19-04-2023 07:26:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "What do you guys think?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1419,
+      "type": "message",
+      "date": "19-04-2023 17:29:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "What do you guys think?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1421,
+      "type": "message",
+      "date": "20-04-2023 08:32:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "Check this out! 📸",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "photo": "photos/photo_RANDOMIMG@10-04-2025_14-15-22.jpg",
+      "width": 640,
+      "height": 600
+    },
+    {
+      "id": 1423,
+      "type": "message",
+      "date": "20-04-2023 20:10:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "Good point! 🤓",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1331
+    },
+    {
+      "id": 1425,
+      "type": "message",
+      "date": "21-04-2023 01:56:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Can you explain more?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1427,
+      "type": "message",
+      "date": "21-04-2023 08:31:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "True, indeed 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1429,
+      "type": "message",
+      "date": "22-04-2023 08:24:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1431,
+      "type": "message",
+      "date": "23-04-2023 04:35:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "I totally agree!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1399
+    },
+    {
+      "id": 1433,
+      "type": "message",
+      "date": "23-04-2023 16:09:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "I totally agree!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1425
+    },
+    {
+      "id": 1435,
+      "type": "message",
+      "date": "24-04-2023 02:06:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1437,
+      "type": "message",
+      "date": "24-04-2023 12:18:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Good point! 🤓",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1439,
+      "type": "message",
+      "date": "24-04-2023 12:55:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Absolutely! 🚀",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1345
+    },
+    {
+      "id": 1441,
+      "type": "message",
+      "date": "24-04-2023 23:03:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1443,
+      "type": "message",
+      "date": "25-04-2023 15:41:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "Sounds interesting!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1445,
+      "type": "message",
+      "date": "26-04-2023 05:38:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1447,
+      "type": "message",
+      "date": "26-04-2023 21:59:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Any updates on this?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1449,
+      "type": "message",
+      "date": "27-04-2023 19:14:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Here's what I found...",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1451,
+      "type": "message",
+      "date": "28-04-2023 12:12:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "How's everyone doing? 🤔",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1421
+    },
+    {
+      "id": 1453,
+      "type": "message",
+      "date": "29-04-2023 09:28:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Can you explain more?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1455,
+      "type": "message",
+      "date": "29-04-2023 22:14:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Here's what I found...",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1457,
+      "type": "message",
+      "date": "30-04-2023 19:33:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "True, indeed 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1459,
+      "type": "message",
+      "date": "01-05-2023 16:18:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Can you explain more?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1453
+    },
+    {
+      "id": 1461,
+      "type": "message",
+      "date": "02-05-2023 12:46:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Thanks for sharing! 👍",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1463,
+      "type": "message",
+      "date": "02-05-2023 19:23:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Sounds interesting!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1465,
+      "type": "message",
+      "date": "03-05-2023 09:54:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "Good point! 🤓",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1467,
+      "type": "message",
+      "date": "04-05-2023 06:08:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Any updates on this?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1469,
+      "type": "message",
+      "date": "05-05-2023 02:36:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1471,
+      "type": "message",
+      "date": "05-05-2023 21:52:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1473,
+      "type": "message",
+      "date": "06-05-2023 14:58:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Can you explain more?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1475,
+      "type": "message",
+      "date": "07-05-2023 08:46:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1477,
+      "type": "message",
+      "date": "08-05-2023 00:01:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1479,
+      "type": "message",
+      "date": "08-05-2023 16:20:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Can you explain more?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1481,
+      "type": "message",
+      "date": "09-05-2023 08:04:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "What do you guys think?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1473
+    },
+    {
+      "id": 1483,
+      "type": "message",
+      "date": "09-05-2023 09:36:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Look at this!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "photo": "photos/photo_ABCDEF@07-03-2025_22-05-45.jpg",
+      "width": 640,
+      "height": 600
+    },
+    {
+      "id": 1485,
+      "type": "message",
+      "date": "09-05-2023 19:41:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "True, indeed 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1487,
+      "type": "message",
+      "date": "10-05-2023 09:26:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Look at this!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "photo": "photos/photo_RANDOMIMG@10-04-2025_14-15-22.jpg",
+      "width": 640,
+      "height": 768
+    },
+    {
+      "id": 1489,
+      "type": "message",
+      "date": "10-05-2023 14:24:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "Check this out! 📸",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "photo": "photos/photo_XYZ123@09-03-2025_16-23-21.jpg",
+      "width": 1024,
+      "height": 768
+    },
+    {
+      "id": 1491,
+      "type": "message",
+      "date": "10-05-2023 15:58:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1493,
+      "type": "message",
+      "date": "11-05-2023 08:13:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "Any updates on this?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1495,
+      "type": "message",
+      "date": "11-05-2023 17:15:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Here's what I found...",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1427
+    },
+    {
+      "id": 1497,
+      "type": "message",
+      "date": "12-05-2023 01:18:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "True, indeed 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1499,
+      "type": "message",
+      "date": "12-05-2023 17:05:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1501,
+      "type": "message",
+      "date": "13-05-2023 02:05:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "How's everyone doing? 🤔",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1503,
+      "type": "message",
+      "date": "13-05-2023 07:11:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Check this out! 📸",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "photo": "photos/photo_XYZ123@09-03-2025_16-23-21.jpg",
+      "width": 640,
+      "height": 600
+    },
+    {
+      "id": 1505,
+      "type": "message",
+      "date": "14-05-2023 05:39:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1507,
+      "type": "message",
+      "date": "14-05-2023 13:29:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Good point! 🤓",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1509,
+      "type": "message",
+      "date": "14-05-2023 15:05:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "What do you guys think?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1511,
+      "type": "message",
+      "date": "14-05-2023 17:50:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "Can you explain more?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1513,
+      "type": "message",
+      "date": "15-05-2023 09:09:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Haha, funny 😂",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1515,
+      "type": "message",
+      "date": "16-05-2023 00:43:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "I'll check it out soon.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1513
+    },
+    {
+      "id": 1517,
+      "type": "message",
+      "date": "16-05-2023 03:23:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "How's everyone doing? 🤔",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1519,
+      "type": "message",
+      "date": "16-05-2023 16:39:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1521,
+      "type": "message",
+      "date": "17-05-2023 13:45:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "How's everyone doing? 🤔",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1421
+    },
+    {
+      "id": 1523,
+      "type": "message",
+      "date": "18-05-2023 06:51:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Any updates on this?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1525,
+      "type": "message",
+      "date": "18-05-2023 11:04:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Interesting photo 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "photo": "photos/photo_ABCDEF@07-03-2025_22-05-45.jpg",
+      "width": 800,
+      "height": 600
+    },
+    {
+      "id": 1527,
+      "type": "message",
+      "date": "19-05-2023 01:38:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Any updates on this?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1529,
+      "type": "message",
+      "date": "19-05-2023 12:45:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Haha, funny 😂",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1531,
+      "type": "message",
+      "date": "20-05-2023 05:09:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1533,
+      "type": "message",
+      "date": "21-05-2023 00:06:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "True, indeed 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1465
+    },
+    {
+      "id": 1535,
+      "type": "message",
+      "date": "21-05-2023 05:26:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Absolutely! 🚀",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1537,
+      "type": "message",
+      "date": "21-05-2023 19:06:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "How's everyone doing? 🤔",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1539,
+      "type": "message",
+      "date": "22-05-2023 16:09:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Here's what I found...",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1541,
+      "type": "message",
+      "date": "23-05-2023 03:15:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1543,
+      "type": "message",
+      "date": "23-05-2023 21:27:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Can you explain more?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1545,
+      "type": "message",
+      "date": "24-05-2023 07:53:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Haha, funny 😂",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1547,
+      "type": "message",
+      "date": "25-05-2023 06:17:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Haha, funny 😂",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1549,
+      "type": "message",
+      "date": "25-05-2023 23:50:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1551,
+      "type": "message",
+      "date": "26-05-2023 18:39:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Thanks for sharing! 👍",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1553,
+      "type": "message",
+      "date": "27-05-2023 16:24:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Here's what I found...",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1555,
+      "type": "message",
+      "date": "27-05-2023 22:25:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "That's an awesome idea! 💡",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1477
+    },
+    {
+      "id": 1557,
+      "type": "message",
+      "date": "28-05-2023 05:31:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Any updates on this?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1503
+    },
+    {
+      "id": 1559,
+      "type": "message",
+      "date": "28-05-2023 20:04:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Here's what I found...",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1557
+    },
+    {
+      "id": 1561,
+      "type": "message",
+      "date": "29-05-2023 17:21:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "I totally agree!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1537
+    },
+    {
+      "id": 1563,
+      "type": "message",
+      "date": "30-05-2023 09:56:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Sounds interesting!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1477
+    },
+    {
+      "id": 1565,
+      "type": "message",
+      "date": "30-05-2023 23:56:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Haha, funny 😂",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1567,
+      "type": "message",
+      "date": "31-05-2023 05:47:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "True, indeed 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1507
+    },
+    {
+      "id": 1569,
+      "type": "message",
+      "date": "31-05-2023 13:21:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Absolutely! 🚀",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1571,
+      "type": "message",
+      "date": "01-06-2023 08:31:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Interesting photo 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "photo": "photos/photo_ABCDEF@07-03-2025_22-05-45.jpg",
+      "width": 1024,
+      "height": 600
+    },
+    {
+      "id": 1573,
+      "type": "message",
+      "date": "02-06-2023 01:31:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Look at this!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "photo": "photos/photo_XYZ123@09-03-2025_16-23-21.jpg",
+      "width": 640,
+      "height": 768
+    },
+    {
+      "id": 1575,
+      "type": "message",
+      "date": "02-06-2023 20:18:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1501
+    },
+    {
+      "id": 1577,
+      "type": "message",
+      "date": "03-06-2023 00:06:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Can you explain more?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1579,
+      "type": "message",
+      "date": "03-06-2023 22:16:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1495
+    },
+    {
+      "id": 1581,
+      "type": "message",
+      "date": "04-06-2023 14:34:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "I'll check it out soon.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1539
+    },
+    {
+      "id": 1583,
+      "type": "message",
+      "date": "05-06-2023 13:13:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Here's what I found...",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1585,
+      "type": "message",
+      "date": "05-06-2023 15:43:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Sounds interesting!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1587,
+      "type": "message",
+      "date": "06-06-2023 03:55:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "How's everyone doing? 🤔",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1553
+    },
+    {
+      "id": 1589,
+      "type": "message",
+      "date": "06-06-2023 19:15:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "I'll check it out soon.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1591,
+      "type": "message",
+      "date": "07-06-2023 18:26:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Interesting photo 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "photo": "photos/photo_ABCDEF@07-03-2025_22-05-45.jpg",
+      "width": 640,
+      "height": 768
+    },
+    {
+      "id": 1593,
+      "type": "message",
+      "date": "08-06-2023 18:21:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "True, indeed 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1595,
+      "type": "message",
+      "date": "09-06-2023 12:31:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Sounds interesting!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1545
+    },
+    {
+      "id": 1597,
+      "type": "message",
+      "date": "10-06-2023 04:33:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "True, indeed 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1599,
+      "type": "message",
+      "date": "10-06-2023 13:06:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Here's what I found...",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1601,
+      "type": "message",
+      "date": "11-06-2023 04:01:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "I'll check it out soon.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1547
+    },
+    {
+      "id": 1603,
+      "type": "message",
+      "date": "11-06-2023 05:13:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Any updates on this?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1605,
+      "type": "message",
+      "date": "11-06-2023 08:16:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1607,
+      "type": "message",
+      "date": "11-06-2023 23:35:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Sounds interesting!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1609,
+      "type": "message",
+      "date": "12-06-2023 13:10:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1611,
+      "type": "message",
+      "date": "12-06-2023 20:32:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Can you explain more?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1613,
+      "type": "message",
+      "date": "13-06-2023 06:02:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Check this out! 📸",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "photo": "photos/photo_XYZ123@09-03-2025_16-23-21.jpg",
+      "width": 1024,
+      "height": 768
+    },
+    {
+      "id": 1615,
+      "type": "message",
+      "date": "13-06-2023 20:55:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Absolutely! 🚀",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1617,
+      "type": "message",
+      "date": "14-06-2023 00:08:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Check this out! 📸",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "photo": "photos/photo_RANDOMIMG@10-04-2025_14-15-22.jpg",
+      "width": 800,
+      "height": 768
+    },
+    {
+      "id": 1619,
+      "type": "message",
+      "date": "14-06-2023 03:56:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1621,
+      "type": "message",
+      "date": "14-06-2023 12:05:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "True, indeed 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1521
+    },
+    {
+      "id": 1623,
+      "type": "message",
+      "date": "14-06-2023 23:33:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Haha, funny 😂",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1625,
+      "type": "message",
+      "date": "15-06-2023 23:22:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Any updates on this?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1627,
+      "type": "message",
+      "date": "16-06-2023 17:51:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "What do you guys think?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1629,
+      "type": "message",
+      "date": "17-06-2023 15:57:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Sounds interesting!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1545
+    },
+    {
+      "id": 1631,
+      "type": "message",
+      "date": "18-06-2023 04:39:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Good point! 🤓",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1623
+    },
+    {
+      "id": 1633,
+      "type": "message",
+      "date": "18-06-2023 20:42:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "I'll check it out soon.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1635,
+      "type": "message",
+      "date": "19-06-2023 14:11:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "That's an awesome idea! 💡",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1637,
+      "type": "message",
+      "date": "20-06-2023 13:00:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "That's an awesome idea! 💡",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1639,
+      "type": "message",
+      "date": "21-06-2023 05:23:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Any updates on this?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1611
+    },
+    {
+      "id": 1641,
+      "type": "message",
+      "date": "21-06-2023 17:12:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Any updates on this?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1625
+    },
+    {
+      "id": 1643,
+      "type": "message",
+      "date": "22-06-2023 09:49:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1645,
+      "type": "message",
+      "date": "22-06-2023 18:46:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1647,
+      "type": "message",
+      "date": "22-06-2023 21:30:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Absolutely! 🚀",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1649,
+      "type": "message",
+      "date": "23-06-2023 18:20:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Absolutely! 🚀",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1651,
+      "type": "message",
+      "date": "24-06-2023 05:01:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Any updates on this?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1653,
+      "type": "message",
+      "date": "25-06-2023 03:57:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Here's what I found...",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1621
+    },
+    {
+      "id": 1655,
+      "type": "message",
+      "date": "25-06-2023 22:49:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Any updates on this?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1567
+    },
+    {
+      "id": 1657,
+      "type": "message",
+      "date": "26-06-2023 18:07:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "I'll check it out soon.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1597
+    },
+    {
+      "id": 1659,
+      "type": "message",
+      "date": "26-06-2023 23:05:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Look at this!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "photo": "photos/photo_ABCDEF@07-03-2025_22-05-45.jpg",
+      "width": 1024,
+      "height": 480
+    },
+    {
+      "id": 1661,
+      "type": "message",
+      "date": "27-06-2023 09:31:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Check this out! 📸",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "photo": "photos/photo_ABCDEF@07-03-2025_22-05-45.jpg",
+      "width": 1024,
+      "height": 600
+    },
+    {
+      "id": 1663,
+      "type": "message",
+      "date": "27-06-2023 21:57:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Thanks for sharing! 👍",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1631
+    },
+    {
+      "id": 1665,
+      "type": "message",
+      "date": "28-06-2023 00:15:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1667,
+      "type": "message",
+      "date": "28-06-2023 23:22:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "What do you guys think?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1669,
+      "type": "message",
+      "date": "29-06-2023 01:55:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1671,
+      "type": "message",
+      "date": "29-06-2023 16:52:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1673,
+      "type": "message",
+      "date": "30-06-2023 01:49:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Any updates on this?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1675,
+      "type": "message",
+      "date": "30-06-2023 09:37:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Haha, funny 😂",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1677,
+      "type": "message",
+      "date": "30-06-2023 21:43:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "Thanks for sharing! 👍",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1679,
+      "type": "message",
+      "date": "01-07-2023 06:20:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "That's an awesome idea! 💡",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1681,
+      "type": "message",
+      "date": "01-07-2023 10:46:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Can you explain more?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1683,
+      "type": "message",
+      "date": "01-07-2023 15:52:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Any updates on this?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1685,
+      "type": "message",
+      "date": "01-07-2023 19:32:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "That's an awesome idea! 💡",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1669
+    },
+    {
+      "id": 1687,
+      "type": "message",
+      "date": "02-07-2023 05:17:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1689,
+      "type": "message",
+      "date": "02-07-2023 10:50:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Thanks for sharing! 👍",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1691,
+      "type": "message",
+      "date": "02-07-2023 11:34:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "That's an awesome idea! 💡",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1693,
+      "type": "message",
+      "date": "02-07-2023 16:59:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Here's what I found...",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1695,
+      "type": "message",
+      "date": "03-07-2023 04:42:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "I'll check it out soon.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1599
+    },
+    {
+      "id": 1697,
+      "type": "message",
+      "date": "03-07-2023 09:56:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Can you explain more?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1699,
+      "type": "message",
+      "date": "03-07-2023 16:56:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "True, indeed 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1701,
+      "type": "message",
+      "date": "04-07-2023 02:10:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "Haha, funny 😂",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1623
+    },
+    {
+      "id": 1703,
+      "type": "message",
+      "date": "04-07-2023 07:57:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Good point! 🤓",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1705,
+      "type": "message",
+      "date": "04-07-2023 08:10:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "How's everyone doing? 🤔",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1707,
+      "type": "message",
+      "date": "04-07-2023 18:59:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "True, indeed 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1709,
+      "type": "message",
+      "date": "05-07-2023 11:45:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Absolutely! 🚀",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1685
+    },
+    {
+      "id": 1711,
+      "type": "message",
+      "date": "05-07-2023 16:42:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "I'll check it out soon.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1713,
+      "type": "message",
+      "date": "06-07-2023 12:31:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1715,
+      "type": "message",
+      "date": "07-07-2023 01:29:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Good point! 🤓",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1717,
+      "type": "message",
+      "date": "07-07-2023 17:27:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "True, indeed 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1719,
+      "type": "message",
+      "date": "08-07-2023 06:23:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "That's an awesome idea! 💡",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1635
+    },
+    {
+      "id": 1721,
+      "type": "message",
+      "date": "08-07-2023 15:21:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Haha, funny 😂",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1723,
+      "type": "message",
+      "date": "09-07-2023 13:03:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "That's an awesome idea! 💡",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1635
+    },
+    {
+      "id": 1725,
+      "type": "message",
+      "date": "09-07-2023 13:48:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "That's an awesome idea! 💡",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1677
+    },
+    {
+      "id": 1727,
+      "type": "message",
+      "date": "09-07-2023 15:16:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Absolutely! 🚀",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1729,
+      "type": "message",
+      "date": "09-07-2023 20:11:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Good point! 🤓",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1683
+    },
+    {
+      "id": 1731,
+      "type": "message",
+      "date": "10-07-2023 03:47:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Absolutely! 🚀",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1647
+    },
+    {
+      "id": 1733,
+      "type": "message",
+      "date": "10-07-2023 08:50:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Good point! 🤓",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1661
+    },
+    {
+      "id": 1735,
+      "type": "message",
+      "date": "11-07-2023 06:53:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Can you explain more?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1737,
+      "type": "message",
+      "date": "12-07-2023 04:24:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "True, indeed 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1739,
+      "type": "message",
+      "date": "12-07-2023 16:59:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Here's what I found...",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1741,
+      "type": "message",
+      "date": "13-07-2023 07:17:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Any updates on this?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1659
+    },
+    {
+      "id": 1743,
+      "type": "message",
+      "date": "13-07-2023 18:07:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Haha, funny 😂",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1745,
+      "type": "message",
+      "date": "14-07-2023 08:54:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Sounds interesting!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1747,
+      "type": "message",
+      "date": "14-07-2023 23:30:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Sounds interesting!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1749,
+      "type": "message",
+      "date": "15-07-2023 03:11:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Sounds interesting!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1721
+    },
+    {
+      "id": 1751,
+      "type": "message",
+      "date": "15-07-2023 17:45:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Sounds interesting!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1667
+    },
+    {
+      "id": 1753,
+      "type": "message",
+      "date": "16-07-2023 11:21:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1755,
+      "type": "message",
+      "date": "16-07-2023 14:51:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Interesting photo 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1665,
+      "photo": "photos/photo_XYZ123@09-03-2025_16-23-21.jpg",
+      "width": 640,
+      "height": 768
+    },
+    {
+      "id": 1757,
+      "type": "message",
+      "date": "16-07-2023 23:13:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Sounds interesting!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1759,
+      "type": "message",
+      "date": "17-07-2023 01:42:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Wow, didn't expect that 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1697
+    },
+    {
+      "id": 1761,
+      "type": "message",
+      "date": "18-07-2023 00:43:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "How's everyone doing? 🤔",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1763,
+      "type": "message",
+      "date": "18-07-2023 10:08:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Can you explain more?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1719
+    },
+    {
+      "id": 1765,
+      "type": "message",
+      "date": "19-07-2023 04:19:00",
+      "from": "David",
+      "from_id": "user444444444",
+      "text": "Here's what I found...",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1767,
+      "type": "message",
+      "date": "19-07-2023 12:11:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "What do you guys think?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1677
+    },
+    {
+      "id": 1769,
+      "type": "message",
+      "date": "19-07-2023 21:51:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Today's a great day 🎉",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1771,
+      "type": "message",
+      "date": "20-07-2023 16:26:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Any updates on this?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1773,
+      "type": "message",
+      "date": "21-07-2023 08:07:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Sounds interesting!",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1775,
+      "type": "message",
+      "date": "22-07-2023 03:10:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "I'll check it out soon.",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1695
+    },
+    {
+      "id": 1777,
+      "type": "message",
+      "date": "22-07-2023 19:33:00",
+      "from": "Emma",
+      "from_id": "user555555555",
+      "text": "Any updates on this?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1713
+    },
+    {
+      "id": 1779,
+      "type": "message",
+      "date": "23-07-2023 00:21:00",
+      "from": "Charlie",
+      "from_id": "user333333333",
+      "text": "Good point! 🤓",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1781,
+      "type": "message",
+      "date": "23-07-2023 13:14:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Any updates on this?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1783,
+      "type": "message",
+      "date": "23-07-2023 23:42:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "How's everyone doing? 🤔",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1785,
+      "type": "message",
+      "date": "24-07-2023 18:25:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "How's everyone doing? 🤔",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1787,
+      "type": "message",
+      "date": "25-07-2023 08:27:00",
+      "from": "Alice",
+      "from_id": "user111111111",
+      "text": "Check this out! 📸",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "photo": "photos/photo_XYZ123@09-03-2025_16-23-21.jpg",
+      "width": 800,
+      "height": 480
+    },
+    {
+      "id": 1789,
+      "type": "message",
+      "date": "25-07-2023 19:50:00",
+      "from": "Fiona",
+      "from_id": "user666666666",
+      "text": "Good point! 🤓",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ]
+    },
+    {
+      "id": 1791,
+      "type": "message",
+      "date": "26-07-2023 06:13:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "True, indeed 😄",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1731
+    },
+    {
+      "id": 1793,
+      "type": "message",
+      "date": "26-07-2023 10:08:00",
+      "from": "George",
+      "from_id": "user777777777",
+      "text": "Can you explain more?",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "reply_to_message_id": 1789
+    },
+    {
+      "id": 1795,
+      "type": "message",
+      "date": "26-07-2023 13:49:00",
+      "from": "Bob",
+      "from_id": "user222222222",
+      "text": "Check this out! 📸",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "synthetic conversation"
+        }
+      ],
+      "photo": "photos/photo_XYZ123@09-03-2025_16-23-21.jpg",
+      "width": 640,
+      "height": 480
+    },
+    {
+      "id": 1797,
+      "type": "message",
+      "date": "24-08-2023 13:49:00",
+      "from": "Henry",
+      "from_id": "user888888888",
+      "text": "I rarely show up here 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "rare user message"
+        }
+      ]
+    },
+    {
+      "id": 1798,
+      "type": "message",
+      "date": "23-09-2023 13:49:00",
+      "from": "Henry",
+      "from_id": "user888888888",
+      "text": "I rarely show up here 😅",
+      "text_entities": [
+        {
+          "type": "plain",
+          "text": "rare user message"
+        }
+      ]
+    }
+  ]
+}

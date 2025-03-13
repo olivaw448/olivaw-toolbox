@@ -60,7 +60,7 @@
       replyToLabel: "Ответ на:"
     },
     ua: {
-      title: "Парсер Telegram Чату",
+      title: "Парсер Telegram чату",
       description: "Розберіть експорт чату Telegram.",
       searchLabelBegin: "Введіть слово для пошуку:",
       searchLabelAnywhere: "Введіть рядок для пошуку:",
@@ -70,7 +70,7 @@
       downloadBtn: "Завантажити результат",
       noMessages: "Повідомлень із заданим словом не знайдено.",
       cancel: "Скасувати",
-      searchInsideLabel: "Шукати рядок всередині повідомлень",
+      searchInsideLabel: "Шукати рядок усередині повідомлень",
       showAuthorLabel: "Показувати автора повідомлення",
       authorLabel: "Автор: ",
       dateRangeLabel: "Діапазон дат",
@@ -190,7 +190,7 @@
     const replyMap = {};
     messagesArray.forEach(m => {
       let txt = "";
-      if (typeof m.text === "string") {
+      if (m.text && typeof m.text === "string") {
         txt = m.text;
       } else if (Array.isArray(m.text)) {
         txt = m.text.map(part => (typeof part === "string" ? part : part.text)).join("");
@@ -226,6 +226,10 @@
     return replyMap;
   }
   
+  // Здесь создаём глобальную переменную для хранения всех сообщений в виде JSON.
+  // Для каждого сообщения будут поля: date, time, unixtime, day_of_week, username (массив), user_id, message_id, reply_id (массив), message_text, message_files (массив).
+  window.allMessagesJson = [];
+
   // Update module interface and re-run parsing
   function updateTelegramInterface() {
     if (selectedFileName === "") {
@@ -342,7 +346,58 @@
   function processJSON(jsonData) {
     console.log("Telegram processJSON called");
     const messagesArray = jsonData.messages || [];
-    // Build reply mapping for JSON messages
+    
+    // Сбор данных для allMessagesJson – для каждого сообщения собираем необходимые поля
+    window.allMessagesJson = [];
+    messagesArray.forEach(msg => {
+      let dateObj = null;
+      if (msg.date) {
+        dateObj = parseDate(msg.date);
+      } else if (msg.date_unixtime) {
+        dateObj = new Date(msg.date_unixtime * 1000);
+      }
+      let dateField = dateObj ? dateObj.toLocaleDateString("en-CA") : "";
+      let timeField = dateObj ? dateObj.toLocaleTimeString("en-GB", { hour12: false }) : "";
+      let unixtimeField = dateObj ? dateObj.getTime() : null;
+      let dayOfWeekField = dateObj ? dateObj.toLocaleDateString("en-US", { weekday: "long" }) : "";
+      let usernameField = msg.from ? [msg.from] : [];
+      let userIdField = msg.from_id || "";
+      let messageIdField = msg.id;
+      let replyIdField = [];
+      if (msg.reply_to_message_id) {
+        replyIdField.push(msg.reply_to_message_id);
+      }
+      let messageTextField = "";
+      if (typeof msg.text === "string") {
+        messageTextField = msg.text;
+      } else if (Array.isArray(msg.text)) {
+        messageTextField = msg.text.map(part => (typeof part === "string" ? part : part.text)).join("");
+      }
+      let messageFilesField = [];
+      if (msg.photo) {
+        messageFilesField.push(extractFileName(msg.photo));
+      }
+      if (msg.file) {
+        messageFilesField.push(extractFileName(msg.file));
+      }
+      window.allMessagesJson.push({
+        date: dateField,
+        time: timeField,
+        unixtime: unixtimeField,
+        day_of_week: dayOfWeekField,
+        username: usernameField,
+        user_id: userIdField,
+        message_id: messageIdField,
+        reply_id: replyIdField,
+        message_text: messageTextField,
+        message_files: messageFilesField
+      });
+    });
+  
+    // Выводим в консоль всю собранную информацию для тестирования
+    console.log("allMessagesJson:", window.allMessagesJson);
+  
+    // Далее стандартная логика фильтрации и формирования вывода
     const replyMap = buildReplyMapJSON(messagesArray);
     const currentLang = currentLanguage;
     const locale = currentLang === "en" ? "en-US" : (currentLang === "ru" ? "ru-RU" : "uk-UA");
@@ -377,12 +432,14 @@
       } else if (Array.isArray(msg.text)) {
         messageText = msg.text.map(part => (typeof part === "string" ? part : part.text)).join("");
       }
-      let includeMsg = true;
+      const lowerMsg = messageText.toLowerCase();
       if (searchWord.length > 0) {
-        const lowerMsg = messageText.toLowerCase();
-        includeMsg = searchInside ? lowerMsg.includes(searchWord) : lowerMsg.startsWith(searchWord);
+        if (searchInside) {
+          if (!lowerMsg.includes(searchWord)) return;
+        } else {
+          if (!lowerMsg.startsWith(searchWord)) return;
+        }
       }
-      if (!includeMsg) return;
       
       const msgAuthor = (msg.from || msg.from_name || "").toLowerCase();
       if (filterAuthors.length > 0) {
@@ -396,7 +453,9 @@
       }
   
       let dateObj = null;
-      if (msg.date) {
+      if (msg.origin_server_ts) {
+        dateObj = new Date(msg.origin_server_ts);
+      } else if (msg.date) {
         dateObj = parseDate(msg.date);
       } else if (msg.date_unixtime) {
         dateObj = new Date(msg.date_unixtime * 1000);
