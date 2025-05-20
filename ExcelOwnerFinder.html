@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -15,41 +16,48 @@
       padding: 0;
       position: relative;
     }
+
     .layout {
       display: flex;
       flex-direction: row;
       gap: 1rem;
       margin: 2rem;
     }
+
     .leftPanel {
       width: 400px;
       background-color: #fff;
       padding: 1.5rem;
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       z-index: 1;
     }
+
     .rightPanel {
       flex: 1;
       background-color: #fff;
       padding: 1.5rem;
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       z-index: 1;
       position: relative;
     }
+
     h2 {
       margin-top: 0;
     }
+
     h3 {
       margin: 0.5rem 0;
       font-size: 1.1rem;
       color: #555;
     }
+
     label {
       display: inline-block;
       margin-top: 1rem;
     }
+
     input[type="text"],
     input[type="number"],
     textarea {
@@ -60,17 +68,21 @@
       border-radius: 4px;
       box-sizing: border-box;
     }
+
     textarea {
       resize: vertical;
     }
+
     .checkbox-area,
     .button-area {
       margin-top: 5px;
     }
+
     .sub-item {
       margin-left: 10px;
       margin-top: 2px;
     }
+
     .extra-feature {
       border: 1px solid #ccc;
       background-color: #f9f9f9;
@@ -80,10 +92,12 @@
       display: flex;
       align-items: center;
     }
+
     .extra-feature label {
       margin: 0;
       vertical-align: middle;
     }
+
     button {
       padding: 0.75rem 1rem;
       border: none;
@@ -94,10 +108,13 @@
       color: #fff;
       transition: background-color 0.3s ease;
     }
+
     button:hover {
       background-color: #45a049;
     }
-    #dropZone, #vulnDropZone {
+
+    #dropZone,
+    #vulnDropZone {
       margin-top: 5px;
       padding: 1rem;
       border: 2px dashed #ccc;
@@ -106,13 +123,17 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
-    #dropZone.dragover, #vulnDropZone.dragover {
+
+    #dropZone.dragover,
+    #vulnDropZone.dragover {
       background-color: #e0ffe0;
       border-color: #4CAF50;
     }
+
     .file-selected {
       background-color: #d0eaff;
     }
+
     #output {
       margin-top: 1rem;
       background-color: #fafafa;
@@ -121,26 +142,29 @@
       border: 1px solid #ddd;
       min-height: 50px;
     }
+
     #overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background-color: rgba(0,0,0,0.5);
+      background-color: rgba(0, 0, 0, 0.5);
       display: none;
       align-items: center;
       justify-content: center;
       z-index: 9999;
     }
+
     #overlayContent {
       background: #fff;
       padding: 2rem;
       border-radius: 8px;
       text-align: center;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
       min-width: 300px;
     }
+
     #progressBar {
       width: 100%;
       height: 20px;
@@ -149,21 +173,25 @@
       margin: 1rem 0;
       overflow: hidden;
     }
+
     #progressBarFill {
       width: 0;
       height: 100%;
       background-color: #4CAF50;
       transition: width 0.2s;
     }
+
     .result-buttons {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 10px;
     }
+
     .result-buttons .left-buttons button {
       margin-right: 5px;
     }
+
     .author-link {
       position: fixed;
       top: 10px;
@@ -175,6 +203,7 @@
     }
   </style>
 </head>
+
 <body>
   <div class="layout">
     <div class="leftPanel">
@@ -182,56 +211,56 @@
       <div id="teamFileBlock">
         <p>File with Teams/Products/Hosts/IPs/Domains/strings/etc.</p>
         <div id="dropZone">Drop Excel file here or click to select</div>
-        <input type="file" id="fileInput" accept=".xls,.xlsx" style="display:none;"/>
+        <input type="file" id="fileInput" accept=".xls,.xlsx" style="display:none;" />
         <div>
           <label for="sheetNameInput">Sheet name (optional):</label>
-          <input type="text" id="sheetNameInput" placeholder="Enter sheet name (optional)"/>
+          <input type="text" id="sheetNameInput" placeholder="Enter sheet name (optional)" />
         </div>
         <div>
           <label for="teamColumnInput">Owner/Team column number (1-based):</label>
-          <input type="number" id="teamColumnInput" value="1" placeholder="e.g. 1"/>
+          <input type="number" id="teamColumnInput" value="1" placeholder="e.g. 1" />
         </div>
         <div class="checkbox-area">
-          <input type="checkbox" id="rangeCheckbox"/>
+          <input type="checkbox" id="rangeCheckbox" />
           <label for="rangeCheckbox">Search only in a specific column range (1-based)</label>
           <div id="rangeInputsContainer" style="margin-left: 20px; display: none;">
             <label for="rangeStart">From column:</label>
-            <input type="number" id="rangeStart" value="2" min="1"/>
+            <input type="number" id="rangeStart" value="2" min="1" />
             <label for="rangeEnd">To column:</label>
-            <input type="number" id="rangeEnd" value="5" min="1"/>
+            <input type="number" id="rangeEnd" value="5" min="1" />
           </div>
         </div>
         <div class="checkbox-area">
-          <input type="checkbox" id="ignorePortTeamFileCheckbox" checked/>
+          <input type="checkbox" id="ignorePortTeamFileCheckbox" checked />
           <label for="ignorePortTeamFileCheckbox">Ignore port in file for Team search</label>
         </div>
         <div class="checkbox-area sub-item" id="portColumnTeamFileContainer" style="display:none;">
-          <input type="checkbox" id="portColumnTeamFileCheckbox"/>
+          <input type="checkbox" id="portColumnTeamFileCheckbox" />
           <label for="portColumnTeamFileCheckbox">Port column I/O string:port</label>
           <div id="portColumnTeamFileInputContainer" style="margin-left:10px; display:none;">
             <label for="portColumnTeamFileInput">Column number:</label>
-            <input type="number" id="portColumnTeamFileInput" placeholder="e.g. 4" min="1"/>
+            <input type="number" id="portColumnTeamFileInput" placeholder="e.g. 4" min="1" />
           </div>
         </div>
       </div>
-  
+
       <div id="userInputBlock" style="margin-top:20px; border-top: 1px solid #ddd; padding-top: 10px;">
         <h3>Search / user input</h3>
         <div class="checkbox-area">
-          <input type="checkbox" id="ignorePortUserInputCheckbox" checked/>
+          <input type="checkbox" id="ignorePortUserInputCheckbox" checked />
           <label for="ignorePortUserInputCheckbox">Ignore port in file for user input</label>
         </div>
         <div class="checkbox-area sub-item" id="portColumnUserInputContainer" style="display:none;">
-          <input type="checkbox" id="portColumnUserInputCheckbox"/>
+          <input type="checkbox" id="portColumnUserInputCheckbox" />
           <label for="portColumnUserInputCheckbox">Port column I/O string:port</label>
           <div id="portColumnUserInputFieldContainer" style="margin-left:10px; display:none;">
             <label for="portColumnUserInput">Column number:</label>
-            <input type="number" id="portColumnUserInput" placeholder="e.g. 4" min="1"/>
+            <input type="number" id="portColumnUserInput" placeholder="e.g. 4" min="1" />
           </div>
         </div>
         <div>
           <label for="separatorInput">Item separator:</label>
-          <input type="text" id="separatorInput" value="," placeholder="Enter a separator character"/>
+          <input type="text" id="separatorInput" value="," placeholder="Enter a separator character" />
         </div>
         <div id="ipListContainer">
           <label for="ipList">List of IPs/domains/words:</label>
@@ -239,25 +268,25 @@
 123.123.123.123:123, test.com:123, Project 6, 123.123.123.127, 123.123.123.123"></textarea>
         </div>
         <div class="checkbox-area extra-feature">
-          <input type="checkbox" id="searchInsideCheckbox"/>
+          <input type="checkbox" id="searchInsideCheckbox" />
           <label for="searchInsideCheckbox">Substring search</label>
         </div>
         <div class="checkbox-area extra-feature">
-          <input type="checkbox" id="searchSeparateVulnCheckbox"/>
+          <input type="checkbox" id="searchSeparateVulnCheckbox" />
           <label for="searchSeparateVulnCheckbox">Search and separate vulnerabilities per team</label>
         </div>
         <div id="vulnFileContainer" style="display:none;">
           <p>2 column at first page: VulnName | List IPs/domains (without definition row)</p>
           <div id="vulnDropZone">Drop Vulnerabilities Excel file here or click to select</div>
-          <input type="file" id="vulnFileInput" accept=".xls,.xlsx" style="display:none;"/>
+          <input type="file" id="vulnFileInput" accept=".xls,.xlsx" style="display:none;" />
         </div>
       </div>
-  
+
       <div class="button-area">
         <button id="startBtn">Process</button>
       </div>
     </div>
-  
+
     <div class="rightPanel">
       <div class="result-buttons">
         <div class="left-buttons">
@@ -273,27 +302,29 @@
   <a class="author-link" href="index.html" target="_blank">
     olivaw448-tools
   </a>
-  
+
   <div id="overlay">
     <div id="overlayContent">
       <p id="progressStatus">Processing... 0%</p>
-      <div id="progressBar"><div id="progressBarFill"></div></div>
+      <div id="progressBar">
+        <div id="progressBarFill"></div>
+      </div>
       <button id="cancelBtn">Cancel</button>
     </div>
   </div>
-  
+
   <script>
     let droppedFile = null;
     let isCanceled = false;
     let isProcessing = false;
-  
+
     const dropZone = document.getElementById('dropZone');
     const fileInput = document.getElementById('fileInput');
     const startBtn = document.getElementById('startBtn');
     const cancelBtn = document.getElementById('cancelBtn');
     const downloadBtn = document.getElementById('downloadBtn');
     const copyBtn = document.getElementById('copyBtn');
-  
+
     const searchSeparateVulnCheckbox = document.getElementById('searchSeparateVulnCheckbox');
     const searchInsideCheckbox = document.getElementById('searchInsideCheckbox');
     const ignorePortTeamFileCheckbox = document.getElementById('ignorePortTeamFileCheckbox');
@@ -310,15 +341,15 @@
     const rangeCheckbox = document.getElementById('rangeCheckbox');
     const ipListContainer = document.getElementById('ipListContainer');
     const vulnFileContainer = document.getElementById('vulnFileContainer');
-  
+
     let userItemsOriginal = [];
     const userWorkMap = new Map();
     let vulnResults = new Map();
     let vulnerabilityRecords = [];
-  
+
     const vulnDropZone = document.getElementById('vulnDropZone');
     const vulnFileInput = document.getElementById('vulnFileInput');
-  
+
     function flattenMerges(sheet) {
       if (!sheet["!merges"] || !sheet["!merges"].length) return;
       sheet["!merges"].forEach(mergeRange => {
@@ -336,23 +367,23 @@
         }
       });
     }
-  
-    rangeCheckbox.addEventListener('change', function() {
+
+    rangeCheckbox.addEventListener('change', function () {
       rangeInputsContainer.style.display = this.checked ? 'block' : 'none';
     });
-    ignorePortTeamFileCheckbox.addEventListener('change', function() {
+    ignorePortTeamFileCheckbox.addEventListener('change', function () {
       portColumnTeamFileContainer.style.display = this.checked ? 'none' : 'block';
     });
-    portColumnTeamFileCheckbox.addEventListener('change', function() {
+    portColumnTeamFileCheckbox.addEventListener('change', function () {
       portColumnTeamFileInputContainer.style.display = this.checked ? 'block' : 'none';
     });
-    ignorePortUserInputCheckbox.addEventListener('change', function() {
+    ignorePortUserInputCheckbox.addEventListener('change', function () {
       portColumnUserInputContainer.style.display = this.checked ? 'none' : 'block';
     });
-    portColumnUserInputCheckbox.addEventListener('change', function() {
+    portColumnUserInputCheckbox.addEventListener('change', function () {
       portColumnUserInputFieldContainer.style.display = this.checked ? 'block' : 'none';
     });
-  
+
     vulnDropZone.addEventListener('click', () => { vulnFileInput.click(); });
     vulnDropZone.addEventListener('dragover', (e) => { e.preventDefault(); vulnDropZone.classList.add('dragover'); });
     vulnDropZone.addEventListener('dragleave', () => { vulnDropZone.classList.remove('dragover'); });
@@ -371,7 +402,7 @@
         vulnDropZone.classList.add('file-selected');
       }
     });
-  
+
     dropZone.addEventListener('click', () => { fileInput.click(); });
     dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
     dropZone.addEventListener('dragleave', () => { dropZone.classList.remove('dragover'); });
@@ -391,7 +422,7 @@
         dropZone.classList.add('file-selected');
       }
     });
-  
+
     searchSeparateVulnCheckbox.addEventListener('change', () => {
       if (searchSeparateVulnCheckbox.checked) {
         ipListContainer.style.display = 'none';
@@ -401,9 +432,9 @@
         vulnFileContainer.style.display = 'none';
       }
     });
-  
+
     cancelBtn.addEventListener('click', () => { isProcessing ? isCanceled = true : hideOverlay(); });
-  
+
     function showOverlay() {
       document.getElementById('overlay').style.display = 'flex';
       document.body.style.pointerEvents = 'none';
@@ -419,37 +450,51 @@
       fill.style.width = p + '%';
       status.textContent = 'Processing... ' + p + '%';
     }
-  
+
     startBtn.addEventListener('click', () => { if (!isProcessing) processExcel(); });
-  
+
     function escapeRegex(str) {
       return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     }
+
     function stripPort(value) {
       const i = value.indexOf(':');
       return (i !== -1) ? value.substring(0, i) : value;
     }
-  
+
+    // Function to handle multiple ports, this is new
+    function handleMultiplePorts(baseItem, portValue) {
+      // Parse port values from string splitting by commas and/or spaces
+      const ports = portValue.split(/[\s,]+/).filter(Boolean);
+
+      // If no valid ports found, return the original item
+      if (ports.length === 0) {
+        return [baseItem];
+      }
+
+      // Create items with each port
+      return ports.map(port => baseItem + ":" + port.trim());
+    }
+
     function processExcel() {
       if (!droppedFile) { alert("Please select the main Excel file."); return; }
       isCanceled = false;
-  
+
       const sheetNameInput = document.getElementById('sheetNameInput').value.trim();
       const teamColumnInput = parseInt(document.getElementById('teamColumnInput').value, 10);
       const rangeChk = rangeCheckbox.checked;
       const rangeStart = parseInt(document.getElementById('rangeStart').value, 10);
       const rangeEnd = parseInt(document.getElementById('rangeEnd').value, 10);
       const separatorInput = document.getElementById('separatorInput').value;
-  
+
       if (isNaN(teamColumnInput) || teamColumnInput < 1) { alert("Invalid Owner/Team column number."); return; }
       let rs = rangeStart, re = rangeEnd;
       if (!rangeChk) { rs = 1; re = 1000; }
       if (rs > re) { [rs, re] = [re, rs]; }
-  
+
       const output = document.getElementById('output');
       output.innerHTML = "";
-  
-      // Настройки для портов:
+
       const useIgnorePortTeam = ignorePortTeamFileCheckbox.checked;
       let usePortColumnTeam = false, portColumnTeam = 0;
       if (!useIgnorePortTeam && portColumnTeamFileCheckbox.checked) {
@@ -462,11 +507,11 @@
         usePortColumnUser = true;
         portColumnUser = parseInt(portColumnUserInput.value, 10);
       }
-  
+
       if (searchSeparateVulnCheckbox.checked) {
         if (vulnFileInput.files.length === 0) { alert("Please select the Vulnerabilities Excel file."); return; }
         const vulnReader = new FileReader();
-        vulnReader.onload = function(e) {
+        vulnReader.onload = function (e) {
           try {
             const data = new Uint8Array(e.target.result);
             const workbook = XLSX.read(data, { type: 'array' });
@@ -496,7 +541,7 @@
               alert("No valid vulnerability records found in the file (columns A/B, and port column if selected).");
               return;
             }
-  
+
             vulnResults = new Map();
             const escapedSep = escapeRegex(separatorInput);
             const sepRegex = new RegExp(`[;\n,${escapedSep}]+`, 'g');
@@ -511,9 +556,9 @@
                 }
               });
             });
-  
+
             processMainFileForVuln(sheetNameInput, teamColumnInput, rs, re, searchInsideCheckbox.checked, useIgnorePortTeam, usePortColumnTeam, portColumnTeam, output);
-  
+
           } catch (err) {
             console.error(err);
             output.innerHTML = `<p>Error reading vulnerabilities file: ${err.message}</p>`;
@@ -521,7 +566,7 @@
           }
         };
         vulnReader.readAsArrayBuffer(vulnFileInput.files[0]);
-  
+
       } else {
         const ipListRaw = document.getElementById('ipList').value;
         const escapedSep = escapeRegex(separatorInput);
@@ -534,13 +579,13 @@
           if (!userWorkMap.has(work)) { userWorkMap.set(work, new Set()); }
           userWorkMap.get(work).add(origVal);
         }
-  
+
         isProcessing = true;
         showOverlay();
         updateProgress(0);
-  
+
         const reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
           if (isCanceled) { finishCancel(output); return; }
           try {
             const data = new Uint8Array(e.target.result);
@@ -556,7 +601,7 @@
             const fullRange = XLSX.utils.decode_range(sheet["!ref"]);
             const maxRow = fullRange.e.r + 1;
             const itemToTeams = new Map();
-  
+
             parseRowsAsync(1, maxRow, rs, re, sheet, teamColumnInput, userWorkMap, itemToTeams, searchInsideCheckbox.checked, useIgnorePortTeam, usePortColumnTeam, portColumnTeam, output);
           } catch (err) {
             console.error(err);
@@ -567,14 +612,14 @@
         reader.readAsArrayBuffer(droppedFile);
       }
     }
-  
+
     function processMainFileForVuln(sheetNameInput, teamColumnInput, rs, re, useSubstringSearch, useRemovePortTeamFile, usePortColumnTeam, portColumnTeam, output) {
       isProcessing = true;
       showOverlay();
       updateProgress(0);
-  
+
       const reader = new FileReader();
-      reader.onload = function(e) {
+      reader.onload = function (e) {
         if (isCanceled) { finishCancel(output); return; }
         try {
           const data = new Uint8Array(e.target.result);
@@ -589,7 +634,7 @@
           flattenMerges(sheet);
           const fullRange = XLSX.utils.decode_range(sheet["!ref"]);
           const maxRow = fullRange.e.r + 1;
-  
+
           parseRowsAsyncVuln(1, maxRow, rs, re, sheet, teamColumnInput, useSubstringSearch, usePortColumnTeam ? false : useRemovePortTeamFile, usePortColumnTeam, portColumnTeam, output);
         } catch (err) {
           console.error(err);
@@ -599,7 +644,7 @@
       };
       reader.readAsArrayBuffer(droppedFile);
     }
-  
+
     function parseRowsAsync(rowIndex, maxRow, rs, re, sheet, teamColumnInput, userWorkMap, itemToTeams, useSubstringSearch, useRemovePortTeamFile, usePortColumnTeam, portColumnTeam, output) {
       if (rowIndex > maxRow) {
         finalizeResults(userWorkMap, itemToTeams, output);
@@ -607,64 +652,82 @@
         return;
       }
       if (isCanceled) { finishCancel(output); return; }
-  
+
       const chunkSize = 50;
       const endRow = Math.min(rowIndex + chunkSize - 1, maxRow);
       const cellSplitRegex = /[;,\n]+/;
-  
+
       for (let row = rowIndex; row <= endRow; row++) {
         const teamColLetter = XLSX.utils.encode_col(teamColumnInput - 1);
         const teamCellRef = teamColLetter + row;
         const teamCellObj = sheet[teamCellRef];
         let currentTeam = teamCellObj && teamCellObj.v ? teamCellObj.v.toString().trim() : "";
-  
+
         for (let colNum = rs; colNum <= re; colNum++) {
           if (colNum === teamColumnInput) continue;
+          // Skip the port column if explicitly specified
+          if (usePortColumnTeam && colNum === portColumnTeam) continue;
+
           const colLetter = XLSX.utils.encode_col(colNum - 1);
           const cellRef = colLetter + row;
           const cellObj = sheet[cellRef];
           if (!cellObj || !cellObj.v) continue;
           const rawStr = cellObj.v.toString();
           const segments = rawStr.split(cellSplitRegex).map(s => s.trim()).filter(Boolean);
-  
+
           for (const seg of segments) {
             let segLower = seg.toLowerCase();
+            let itemsToCheck = [segLower]; // Default - just the original item
+
             if (useRemovePortTeamFile) {
+              // Just strip any port
               segLower = stripPort(segLower);
+              itemsToCheck = [segLower];
             } else if (usePortColumnTeam) {
+              // Get port value from the specified port column
               let portVal = "";
-              let portCellRef = XLSX.utils.encode_cell({ r: row, c: portColumnTeam - 1 });
+              let portCellRef = XLSX.utils.encode_cell({ r: row - 1, c: portColumnTeam - 1 });
               let portCell = sheet[portCellRef];
-              if (portCell && portCell.v) { portVal = portCell.v.toString().trim(); }
+              if (portCell && portCell.v) {
+                portVal = portCell.v.toString().trim();
+              }
+
               if (portVal !== "") {
-                segLower = stripPort(segLower) + ":" + portVal;
+                const baseItem = stripPort(segLower);
+                // Create multiple items with different ports
+                itemsToCheck = handleMultiplePorts(baseItem, portVal);
+              } else {
+                itemsToCheck = [segLower];
               }
             }
-  
-            for (const [uWork, origSet] of userWorkMap.entries()) {
-              if (useSubstringSearch) {
-                if (segLower.includes(uWork)) {
-                  if (!itemToTeams.has(uWork)) { itemToTeams.set(uWork, new Set()); }
-                  itemToTeams.get(uWork).add(currentTeam);
-                }
-              } else {
-                if (segLower === uWork) {
-                  if (!itemToTeams.has(uWork)) { itemToTeams.set(uWork, new Set()); }
-                  itemToTeams.get(uWork).add(currentTeam);
+
+            // Check each version of the item against user work map
+            for (const itemVersion of itemsToCheck) {
+              for (const [uWork, origSet] of userWorkMap.entries()) {
+                if (useSubstringSearch) {
+                  if (itemVersion.includes(uWork)) {
+                    if (!itemToTeams.has(uWork)) { itemToTeams.set(uWork, new Set()); }
+                    itemToTeams.get(uWork).add(currentTeam);
+                  }
+                } else {
+                  if (itemVersion === uWork) {
+                    if (!itemToTeams.has(uWork)) { itemToTeams.set(uWork, new Set()); }
+                    itemToTeams.get(uWork).add(currentTeam);
+                  }
                 }
               }
             }
           }
         }
       }
-  
+
       const progress = Math.floor((endRow / maxRow) * 100);
       updateProgress(progress);
       setTimeout(() => {
         parseRowsAsync(endRow + 1, maxRow, rs, re, sheet, teamColumnInput, userWorkMap, itemToTeams, useSubstringSearch, usePortColumnTeam ? false : useRemovePortTeamFile, usePortColumnTeam, portColumnTeam, output);
       }, 0);
     }
-  
+
     function parseRowsAsyncVuln(rowIndex, maxRow, rs, re, sheet, teamColumnInput, useSubstringSearch, useRemovePortTeamFile, usePortColumnTeam, portColumnTeam, output) {
       if (rowIndex > maxRow) {
         finalizeResultsVuln(output);
@@ -672,70 +735,93 @@
         return;
       }
       if (isCanceled) { finishCancel(output); return; }
-  
+
       const chunkSize = 50;
       const endRow = Math.min(rowIndex + chunkSize - 1, maxRow);
       const separatorInputValue = document.getElementById('separatorInput').value;
       const escapedSep = escapeRegex(separatorInputValue);
       const cellSplitRegex = new RegExp(`[;\n,${escapedSep}]+`);
-  
+
       for (let row = rowIndex; row <= endRow; row++) {
         const teamColLetter = XLSX.utils.encode_col(teamColumnInput - 1);
         const teamCellRef = teamColLetter + row;
         const teamCellObj = sheet[teamCellRef];
         let currentTeam = teamCellObj && teamCellObj.v ? teamCellObj.v.toString().trim() : "";
         currentTeam = currentTeam || "No team name";
-  
+
         for (let colNum = rs; colNum <= re; colNum++) {
           if (colNum === teamColumnInput) continue;
+          // Skip the port column if explicitly specified
+          if (usePortColumnTeam && colNum === portColumnTeam) continue;
+
           const colLetter = XLSX.utils.encode_col(colNum - 1);
           const cellRef = colLetter + row;
           const cellObj = sheet[cellRef];
           if (!cellObj || !cellObj.v) continue;
           const rawStr = cellObj.v.toString();
           const segments = rawStr.split(cellSplitRegex).map(s => s.trim()).filter(Boolean);
-  
+
           for (let seg of segments) {
             let segLower = seg.toLowerCase();
+            let itemsToCheck = [segLower]; // Default - just the original item
+
             if (useRemovePortTeamFile) {
+              // Just strip any port
               segLower = stripPort(segLower);
+              itemsToCheck = [segLower];
             } else if (usePortColumnTeam) {
+              // Get port value from the specified port column
               let portVal = "";
-              let portCellRef = XLSX.utils.encode_cell({ r: row, c: portColumnTeam - 1 });
+              let portCellRef = XLSX.utils.encode_cell({ r: row - 1, c: portColumnTeam - 1 });
               let portCell = sheet[portCellRef];
-              if (portCell && portCell.v) { portVal = portCell.v.toString().trim(); }
+              if (portCell && portCell.v) {
+                portVal = portCell.v.toString().trim();
+              }
+
               if (portVal !== "") {
-                segLower = stripPort(segLower) + ":" + portVal;
+                const baseItem = stripPort(segLower);
+                // Create multiple items with different ports
+                itemsToCheck = handleMultiplePorts(baseItem, portVal);
+              } else {
+                itemsToCheck = [segLower];
               }
             }
-            vulnResults.forEach(vulnObj => {
-              let tokenLower = vulnObj.token.toLowerCase();
-              if (useSubstringSearch) {
-                if (segLower.includes(tokenLower)) { vulnObj.teams.add(currentTeam); }
-              } else {
-                if (segLower === tokenLower) { vulnObj.teams.add(currentTeam); }
-              }
-            });
+
+            // Check each version of the item against vulnerability data
+            for (const itemVersion of itemsToCheck) {
+              vulnResults.forEach(vulnObj => {
+                let tokenLower = vulnObj.token.toLowerCase();
+                if (useSubstringSearch) {
+                  if (itemVersion.includes(tokenLower)) {
+                    vulnObj.teams.add(currentTeam);
+                  }
+                } else {
+                  if (itemVersion === tokenLower) {
+                    vulnObj.teams.add(currentTeam);
+                  }
+                }
+              });
+            }
           }
         }
       }
-  
+
       const progress = Math.floor((endRow / maxRow) * 100);
       updateProgress(progress);
       setTimeout(() => {
         parseRowsAsyncVuln(endRow + 1, maxRow, rs, re, sheet, teamColumnInput, useSubstringSearch, usePortColumnTeam ? false : useRemovePortTeamFile, usePortColumnTeam, portColumnTeam, output);
       }, 0);
     }
-  
+
     function finalizeResults(userWorkMap, itemToTeams, output) {
       finalizeResultsGrouped(userWorkMap, itemToTeams, output);
     }
-  
+
     function finalizeResultsGrouped(userWorkMap, itemToTeams, output) {
       const teamToTokens = new Map();
       const notFound = new Set();
       const useNoPortOutput = ignorePortUserInputCheckbox.checked;
-  
+
       for (const [uWork, origSet] of userWorkMap.entries()) {
         let displayVal = useNoPortOutput ? uWork : Array.from(origSet).join(", ");
         if (!itemToTeams.has(uWork)) {
@@ -750,24 +836,24 @@
           }
         }
       }
-  
+
       let html = "<table style='border-collapse: collapse; width: 100%;'><thead><tr style='background-color: #f0f0f0;'>" +
-                 "<th style='border:1px solid #000; padding:8px;'>Team</th>" +
-                 "<th style='border:1px solid #000; padding:8px;'>Results</th>" +
-                 "</tr></thead><tbody>";
+        "<th style='border:1px solid #000; padding:8px;'>Team</th>" +
+        "<th style='border:1px solid #000; padding:8px;'>Results</th>" +
+        "</tr></thead><tbody>";
       teamToTokens.forEach((tokens, team) => {
         html += `<tr style='border:1px solid #000;'><td style='border:1px solid #000; padding:8px;'>${team}</td>` +
-                `<td style='border:1px solid #000; padding:8px;'>${Array.from(tokens).join(", ")}</td></tr>`;
+          `<td style='border:1px solid #000; padding:8px;'>${Array.from(tokens).join(", ")}</td></tr>`;
       });
       if (notFound.size > 0) {
         html += `<tr style='border:1px solid #000;'><td style='border:1px solid #000; padding:8px;'>Not found in the file:</td>` +
-                `<td style='border:1px solid #000; padding:8px;'>${Array.from(notFound).join(", ")}</td></tr>`;
+          `<td style='border:1px solid #000; padding:8px;'>${Array.from(notFound).join(", ")}</td></tr>`;
       }
       html += "</tbody></table>";
       output.innerHTML = html;
       updateProgress(100);
     }
-  
+
     function finalizeResultsVuln(output) {
       const grouped = {};
       vulnResults.forEach(vulnObj => {
@@ -783,26 +869,26 @@
           grouped[vuln][team].add(token);
         });
       });
-  
+
       let html = "<table style='border-collapse: collapse; width: 100%;'><thead><tr style='background-color: #f0f0f0;'>" +
-                 "<th style='border:1px solid #000; padding:8px;'>Vuln name</th>" +
-                 "<th style='border:1px solid #000; padding:8px;'>Team</th>" +
-                 "<th style='border:1px solid #000; padding:8px;'>Results</th>" +
-                 "</tr></thead><tbody>";
+        "<th style='border:1px solid #000; padding:8px;'>Vuln name</th>" +
+        "<th style='border:1px solid #000; padding:8px;'>Team</th>" +
+        "<th style='border:1px solid #000; padding:8px;'>Results</th>" +
+        "</tr></thead><tbody>";
       for (let vuln in grouped) {
         for (let team in grouped[vuln]) {
           let tokensArr = Array.from(grouped[vuln][team]);
           let tokensStr = tokensArr.join(", ");
           html += `<tr style='border:1px solid #000;'><td style='border:1px solid #000; padding:8px;'>${vuln}</td>` +
-                  `<td style='border:1px solid #000; padding:8px;'>${team}</td>` +
-                  `<td style='border:1px solid #000; padding:8px;'>${tokensStr}</td></tr>`;
+            `<td style='border:1px solid #000; padding:8px;'>${team}</td>` +
+            `<td style='border:1px solid #000; padding:8px;'>${tokensStr}</td></tr>`;
         }
       }
       html += "</tbody></table>";
       output.innerHTML = html;
       updateProgress(100);
     }
-  
+
     function finishProcessing() {
       isProcessing = false;
       hideOverlay();
@@ -812,7 +898,7 @@
       output.innerHTML = "<p>Processing canceled.</p>";
       hideOverlay();
     }
-  
+
     downloadBtn.addEventListener('click', () => {
       const table = document.querySelector('#output table');
       if (!table) { alert('No table to download!'); return; }
@@ -832,10 +918,14 @@
           const cellAddress = XLSX.utils.encode_cell({ r: R, c: C });
           const cell = ws[cellAddress];
           if (!cell) continue;
-          cell.s = { border: { top: { style: 'thin', color: { rgb: '000000' } },
-                                left: { style: 'thin', color: { rgb: '000000' } },
-                                right: { style: 'thin', color: { rgb: '000000' } },
-                                bottom: { style: 'thin', color: { rgb: '000000' } } } };
+          cell.s = {
+            border: {
+              top: { style: 'thin', color: { rgb: '000000' } },
+              left: { style: 'thin', color: { rgb: '000000' } },
+              right: { style: 'thin', color: { rgb: '000000' } },
+              bottom: { style: 'thin', color: { rgb: '000000' } }
+            }
+          };
           if (R === 0) {
             cell.s.fill = { patternType: 'solid', fgColor: { rgb: 'FFF0F0F0' } };
             cell.s.font = { bold: true };
@@ -854,7 +944,7 @@
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
     });
-  
+
     copyBtn.addEventListener('click', () => {
       const table = document.querySelector('#output table');
       if (!table) { alert('No table to copy!'); return; }
@@ -873,4 +963,5 @@
     });
   </script>
 </body>
+
 </html>
